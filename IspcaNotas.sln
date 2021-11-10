@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.29519.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IspcaNotas.Android", "IspcaNotas\IspcaNotas.Android\IspcaNotas.Android.csproj", "{8752A1B3-746B-4E4B-861B-F8F3A4CC7C7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IspcaNotas", "IspcaNotas\IspcaNotas\IspcaNotas.csproj", "{A3D21802-855C-4569-889E-CA9876C90077}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IspcaNotas", "IspcaNotas\IspcaNotas\IspcaNotas.csproj", "{A3D21802-855C-4569-889E-CA9876C90077}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IspcaNotas.Test", "IspcaNotas.Test\IspcaNotas.Test.csproj", "{DCA90846-26F3-4A8C-9CCB-FC6136B75CF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +27,10 @@ Global
 		{A3D21802-855C-4569-889E-CA9876C90077}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3D21802-855C-4569-889E-CA9876C90077}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A3D21802-855C-4569-889E-CA9876C90077}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{DCA90846-26F3-4A8C-9CCB-FC6136B75CF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCA90846-26F3-4A8C-9CCB-FC6136B75CF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCA90846-26F3-4A8C-9CCB-FC6136B75CF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCA90846-26F3-4A8C-9CCB-FC6136B75CF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
