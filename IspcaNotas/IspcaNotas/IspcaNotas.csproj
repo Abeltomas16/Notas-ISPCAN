@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -17,5 +17,12 @@
     <PackageReference Include="System.Memory" Version="4.5.4" />
     <PackageReference Include="Xamarin.Forms" Version="4.2.0.778463" />
     <PackageReference Include="XF.Material" Version="1.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\Interface\" />
+    <Folder Include="Features\Service\" />
+    <Folder Include="Model\" />
+    <Folder Include="View\" />
   </ItemGroup>
 </Project>
