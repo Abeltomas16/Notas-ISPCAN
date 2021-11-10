@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace IspcaNotas.Features.Service
+namespace IspcaNotas.Features.Interface
 {
     public interface IAuthenticationService
     {
