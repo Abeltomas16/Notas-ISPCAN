@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <Folder Include="Features\Interface\" />
-    <Folder Include="Features\Service\" />
     <Folder Include="Model\" />
   </ItemGroup>
 
