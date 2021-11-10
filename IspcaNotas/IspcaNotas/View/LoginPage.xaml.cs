@@ -20,6 +20,10 @@ namespace IspcaNotas.View
         {
                
         }
+        protected override bool OnBackButtonPressed()
+        {
+            return true;
+        }
         private void AjudaFacebook(object sender, EventArgs e)
         {
             Device.OpenUri(new Uri("https://www.facebook.com/abel.tomas.16"));

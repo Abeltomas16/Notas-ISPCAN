@@ -1,4 +1,7 @@
-﻿using System;
+﻿using IspcaNotas.Features.Interface;
+using IspcaNotas.Features.Service.Routing;
+using Splat;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,16 +9,23 @@ namespace IspcaNotas.ViewModel
 {
     public class LoadingViewModel
     {
-        public void Init()
+        private IRouting routingService;
+        private IAuthenticationService AuthenticationService;
+        public LoadingViewModel(IRouting routing = null, IAuthenticationService authentication = null)
         {
-            var isAuthenticated = false;
+            routingService = routing ?? Locator.Current.GetService<IRouting>();
+            AuthenticationService = authentication ?? Locator.Current.GetService<IAuthenticationService>();
+        }
+        public async void Init()
+        {
+            var isAuthenticated = AuthenticationService.IsLogged();
             if (isAuthenticated)
             {
-                Console.WriteLine("errado");
+                await routingService.NavigateTo("certo");
             }
             else
             {
-                Console.WriteLine("certo");
+                await this.routingService.NavigateTo("///main/home");
             }
         }
     }
