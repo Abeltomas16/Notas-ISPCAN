@@ -1,4 +1,6 @@
-﻿using System;
+﻿using IspcaNotas.ViewModel;
+using Splat;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -8,10 +10,16 @@ namespace IspcaNotas
     {
         public App()
         {
+            Dependences();
             InitializeComponent();
 
             XF.Material.Forms.Material.Init(this);
-            MainPage = new NavigationPage(new View.LoginPage());
+            MainPage = new NavigationPage(new AppShell());
+        }
+
+        private void Dependences()
+        {
+            Locator.CurrentMutable.Register(() => new LoadingViewModel());
         }
 
         protected override void OnStart()
