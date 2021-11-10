@@ -1,4 +1,5 @@
-﻿using IspcaNotas.Features.Interface;
+﻿using Firebase.Auth;
+using IspcaNotas.Features.Interface;
 using IspcaNotas.Features.Service.Login;
 using IspcaNotas.Features.Service.Routing;
 using IspcaNotas.ViewModel;
@@ -28,6 +29,7 @@ namespace IspcaNotas
 
             Locator.CurrentMutable.Register(() => new LoadingViewModel());
             Locator.CurrentMutable.Register(() => new LoginViewModel());
+            Locator.CurrentMutable.Register(() => new FirebaseAuthProvider(new FirebaseConfig("API KEY")));
         }
 
         protected override void OnStart()
