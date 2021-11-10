@@ -1,4 +1,5 @@
 ﻿using IspcaNotas.Features.Interface;
+using IspcaNotas.Features.Service.Login;
 using IspcaNotas.Features.Service.Routing;
 using IspcaNotas.ViewModel;
 using Splat;
@@ -23,8 +24,10 @@ namespace IspcaNotas
         {
             Locator.CurrentMutable.RegisterLazySingleton<IRouting>(() => new IRoutingService());
             Locator.CurrentMutable.RegisterLazySingleton<IAuthenticationService>(() => new LoadingPageService());
+            Locator.CurrentMutable.RegisterLazySingleton<ILogin>(() => new LoginService());
 
             Locator.CurrentMutable.Register(() => new LoadingViewModel());
+            Locator.CurrentMutable.Register(() => new LoginViewModel());
         }
 
         protected override void OnStart()

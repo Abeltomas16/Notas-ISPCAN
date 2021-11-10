@@ -1,4 +1,7 @@
-﻿using System;
+﻿using IspcaNotas.Features.Interface;
+using IspcaNotas.ViewModel;
+using Splat;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,13 +15,11 @@ namespace IspcaNotas.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginPage : ContentPage
     {
+        LoginViewModel ViewModel { get; set; } = Locator.Current.GetService<LoginViewModel>();
         public LoginPage()
         {
             InitializeComponent();
-        }
-        private async void BTEntrar(object sender, EventArgs e)
-        {
-               
+            BindingContext = ViewModel;
         }
         protected override bool OnBackButtonPressed()
         {

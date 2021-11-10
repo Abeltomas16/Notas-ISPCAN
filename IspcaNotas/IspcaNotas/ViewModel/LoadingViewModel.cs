@@ -21,11 +21,11 @@ namespace IspcaNotas.ViewModel
             var isAuthenticated = AuthenticationService.IsLogged();
             if (isAuthenticated)
             {
-                await routingService.NavigateTo("certo");
+                await routingService.NavigateTo("///main/home");
             }
             else
             {
-                await this.routingService.NavigateTo("///main/home");
+                await this.routingService.NavigateTo("///login");
             }
         }
     }
