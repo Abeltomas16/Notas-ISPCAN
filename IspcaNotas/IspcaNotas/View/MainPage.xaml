@@ -4,6 +4,9 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             Shell.NavBarIsVisible="False"
+             Shell.PresentationMode="Animated"
+             Shell.FlyoutBehavior="Disabled"
              x:Class="IspcaNotas.View.MainPage">
     <ContentPage.Content>
         <StackLayout>
