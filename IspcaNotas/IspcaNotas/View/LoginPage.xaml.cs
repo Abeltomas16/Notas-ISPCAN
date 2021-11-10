@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace IspcaNotas.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginView : ContentPage
+    public partial class LoginPage : ContentPage
     {
-        public LoginView()
+        public LoginPage()
         {
             InitializeComponent();
         }

@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                xmlns:Material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material.Forms"
-             x:Class="IspcaNotas.View.LoginView"
+             x:Class="IspcaNotas.View.LoginPage"
              Title="Iniciar sessão">
     <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
         <Image Source="back" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Aspect="AspectFill"/>
