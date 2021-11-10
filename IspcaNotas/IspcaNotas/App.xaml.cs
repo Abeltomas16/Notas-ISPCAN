@@ -10,7 +10,8 @@ namespace IspcaNotas
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            XF.Material.Forms.Material.Init(this);
+            MainPage = new NavigationPage(new View.LoginView());
         }
 
         protected override void OnStart()
