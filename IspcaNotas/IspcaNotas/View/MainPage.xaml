@@ -10,6 +10,6 @@
              Shell.FlyoutBehavior="Disabled"
              x:Class="IspcaNotas.View.MainPage">
 
-    <local:Actividades Title="Teste" />
+    <local:ActividadesTabbed Title="Teste" />
     <local:Actividades Title="Novo"/>
 </TabbedPage>
