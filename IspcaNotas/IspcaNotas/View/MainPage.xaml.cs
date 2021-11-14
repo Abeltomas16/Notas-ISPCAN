@@ -10,7 +10,7 @@ using Xamarin.Forms.Xaml;
 namespace IspcaNotas.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MainPage : ContentPage
+    public partial class MainPage : TabbedPage
     {
         public MainPage()
         {

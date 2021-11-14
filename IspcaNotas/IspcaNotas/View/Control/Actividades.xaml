@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material.Forms"
+             mc:Ignorable="d"
+             x:Class="IspcaNotas.View.Control.Actividades">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="MenuPerfil" Order="Secondary" Text="Perfil" Priority="0" />
+        <ToolbarItem Name="MenuSobre" Order="Secondary" Text="Sobre" Priority="1"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackLayout Grid.Row="0" IsVisible="False">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <ActivityIndicator x:Name="activityIndicator1" 
+                                IsRunning="{Binding Busy}" 
+                                IsVisible="{Binding Busy}"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center" 
+                                Color="Blue" Grid.Row="0" />
+
+                        <StackLayout  Grid.Row="1">
+
+                            <Label Text="Dados da Actividade" Margin="10,10" 
+                               FontSize="Medium" 
+                               TextColor="#2189df"/>
+
+                            <Editor Placeholder="Descrição" MaxLength="200" AutoSize="TextChanges"
+                                x:Name="labelDescricao" HorizontalOptions="FillAndExpand"
+                                />
+                            <Editor Placeholder="URL da imagem" MaxLength="600" AutoSize="TextChanges"
+                                x:Name="labelIMG" HorizontalOptions="FillAndExpand"
+                              />
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" Grid.Row="2" Padding="10,10" >
+                            <Material:MaterialButton x:Name="btSalvarEditar" Text="Salvar"                                              
+                             BackgroundColor="#2196f3" Clicked="MaterialButton_Clicked" VerticalOptions="Fill"/>
+
+                            <Material:MaterialButton x:Name="btCancelarEditar" Text="Cancelar"
+                             BackgroundColor="#D53343" Clicked="MaterialButtonCancelar_Clicked" VerticalOptions="End" IsVisible="False"/>
+                        </StackLayout>
+
+                    </Grid>
+                </StackLayout>
+
+                <StackLayout Grid.Row="1" IsVisible="True">
+
+                    <Label Text="Actividades" Margin="10,10" FontSize="Medium" TextColor="#2189df" Style="{DynamicResource BodyStyle}"/>
+
+                    <CollectionView x:Name="ViewActividades" BackgroundColor="#f3f3f3" 
+                                ItemsSource="{Binding Actividades}"
+                            EmptyView="Nenhuma actividade registrada" 
+                            SelectionMode="Single" 
+                            SelectionChanged="ViewActividades_SelectionChanged">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="5" Span="1"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame
+                                    Margin="10,5"
+                                    Padding="10"
+                                    BackgroundColor="White"
+                                    HasShadow="True"
+                                      >
+                                    <Grid Padding="0" ColumnSpacing="10">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <StackLayout BackgroundColor="#0077F7" Margin="0" Padding="10">
+                                            <Label Text="{Binding Descricao}"  HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" TextColor="white" Style="{DynamicResource BodyStyle}"/>
+                                            <Label Text="{Binding DataCadastro, StringFormat='{}{0:d}'}" FontSize="Medium" HorizontalOptions="Fill" HorizontalTextAlignment="End" TextColor="#FE9611"/>
+                                        </StackLayout>
+
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+            </Grid>
+
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
