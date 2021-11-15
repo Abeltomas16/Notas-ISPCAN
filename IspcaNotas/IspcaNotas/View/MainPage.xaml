@@ -8,6 +8,7 @@
              Shell.NavBarIsVisible="False"
              Shell.PresentationMode="Animated"
              Shell.FlyoutBehavior="Disabled"
+
              x:Class="IspcaNotas.View.MainPage">
 
     <local:ActividadesTabbed Title="Teste" />

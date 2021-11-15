@@ -38,7 +38,7 @@ namespace IspcaNotas.ViewModel
             {
                 var resultado = await LoginNegocios.SignIn(email, Senha);
                 if (resultado != null)
-                    await routing.NavigateTo("///main/home");
+                    await routing.NavigateTo("///main/admin");
 
             }
             catch 

@@ -55,6 +55,10 @@
                       IsTabStop="False"
                       ContentTemplate="{DataTemplate local:MainPage}"
                       Title="Home" />
+        <ShellContent Route="admin"
+                      IsTabStop="False"
+                      ContentTemplate="{DataTemplate local:Administrador}"
+                      Title="Admin" />
     </FlyoutItem>
     <MenuItem Text="Logout"
               Command="{Binding ExecuteLogout}" />

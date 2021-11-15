@@ -10,15 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace IspcaNotas.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MainPage : TabbedPage
+    public partial class Administrador : Shell
     {
-        public MainPage()
+        public Administrador()
         {
             InitializeComponent();
-        }
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
         }
     }
 }

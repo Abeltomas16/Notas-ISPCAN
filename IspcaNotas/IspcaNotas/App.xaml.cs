@@ -35,7 +35,6 @@ namespace IspcaNotas
             Locator.CurrentMutable.Register(() => new LoadingViewModel());
             Locator.CurrentMutable.Register(() => new LoginViewModel());
             Locator.CurrentMutable.Register(() => new ActividadesViewModel());
-
         }
 
         protected override void OnStart()
