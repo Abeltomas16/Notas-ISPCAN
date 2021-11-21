@@ -12,6 +12,6 @@ namespace IspcaNotas.Features.Interface
         Task<string> Alterar(UsuarioDTO entidade, string key);
         Task<string> Apagar(UsuarioDTO usuarioDTO);
         Task<List<UsuarioDTO>> ListarTodos();
-        Task<String> categoria(string token);
+        Task<UsuarioDTO> Pesquisar(string token);
     }
 }

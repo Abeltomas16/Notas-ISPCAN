@@ -65,18 +65,14 @@ namespace IspcaNotas.Features.Service.usuario
             return "Usúario apagado com sucesso !";
         }
 
-        public async Task<string> categoria(string token)
+        public async Task<UsuarioDTO> Pesquisar(string token)
         {
-            string novoToken = string.Empty;
-            var idToken = JsonConvert.DeserializeObject<erros>(token);
-            if (idToken.idToken.Contains("."))
-                novoToken = idToken.idToken.Split('.')[1];
-
             var dados = (await dbCliente.Child("usuario")
                         .OnceAsync<UsuarioDTO>())
-                        .Select(y => y.Object.Token == novoToken).FirstOrDefault();
+                        .Where(y => y.Object.Token == token).FirstOrDefault();
 
-            return "";
+
+            return dados.Object;
         }
     }
 }

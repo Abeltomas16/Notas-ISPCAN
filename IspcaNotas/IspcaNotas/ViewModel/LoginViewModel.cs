@@ -41,9 +41,11 @@ namespace IspcaNotas.ViewModel
                 var resultado = await LoginNegocios.SignIn(email, Senha);
                 if (resultado != null)
                 {
-                   // string categoria = await usuarioService.categoria(resultado);
-                    //Console.WriteLine(categoria);
-                    await routing.NavigateTo("///admin");
+                    UsuarioDTO categoria = await usuarioService.Pesquisar(resultado);
+                    if (categoria.Categoria == "Estudante")
+                        await routing.NavigateTo("///main");
+                    else if (categoria.Categoria == "Administrador")
+                        await routing.NavigateTo("///admin");
                 }
 
 

@@ -18,14 +18,14 @@ namespace IspcaNotas.Features.Service.Login
             var content = await auth.SignInWithEmailAndPasswordAsync(email, password);
             var result = await content.GetFreshAuthAsync();
             var serialized = JsonConvert.SerializeObject(result);
+            var userId = result.User.LocalId;
             Preferences.Set("MyFirebaseToken", serialized);
-            return await Task.FromResult(serialized);
+            return await Task.FromResult(userId);
         }
         public async Task<string> SignUp(string email, string password, string displayname)
         {
             var conn = await auth.CreateUserWithEmailAndPasswordAsync(email, password, displayname);
             var id = conn.User.LocalId;
-            // var token = conn.FirebaseToken;
             return await Task.FromResult(id);
         }
         public async Task DeleteAccount(string email, string password)
