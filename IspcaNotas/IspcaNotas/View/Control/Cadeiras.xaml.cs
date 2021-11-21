@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using XF.Material.Forms.UI.Dialogs;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -32,7 +33,12 @@ namespace IspcaNotas.View.Control
             }
             catch (Exception erro)
             {
-                DisplayAlert("Info", erro.Message, "Ok");
+                MaterialDialog.Instance.SnackbarAsync(message: erro.Message, actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
+                  new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
+                  {
+                      BackgroundColor = Color.Orange,
+                      MessageTextColor = Color.Black
+                  });
             }
 
         }
@@ -60,13 +66,23 @@ namespace IspcaNotas.View.Control
 
                     var resultado = await CadeiraViewModel.Apagar(cadeiraCurrent.IDCadeira);
                     await CadeiraViewModel.Carregar();
-                    await DisplayAlert("Info", resultado, "Ok");
+                    await MaterialDialog.Instance.SnackbarAsync(message: resultado, actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
+                     new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
+                     {
+                         BackgroundColor = Color.Orange,
+                         MessageTextColor = Color.Black
+                     });
                 }
                 catch (Exception erro)
                 {
                     if (CadeiraViewModel.Busy)
                         CadeiraViewModel.Busy = false;
-                    await DisplayAlert("Info", erro.Message, "Ok");
+                    await MaterialDialog.Instance.SnackbarAsync(message: erro.Message, actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
+                      new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
+                      {
+                          BackgroundColor = Color.Orange,
+                          MessageTextColor = Color.Black
+                      });
                 }
                 finally
                 {
@@ -111,13 +127,23 @@ namespace IspcaNotas.View.Control
                 resultado = await CadeiraViewModel.CadastrarEditar(cadeira, operacao);
 
                 await CadeiraViewModel.Carregar();
-                await DisplayAlert("Info", resultado, "Ok");
+                await MaterialDialog.Instance.SnackbarAsync(message: resultado, actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
+                    new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
+                    {
+                        BackgroundColor = Color.Orange,
+                        MessageTextColor = Color.Black
+                    });
             }
             catch (Exception erro)
             {
                 if (CadeiraViewModel.Busy)
                     CadeiraViewModel.Busy = false;
-                await DisplayAlert("Info", erro.Message, "Ok");
+                await MaterialDialog.Instance.SnackbarAsync(message: erro.Message, actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
+                    new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
+                    {
+                        BackgroundColor = Color.Orange,
+                        MessageTextColor = Color.Black
+                    });
             }
             finally
             {

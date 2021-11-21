@@ -23,13 +23,13 @@ namespace IspcaNotas.Features.Service.Cadeira
                 var insert = await db.Child("cadeira")
                               .PostAsync(cadeira);
                 string key = insert.Key;
-                return key;
+                return "Cadeira cadastrada com sucesso !";
             }
 
             await db.Child("cadeira")
                             .Child(cadeira.IDCadeira)
                             .PutAsync(cadeira);
-            return "Ok";
+            return "Cadeira alterada com sucesso !";
         }
         public async Task<string> apagar(string key)
         {
@@ -37,7 +37,7 @@ namespace IspcaNotas.Features.Service.Cadeira
                          .Child(key)
                          .DeleteAsync();
 
-            return "Ok";
+            return "Cadeira apagada com sucesso !";
         }
 
         public async Task<List<CadeiraDTO>> listarTodos()
