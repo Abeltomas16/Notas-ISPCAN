@@ -10,7 +10,7 @@ namespace IspcaNotas.Features.Interface
     {
         Task<string> Cadastrar(UsuarioDTO entidade);
         Task<string> Alterar(UsuarioDTO entidade, string key);
-        Task<string> Apagar(string token, string key);
+        Task<string> Apagar(UsuarioDTO usuarioDTO);
         Task<List<UsuarioDTO>> ListarTodos();
         Task<String> categoria(string token);
     }

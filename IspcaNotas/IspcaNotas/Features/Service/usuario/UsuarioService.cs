@@ -55,11 +55,11 @@ namespace IspcaNotas.Features.Service.usuario
                         });
             return dados.ToList();
         }
-        public async Task<string> Apagar(string token, string key)
+        public async Task<string> Apagar(UsuarioDTO usuarioDTO)
         {
-            await dbLogin.DeleteAccount(token);
+            await dbLogin.DeleteAccount(usuarioDTO.Email, usuarioDTO.Senha);
             await dbCliente.Child("usuario")
-                           .Child(key)
+                           .Child(usuarioDTO.Key)
                            .DeleteAsync();
 
             return "Usúario apagado com sucesso !";

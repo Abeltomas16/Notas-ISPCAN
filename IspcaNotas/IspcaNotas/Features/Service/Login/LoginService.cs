@@ -28,8 +28,10 @@ namespace IspcaNotas.Features.Service.Login
             // var token = conn.FirebaseToken;
             return await Task.FromResult(id);
         }
-        public async Task DeleteAccount(string token)
+        public async Task DeleteAccount(string email, string password)
         {
+            var request = await auth.SignInWithEmailAndPasswordAsync(email, password);
+            string token = request.FirebaseToken;
             await auth.DeleteUserAsync(token);
         }
         public void SignOut(string email, string password)

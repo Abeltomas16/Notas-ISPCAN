@@ -57,10 +57,10 @@ namespace IspcaNotas.ViewModel
             Busy = false;
             return retorno;
         }
-        public async Task<string> Apagar(string token, string key)
+        public async Task<string> Apagar(UsuarioDTO usuarioDTO)
         {
             Busy = true;
-            var resultado = await Idata.Apagar(token, key);
+            var resultado = await Idata.Apagar(usuarioDTO);
             Busy = false;
             return resultado;
         }

@@ -66,7 +66,7 @@ namespace IspcaNotas.View.Control
                     if (!questao)
                         return;
 
-                    var resultado = await estudantesViewModel.Apagar(estudanteCurrent.Token, estudanteCurrent.Key);
+                    var resultado = await estudantesViewModel.Apagar(estudanteCurrent);
                     estudantesViewModel.Carregar();
                     await MaterialDialog.Instance.SnackbarAsync(message: resultado, actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
                             new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
