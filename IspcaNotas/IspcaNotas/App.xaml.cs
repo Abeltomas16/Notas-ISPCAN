@@ -39,6 +39,11 @@ namespace IspcaNotas
             Locator.CurrentMutable.Register(() => new LoadingViewModel());
             Locator.CurrentMutable.Register(() => new LoginViewModel());
             Locator.CurrentMutable.Register(() => new ActividadesViewModel());
+            Locator.CurrentMutable.Register(() => new UsuarioViewModel());
+
+            Locator.CurrentMutable.Register(() => new FirebaseAuthProvider(new FirebaseConfig("AIzaSyDt4LlC53lc5_P0EZ-d0kkQ42Kr2neONUo")));
+            Locator.CurrentMutable.Register(() => new FirebaseClient("https://projectnotas-c7ffc-default-rtdb.firebaseio.com/"));
+
         }
 
         protected override void OnStart()

@@ -10,9 +10,9 @@ namespace IspcaNotas.Features.Service.Routing
     {
         public bool IsLogged()
         {
-           // Preferences.Remove("MyFirebaseToken");
-            string usuario = Preferences.Get("MyFirebaseToken","doesnot");
-            return usuario != "doesnot" ;
+            Preferences.Remove("MyFirebaseToken");
+            string usuario = Preferences.Get("MyFirebaseToken", "doesnot");
+            return usuario != "doesnot";
         }
     }
 }

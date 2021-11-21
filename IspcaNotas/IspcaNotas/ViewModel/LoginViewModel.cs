@@ -24,11 +24,13 @@ namespace IspcaNotas.ViewModel
         }
         IRouting routing;
         ILogin LoginNegocios;
+        IUsuario usuarioService;
         public ICommand ExecuteSignIn { get; }
         public LoginViewModel()
         {
             LoginNegocios = Locator.Current.GetService<ILogin>();
-            this.routing = routing ?? Locator.Current.GetService<IRouting>();
+            this.routing = Locator.Current.GetService<IRouting>();
+            this.usuarioService = Locator.Current.GetService<IUsuario>();
             ExecuteSignIn = new Command(() => ValidarEntrada(this.Email, this.Senha));
         }
 
@@ -38,7 +40,12 @@ namespace IspcaNotas.ViewModel
             {
                 var resultado = await LoginNegocios.SignIn(email, Senha);
                 if (resultado != null)
+                {
+                   // string categoria = await usuarioService.categoria(resultado);
+                    //Console.WriteLine(categoria);
                     await routing.NavigateTo("///admin");
+                }
+
 
             }
             catch (Exception erro)

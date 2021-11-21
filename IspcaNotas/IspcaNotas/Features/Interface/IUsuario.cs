@@ -8,6 +8,10 @@ namespace IspcaNotas.Features.Interface
 {
     public interface IUsuario
     {
-        Task<string> criar(UsuarioDTO entidade);
+        Task<string> Cadastrar(UsuarioDTO entidade);
+        Task<string> Alterar(UsuarioDTO entidade, string key);
+        Task<string> Apagar(string token, string key);
+        Task<List<UsuarioDTO>> ListarTodos();
+        Task<String> categoria(string token);
     }
 }

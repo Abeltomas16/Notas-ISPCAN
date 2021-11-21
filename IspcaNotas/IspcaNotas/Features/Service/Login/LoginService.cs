@@ -21,11 +21,16 @@ namespace IspcaNotas.Features.Service.Login
             Preferences.Set("MyFirebaseToken", serialized);
             return await Task.FromResult(serialized);
         }
-        public async Task<string> SignUp(string email, string password)
+        public async Task<string> SignUp(string email, string password, string displayname)
         {
-            var conn = await auth.CreateUserWithEmailAndPasswordAsync(email, password, "Abel Tomás");
-            var token = conn.FirebaseToken;
-            return await Task.FromResult(token);
+            var conn = await auth.CreateUserWithEmailAndPasswordAsync(email, password, displayname);
+            var id = conn.User.LocalId;
+            // var token = conn.FirebaseToken;
+            return await Task.FromResult(id);
+        }
+        public async Task DeleteAccount(string token)
+        {
+            await auth.DeleteUserAsync(token);
         }
         public void SignOut(string email, string password)
         {

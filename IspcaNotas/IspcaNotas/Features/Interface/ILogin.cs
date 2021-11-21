@@ -8,6 +8,8 @@ namespace IspcaNotas.Features.Interface
     public interface ILogin
     {
         Task<string> SignIn(string email, string password);
-        Task<string> SignUp(string email, string password);
+        Task<string> SignUp(string email, string password, string displayname);
+        Task DeleteAccount(string token);
+
     }
 }
