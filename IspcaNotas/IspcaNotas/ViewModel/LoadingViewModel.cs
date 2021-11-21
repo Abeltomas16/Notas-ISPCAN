@@ -21,7 +21,7 @@ namespace IspcaNotas.ViewModel
             var isAuthenticated = AuthenticationService.IsLogged();
             if (isAuthenticated)
             {
-                await routingService.NavigateTo("///main/home");
+                await routingService.NavigateTo("///admin");
             }
             else
             {

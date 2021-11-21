@@ -38,11 +38,12 @@ namespace IspcaNotas.ViewModel
             {
                 var resultado = await LoginNegocios.SignIn(email, Senha);
                 if (resultado != null)
-                    await routing.NavigateTo("///main/admin");
+                    await routing.NavigateTo("///admin");
 
             }
-            catch 
+            catch (Exception erro)
             {
+                Console.WriteLine(erro.Message);
                 await XF.Material.Forms.UI.Dialogs.MaterialDialog.Instance.SnackbarAsync("Senha errada", XF.Material.Forms.UI.Dialogs.MaterialSnackbar.DurationShort);
             }
         }

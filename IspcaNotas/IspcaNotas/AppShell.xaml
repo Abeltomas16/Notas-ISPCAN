@@ -4,6 +4,7 @@
        xmlns:d="http://xamarin.com/schemas/2014/forms/design"
        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
        xmlns:local="clr-namespace:IspcaNotas.View"
+       xmlns:control="clr-namespace:IspcaNotas.View.Control"
              mc:Ignorable="d"
              x:Class="IspcaNotas.AppShell"
     Title="ShellLogin">
@@ -49,17 +50,14 @@
     </ShellContent>
 
     <!-- Main Page -->
-    <FlyoutItem Route="main"
-                FlyoutDisplayOptions="AsMultipleItems" IsTabStop="False">
-        <ShellContent Route="home"
-                      IsTabStop="False"
-                      ContentTemplate="{DataTemplate local:MainPage}"
-                      Title="Home" />
-        <ShellContent Route="admin"
-                      IsTabStop="False"
-                      ContentTemplate="{DataTemplate local:Administrador}"
-                      Title="Admin" />
-    </FlyoutItem>
-    <MenuItem Text="Logout"
-              Command="{Binding ExecuteLogout}" />
+    <TabBar Route="main">
+        <ShellContent Title="Home" ContentTemplate="{DataTemplate control:ActividadesTabbed}"/>
+        <ShellContent Title="Notas" ContentTemplate="{DataTemplate control:ActividadesTabbed}"/>
+    </TabBar>
+
+    <TabBar Route="admin">
+        <ShellContent Title="admin" ContentTemplate="{DataTemplate control:ActividadesTabbed}"/>
+        <ShellContent Title="Cadeira" Icon="disciplinas.png" ContentTemplate="{DataTemplate control:Cadeiras}"/>
+    </TabBar>
+    
 </Shell>
