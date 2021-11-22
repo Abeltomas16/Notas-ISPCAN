@@ -19,7 +19,7 @@ namespace IspcaNotas.View.Control
     {
         private EnumAdmCRUD EnumCadeiras;
         CadeiraDTO cadeiraCurrent = null;
-        CadeiraViewModel CadeiraViewModel { get; } = Locator.Current.GetService<CadeiraViewModel>();
+        CadeiraViewModel CadeiraViewModel { get; } = Locator.Current.GetService<CadeiraViewModel>("Cadeiras");
         public Cadeiras()
         {
             InitializeComponent();
@@ -50,7 +50,7 @@ namespace IspcaNotas.View.Control
             cadeiraCurrent = e.CurrentSelection[0] as CadeiraDTO;
             if (result.Equals("Editar"))
             {
-                txtNome.Text = cadeiraCurrent.name;
+                txtNome.Text = cadeiraCurrent.Name;
                 btCancelarEditar.IsVisible = true;
 
                 EnumCadeiras = EnumAdmCRUD.Editar;
@@ -108,7 +108,7 @@ namespace IspcaNotas.View.Control
         {
             CadeiraDTO cadeira = new CadeiraDTO()
             {
-                name = txtNome.Text
+                Name = txtNome.Text
             };
             try
             {

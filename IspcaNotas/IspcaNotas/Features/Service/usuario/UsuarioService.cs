@@ -15,10 +15,6 @@ namespace IspcaNotas.Features.Service.usuario
 {
     public class UsuarioService : IUsuario
     {
-        public class erros
-        {
-            public string idToken { get; set; }
-        }
         FirebaseClient dbCliente { get; } = Locator.Current.GetService<FirebaseClient>();
         ILogin dbLogin { get; } = Locator.Current.GetService<ILogin>();
         public async Task<string> Cadastrar(UsuarioDTO entidade)
@@ -28,7 +24,7 @@ namespace IspcaNotas.Features.Service.usuario
             var key = await dbCliente.Child("usuario")
                       .PostAsync(entidade);
             //return key.Key;
-            return "Usúario cadastrado com sucesso";
+            return token;
         }
         public async Task<string> Alterar(UsuarioDTO entidade, string chave)
         {

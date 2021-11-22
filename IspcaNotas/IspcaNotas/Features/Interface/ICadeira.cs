@@ -12,5 +12,7 @@ namespace IspcaNotas.Features.Interface
         Task<string> inserirOuAlterar(CadeiraDTO cadeira, EnumOperacoes operacoes);
         Task<string> apagar(string key);
         Task<List<CadeiraDTO>> listarTodos();
+        Task<List<CadeiraDTO>> CadeiraLivre();
+        Task DocenteCadeira(CadeiraDTO cadeira, string tokenDocente);
     }
 }

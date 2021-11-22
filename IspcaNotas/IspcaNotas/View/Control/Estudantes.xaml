@@ -73,7 +73,7 @@
 
                         <Material:MaterialTextField 
                         x:Name="txtEmail"
-                        Placeholder="Nome Login"
+                        Placeholder="Email"
                         VerticalOptions="Center"
                         InputType="Email"
                         TextColor="#4A6963"
@@ -100,7 +100,7 @@
                         TintColor="#1976D3"
                            BackgroundColor="WhiteSmoke" 
                             Padding="10"
-                        MaxLength="6"
+                        MaxLength="20"
                         Grid.Row="5"/>
 
                         <StackLayout Orientation="Horizontal" Grid.Row="6" Padding="10,10" >

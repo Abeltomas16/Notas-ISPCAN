@@ -47,10 +47,31 @@ namespace IspcaNotas.Features.Service.Cadeira
                          ).Select(x => new CadeiraDTO
                          {
                              IDCadeira = x.Key,
-                             name = x.Object.name
+                             Name = x.Object.Name
                          });
 
             return cadeiras.ToList();
+        }
+        public async Task DocenteCadeira(CadeiraDTO cadeira, string tokenDocente)
+        {
+            cadeira.Docente = tokenDocente;
+            await db.Child("cadeira")
+                            .Child(cadeira.IDCadeira)
+                          .PutAsync(cadeira);
+        }
+
+        public async Task<List<CadeiraDTO>> CadeiraLivre()
+        {
+            var cadeiras = (await db.Child("cadeira")
+                     .OnceAsync<CadeiraDTO>()
+              ).Select(x => new CadeiraDTO
+              {
+                  IDCadeira = x.Key,
+                  Name = x.Object.Name,
+                  Docente=x.Object.Docente
+              });
+
+            return cadeiras.Where(y => y.Docente == null).ToList();
         }
     }
 }

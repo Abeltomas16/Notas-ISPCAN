@@ -33,13 +33,16 @@ namespace IspcaNotas
             Locator.CurrentMutable.RegisterLazySingleton<IUsuario>(() => new UsuarioService());
             Locator.CurrentMutable.RegisterLazySingleton<IActividades>(() => new ActividadseService());
             Locator.CurrentMutable.RegisterLazySingleton<ICadeira>(() => new CadeiraService());
+            Locator.CurrentMutable.RegisterLazySingleton<IDocente>(() => new DocenteService());
 
-
-            Locator.CurrentMutable.Register(() => new CadeiraViewModel());
+            Locator.CurrentMutable.Register(() => new CadeiraViewModel("Cadeiras"),"Cadeira");
+            Locator.CurrentMutable.Register(() => new CadeiraViewModel("CadeirasMostrar"), "CadeirasMostrar");
             Locator.CurrentMutable.Register(() => new LoadingViewModel());
             Locator.CurrentMutable.Register(() => new LoginViewModel());
             Locator.CurrentMutable.Register(() => new ActividadesViewModel());
             Locator.CurrentMutable.Register(() => new UsuarioViewModel());
+            Locator.CurrentMutable.Register(() => new DocenteViewModel());
+
 
 
         }

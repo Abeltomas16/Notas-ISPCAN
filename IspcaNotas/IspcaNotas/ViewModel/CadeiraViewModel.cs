@@ -15,7 +15,6 @@ namespace IspcaNotas.ViewModel
         private bool IsBusyCadeira;
         //Total de cadeiras existentes
         public int Total { get; private set; }
-
         public bool Busy
         {
             get { return IsBusyCadeira; }
@@ -29,10 +28,14 @@ namespace IspcaNotas.ViewModel
             }
         }
         ICadeira cadeiraService;
-        public CadeiraViewModel()
+        public CadeiraViewModel(string Tela)
         {
             cadeiraService = Locator.Current.GetService<ICadeira>();
-            Task.Run(async () => await Carregar());
+            Busy = false;
+            if (Tela == "CadeirasMostrar")
+                Task.Run(async () => await CarregarCadeiraLivres());
+            else  //QUANDO A TELA NÃO FOR CADEIRA MOSTRAR, LOGO É A TELA DE INSERÇÃO DAS CADEIRAS
+                Task.Run(async () => await Carregar());
         }
 
         //public CadeiraViewModel(string Tela, Collection<CadeiraDTO> cadeiras)
@@ -55,8 +58,8 @@ namespace IspcaNotas.ViewModel
         //       },
         //       TaskContinuationOptions.OnlyOnRanToCompletion);
         //}
-       
-        
+
+
         ObservableCollection<object> selectedCadeira;
         public ObservableCollection<object> SelectedCadeira
         {
@@ -80,7 +83,6 @@ namespace IspcaNotas.ViewModel
             Busy = false;
             return retorno;
         }
-
         public async Task Carregar()
         {
             try
@@ -108,10 +110,10 @@ namespace IspcaNotas.ViewModel
             Busy = false;
             return resultado;
         }
-        public void CarregarCadeiraLivres()
+        public async Task CarregarCadeiraLivres()
         {
             Busy = true;
-            var cadeiras = new List<CadeiraDTO>();// await cadeiraService.CadeiraLivre();
+            var cadeiras = await cadeiraService.CadeiraLivre();
             this.Cadeiras = new ObservableCollection<CadeiraDTO>(cadeiras);
             OnPropertyChanged("Cadeiras");
             Total = this.Cadeiras.Count;
