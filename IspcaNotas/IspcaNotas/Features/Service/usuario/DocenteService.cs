@@ -24,10 +24,16 @@ namespace IspcaNotas.Features.Service.usuario
             await Task.WhenAll(tarefas);
             return "Docente cadastrado com sucesso";
         }
-        public async Task<string> Alterar(UsuarioDTO entidade, List<CadeiraDTO> cadeira, string chave)
+        public async Task<string> Alterar(UsuarioDTO entidade, List<CadeiraDTO> cadeiras)
         {
-            string retorno = await dbLogin.Alterar(entidade, chave);
-            return retorno;
+            string retorno = await dbLogin.Alterar(entidade, entidade.Key);
+            string apagarCadeiras = await dbCadeira.apagarCadeiraProf(entidade.Token);
+            List<Task> tarefas = new List<Task>();
+
+            foreach (CadeiraDTO item in cadeiras)
+                tarefas.Add(dbCadeira.DocenteCadeira(item, entidade.Token));
+            await Task.WhenAll(tarefas);
+            return "Docente alterado com sucesso";
         }
         public async Task<List<UsuarioDTO>> ListarTodos()
         {

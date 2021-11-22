@@ -27,39 +27,36 @@ namespace IspcaNotas.ViewModel
                 }
             }
         }
-        ICadeira cadeiraService;
+        ICadeira cadeiraService = Locator.Current.GetService<ICadeira>();
         public CadeiraViewModel(string Tela)
         {
-            cadeiraService = Locator.Current.GetService<ICadeira>();
+
             Busy = false;
             if (Tela == "CadeirasMostrar")
                 Task.Run(async () => await CarregarCadeiraLivres());
             else  //QUANDO A TELA NÃO FOR CADEIRA MOSTRAR, LOGO É A TELA DE INSERÇÃO DAS CADEIRAS
                 Task.Run(async () => await Carregar());
         }
-
-        //public CadeiraViewModel(string Tela, Collection<CadeiraDTO> cadeiras)
-        //{
-        //    //Depois de pegar todas cadeiras, seleciono todas em que um pof leciona
-        //    selectedCadeira = new ObservableCollection<object>();
-        //    Busy = false;
-        //    var tarefaBusca = Task.Run(() => Carregar());
-        //    tarefaBusca.ContinueWith(
-        //       tarefaAnterior =>
-        //       {
-        //           for (int i = 0; i < Cadeiras.Count; i++)
-        //           {
-        //               for (int j = 0; j < cadeiras.Count; j++)
-        //               {
-        //                   if (Cadeiras[i].IDCadeira == cadeiras[j].IDCadeira)
-        //                       SelectedCadeira.Add(Cadeiras[i]);
-        //               }
-        //           }
-        //       },
-        //       TaskContinuationOptions.OnlyOnRanToCompletion);
-        //}
-
-
+        public CadeiraViewModel(string Tela, List<CadeiraDTO> cadeiras)
+        {
+            //Depois de pegar todas cadeiras, seleciono todas em que um pof leciona
+            selectedCadeira = new ObservableCollection<object>();
+            Busy = false;
+            Task.Run(async () => await Carregar())
+                .ContinueWith(
+                tarefaAnterior =>
+                {
+                    for (int i = 0; i < Cadeiras.Count; i++)
+                    {
+                        for (int j = 0; j < cadeiras.Count; j++)
+                        {
+                            if (Cadeiras[i].IDCadeira == cadeiras[j].IDCadeira)
+                                SelectedCadeira.Add(Cadeiras[i]);
+                        }
+                    }
+                },
+                TaskContinuationOptions.OnlyOnRanToCompletion);
+        }
         ObservableCollection<object> selectedCadeira;
         public ObservableCollection<object> SelectedCadeira
         {
@@ -72,6 +69,7 @@ namespace IspcaNotas.ViewModel
                 if (selectedCadeira != value)
                 {
                     selectedCadeira = value;
+                    OnPropertyChanged("selectedCadeira");
                 }
             }
         }
@@ -85,8 +83,7 @@ namespace IspcaNotas.ViewModel
         }
         public async Task Carregar()
         {
-            try
-            {
+
                 Busy = true;
                 var cadeiras = await cadeiraService.listarTodos();
                 this.Cadeiras = new ObservableCollection<CadeiraDTO>(cadeiras);
@@ -94,13 +91,7 @@ namespace IspcaNotas.ViewModel
                 Total = this.Cadeiras.Count;
                 OnPropertyChanged("Total");
                 Busy = false;
-            }
-            catch (Exception erro)
-            {
-                Busy = false;
-                Console.WriteLine(erro);
-                throw;
-            }
+
 
         }
         public async Task<string> Apagar(string id)

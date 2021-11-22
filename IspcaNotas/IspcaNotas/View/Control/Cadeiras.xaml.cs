@@ -19,7 +19,7 @@ namespace IspcaNotas.View.Control
     {
         private EnumAdmCRUD EnumCadeiras;
         CadeiraDTO cadeiraCurrent = null;
-        CadeiraViewModel CadeiraViewModel { get; } = Locator.Current.GetService<CadeiraViewModel>("Cadeiras");
+        CadeiraViewModel CadeiraViewModel { get; } = Locator.Current.GetService<CadeiraViewModel>("Cadeira");
         public Cadeiras()
         {
             InitializeComponent();

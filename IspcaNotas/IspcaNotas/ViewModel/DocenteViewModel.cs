@@ -39,7 +39,7 @@ namespace IspcaNotas.ViewModel
         }
         ICadeira clienteCadeira;
         IDocente clienteDocente;
-        public DocenteViewModel(IDocente docente=null, ICadeira cadeira=null)
+        public DocenteViewModel(IDocente docente = null, ICadeira cadeira = null)
         {
             clienteDocente = docente ?? Locator.Current.GetService<IDocente>();
             clienteCadeira = cadeira ?? Locator.Current.GetService<ICadeira>();
@@ -55,13 +55,13 @@ namespace IspcaNotas.ViewModel
             Busy = false;
             return retorno;
         }
-      /*  public async Task<List<string>> Editar(UsuarioDTO docente, List<CadeiraDTO> cadeiras, string key)
+        public async Task<string> Alterar(UsuarioDTO docente, List<CadeiraDTO> cadeiras)
         {
-           Busy = true;
-            var retorno = await clienteDocente.Alterar(docente, cadeiras, key);
+            Busy = true;
+            var retorno = await clienteDocente.Alterar(docente, cadeiras);
             Busy = false;
             return retorno;
-        }*/
+        }
         public async void Carregar()
         {
             Busy = true;
@@ -77,14 +77,13 @@ namespace IspcaNotas.ViewModel
 
             Busy = false;
         }
-        /*  public async Task<Collection<Cadeira>> MostrarCadeira(int id)
-          {
-              Busy = true;
-              CadeiraNegocios cadeiraNegocios = new CadeiraNegocios();
-              var cadeiras = await cadeiraNegocios.MostrarPorID(id);
-              Busy = false;
-              return cadeiras;
-          }*/
+        public async Task<List<CadeiraDTO>> MostrarCadeira(string key)
+        {
+            Busy = true;
+            var cadeiras = await clienteCadeira.MostrarPorID(key);
+            Busy = false;
+            return cadeiras;
+        }
         public async Task<string> Apagar(UsuarioDTO key)
         {
             Busy = true;

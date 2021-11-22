@@ -21,7 +21,7 @@ namespace IspcaNotas.View.Control
         EnumAdmCRUD EnumDocente;
         UsuarioDTO docenteCurrent = null;
         DocenteViewModel DocentesViewModel { get; } = Locator.Current.GetService<DocenteViewModel>();
-        Collection<CadeiraDTO> cadeirasDoDocente = null;
+        List<CadeiraDTO> cadeirasDoDocente = null;
         public Docentes()
         {
             InitializeComponent();
@@ -62,12 +62,13 @@ namespace IspcaNotas.View.Control
                     if (docenteCurrent == null)
                         return;
                     docente.Key = docenteCurrent.Key;
+                    docente.Token = docenteCurrent.Token;
                     operacao = EnumOperacoes.Editar;
                 }
                 if (operacao == EnumOperacoes.Cadastrar)
                     resultado = await DocentesViewModel.Cadastrar(docente, cadeiras);
-                //  else if (operacao == EnumOperacoes.Editar)
-                //    resultado = await DocentesViewModel.(docente, login, cadeiras, operacao);
+                else if (operacao == EnumOperacoes.Editar)
+                    resultado = await DocentesViewModel.Alterar(docente, cadeiras);
 
                 DocentesViewModel.Carregar();
                 await DisplayActionSheet("Resultados", null, "Ok");
@@ -105,49 +106,49 @@ namespace IspcaNotas.View.Control
             CadeirasDocente.Cadeiras = new List<CadeiraDTO>();
         }
 
-        private void ViewDocentes_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void ViewDocentes_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            /*   var result = await DisplayActionSheet("Acção", "Cancelar", null, new string[] { "Editar", "Apagar" });
-               if (result == null || result == "Cancelar") return;
-               docenteCurrent = e.CurrentSelection[0] as UsuarioDTO;
-               if (result.Equals("Editar"))
-               {
-                   var login = await DocentesViewModel.MostrarLogin(docenteCurrent.IDDocenteUsuario.IDUsuario.Value);
-                   cadeirasDoDocente = await DocentesViewModel.MostrarCadeira(docenteCurrent.IDDocenteUsuario.IDUsuario.Value);
-                   txtNome.Text = docenteCurrent.IDDocenteUsuario.Nome;
-                   txtPhone.Text = docenteCurrent.IDDocenteUsuario.Telefone;
-                   txtSenha.Text = login.Senha;
-                   txtNomeLogin.Text = login.NomeLogin;
+            var result = await DisplayActionSheet("Acção", "Cancelar", null, new string[] { "Editar", "Apagar" });
+            if (result == null || result == "Cancelar") return;
+            docenteCurrent = e.CurrentSelection[0] as UsuarioDTO;
+            if (result.Equals("Editar"))
+            {
+                cadeirasDoDocente = await DocentesViewModel.MostrarCadeira(docenteCurrent.Token);
+                txtNome.Text = docenteCurrent.Name;
+                txtPhone.Text = docenteCurrent.Telefone;
+                txtSenha.Text = docenteCurrent.Senha;
+                txtEmail.Text = docenteCurrent.Email;
 
-                   btCancelarEditar.IsVisible = true;
-                   EnumDocente = EnumAdmCRUD.Editar;
-                   btSalvarEditar.Text = "Actualizar";
-                   AddCadeiras.Text = "Ver cadeiras";
-               }
-               else if (result.Equals("Apagar"))
-               {
-                   try
-                   {
-                       var questao = await DisplayAlert("Notas", "Tens certeza que pretendes Apagar o docente selecionado?", "Sim", "Cancelar");
-                       if (!questao)
-                           return;
+                btCancelarEditar.IsVisible = true;
+                EnumDocente = EnumAdmCRUD.Editar;
+                btSalvarEditar.Text = "Actualizar";
+                AddCadeiras.Text = "Ver cadeiras";
+            }
+            else if (result.Equals("Apagar"))
+            {
+                /*try
+                {
+                    var questao = await DisplayAlert("Notas", "Tens certeza que pretendes Apagar o docente selecionado?", "Sim", "Cancelar");
+                    if (!questao)
+                        return;
 
-                       var resultado = await DocentesViewModel.Apagar(docenteCurrent.IDDocenteUsuario.IDUsuario.Value);
-                       DocentesViewModel.Carregar();
-                       await DisplayAlert("Info", resultado, "Ok");
-                   }
-                   catch (Exception erro)
-                   {
-                       if (DocentesViewModel.Busy)
-                           DocentesViewModel.Busy = false;
-                       await DisplayAlert("Info", erro.Message, "Ok");
-                   }
-                   finally
-                   {
-                       if (DocentesViewModel.Busy)
-                           DocentesViewModel.Busy = false;
-                   }
-               }*/
+                    var resultado = await DocentesViewModel.Apagar(docenteCurrent.IDDocenteUsuario.IDUsuario.Value);
+                    DocentesViewModel.Carregar();
+                    await DisplayAlert("Info", resultado, "Ok");
+                }
+                catch (Exception erro)
+                {
+                    if (DocentesViewModel.Busy)
+                        DocentesViewModel.Busy = false;
+                    await DisplayAlert("Info", erro.Message, "Ok");
+                }
+                finally
+                {
+                    if (DocentesViewModel.Busy)
+                        DocentesViewModel.Busy = false;
+                }*/
+                Console.WriteLine("apagar");
+            }
         }
         protected override void OnAppearing()
         {
@@ -161,15 +162,13 @@ namespace IspcaNotas.View.Control
         private async void AddCadeiras_Clicked(object sender, EventArgs e)
         {
             if (EnumDocente == EnumAdmCRUD.Cadastrar)
-            {
                 await Navigation.PushAsync(new CadeirasMostrar());
-            }
             else
             {
                 if (cadeirasDoDocente == null)
                     return;
 
-                //await Navigation.PushAsync(new CadeirasMostrar(cadeirasDoDocente));
+                await Navigation.PushAsync(new CadeirasMostrar(cadeirasDoDocente));
             }
         }
     }

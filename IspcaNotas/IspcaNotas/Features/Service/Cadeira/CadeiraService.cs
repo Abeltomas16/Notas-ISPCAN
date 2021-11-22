@@ -6,6 +6,7 @@ using IspcaNotas.Model;
 using Splat;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -68,10 +69,41 @@ namespace IspcaNotas.Features.Service.Cadeira
               {
                   IDCadeira = x.Key,
                   Name = x.Object.Name,
-                  Docente=x.Object.Docente
-              });
+                  Docente = x.Object.Docente
+              }).Where(y => y.Docente == null);
 
-            return cadeiras.Where(y => y.Docente == null).ToList();
+            return cadeiras.ToList();
+        }
+
+        public async Task<List<CadeiraDTO>> MostrarPorID(string token)
+        {
+            var cadeiras = (await db.Child("cadeira")
+                                    .OnceAsync<CadeiraDTO>()
+                                         ).Select(x => new CadeiraDTO
+                                         {
+                                             IDCadeira = x.Key,
+                                             Name = x.Object.Name,
+                                             Docente = x.Object.Docente
+                                         }).Where(y => y.Docente == token);
+            return cadeiras.ToList();
+        }
+
+        public async Task<string> apagarCadeiraProf(string token)
+        {
+            List<Task> tarefas = new List<Task>();
+            var cadeirasProd = await this.MostrarPorID(token);
+            foreach (CadeiraDTO item in cadeirasProd)
+                tarefas.Add(this.removerDocente(item));
+            await Task.WhenAll(tarefas);
+            return "Cadeiras removidas";
+        }
+
+        public async Task removerDocente(CadeiraDTO key)
+        {
+            key.Docente = null;
+            await db.Child("cadeira")
+                     .Child(key.IDCadeira)
+                     .PutAsync(key);
         }
     }
 }

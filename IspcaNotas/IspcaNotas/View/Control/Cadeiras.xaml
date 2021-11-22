@@ -88,7 +88,7 @@
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
 
-                                        <Label Text="{Binding name}" FontSize="Medium" VerticalOptions="Start" Grid.Row="0" Margin="0,5" TextColor="#2189dc"  Style="{DynamicResource CaptionStyle}" />
+                                        <Label Text="{Binding Name}" FontSize="Medium" VerticalOptions="Start" Grid.Row="0" Margin="0,5" TextColor="#2189dc"  Style="{DynamicResource CaptionStyle}" />
 
                                     </Grid>
                                 </Frame>
