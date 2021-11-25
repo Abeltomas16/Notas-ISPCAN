@@ -9,7 +9,7 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Name="MenuPerfil" Order="Secondary" Text="Perfil" Priority="0" />
-        <ToolbarItem Name="MenuSobre" Order="Secondary" Text="Sobre" Priority="1"/>
+        <ToolbarItem Name="MenuSobre" Order="Secondary" Clicked="MenuSobre_Clicked" Text="Sobre" Priority="1"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>

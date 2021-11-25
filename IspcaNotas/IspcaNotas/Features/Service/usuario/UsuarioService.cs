@@ -57,7 +57,6 @@ namespace IspcaNotas.Features.Service.usuario
                            .DeleteAsync();
             return "Usúario apagado com sucesso !";
         }
-
         public async Task<UsuarioDTO> Pesquisar(string token)
         {
             var dados = (await dbCliente.Child("usuario")

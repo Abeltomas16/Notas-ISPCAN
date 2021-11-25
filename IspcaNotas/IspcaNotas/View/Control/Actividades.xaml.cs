@@ -145,5 +145,10 @@ namespace IspcaNotas.View.Control
                     Service.Busy = false;
             }
         }
+
+        private async void MenuSobre_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Sobre());
+        }
     }
 }

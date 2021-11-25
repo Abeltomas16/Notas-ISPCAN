@@ -16,6 +16,8 @@ namespace IspcaNotas.Features.Service.Login
             var result = await content.GetFreshAuthAsync();
             var serialized = JsonConvert.SerializeObject(result);
             var userId = result.User.LocalId;
+            Preferences.Set("MyEmail",email);
+            Preferences.Set("MySenha", password);
             Preferences.Set("MyFirebaseToken", serialized);
             return await Task.FromResult(userId);
         }
