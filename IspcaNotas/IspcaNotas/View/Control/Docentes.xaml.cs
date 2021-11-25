@@ -5,13 +5,10 @@ using IspcaNotas.ViewModel;
 using Splat;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XF.Material.Forms.UI.Dialogs;
 
 namespace IspcaNotas.View.Control
 {
@@ -32,7 +29,12 @@ namespace IspcaNotas.View.Control
             }
             catch (Exception erro)
             {
-                DisplayAlert("Info", erro.Message, "Ok");
+                MaterialDialog.Instance.SnackbarAsync(message: erro.Message, actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
+                  new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
+                  {
+                      BackgroundColor = Color.Orange,
+                      MessageTextColor = Color.Black
+                  });
             }
         }
 
@@ -71,13 +73,23 @@ namespace IspcaNotas.View.Control
                     resultado = await DocentesViewModel.Alterar(docente, cadeiras);
 
                 DocentesViewModel.Carregar();
-                await DisplayActionSheet("Resultados", null, "Ok");
+                await MaterialDialog.Instance.SnackbarAsync(message: resultado, actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
+                  new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
+                  {
+                      BackgroundColor = Color.Orange,
+                      MessageTextColor = Color.Black
+                  });
             }
             catch (Exception erro)
             {
                 if (DocentesViewModel.Busy)
                     DocentesViewModel.Busy = false;
-                await DisplayAlert("Info", erro.Message, "Ok");
+                await MaterialDialog.Instance.SnackbarAsync(message: erro.Message, actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
+                   new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
+                   {
+                       BackgroundColor = Color.Orange,
+                       MessageTextColor = Color.Black
+                   });
             }
             finally
             {
@@ -111,43 +123,53 @@ namespace IspcaNotas.View.Control
             var result = await DisplayActionSheet("Acção", "Cancelar", null, new string[] { "Editar", "Apagar" });
             if (result == null || result == "Cancelar") return;
             docenteCurrent = e.CurrentSelection[0] as UsuarioDTO;
-            if (result.Equals("Editar"))
+            try
             {
-                cadeirasDoDocente = await DocentesViewModel.MostrarCadeira(docenteCurrent.Token);
-                txtNome.Text = docenteCurrent.Name;
-                txtPhone.Text = docenteCurrent.Telefone;
-                txtSenha.Text = docenteCurrent.Senha;
-                txtEmail.Text = docenteCurrent.Email;
-
-                btCancelarEditar.IsVisible = true;
-                EnumDocente = EnumAdmCRUD.Editar;
-                btSalvarEditar.Text = "Actualizar";
-                AddCadeiras.Text = "Ver cadeiras";
-            }
-            else if (result.Equals("Apagar"))
-            {
-                /*try
+                if (result.Equals("Editar"))
                 {
+                    cadeirasDoDocente = await DocentesViewModel.MostrarCadeira(docenteCurrent.Token);
+                    txtNome.Text = docenteCurrent.Name;
+                    txtPhone.Text = docenteCurrent.Telefone;
+                    txtSenha.Text = docenteCurrent.Senha;
+                    txtEmail.Text = docenteCurrent.Email;
+
+                    btCancelarEditar.IsVisible = true;
+                    EnumDocente = EnumAdmCRUD.Editar;
+                    btSalvarEditar.Text = "Actualizar";
+                    AddCadeiras.Text = "Ver cadeiras";
+                }
+                else if (result.Equals("Apagar"))
+                {
+
                     var questao = await DisplayAlert("Notas", "Tens certeza que pretendes Apagar o docente selecionado?", "Sim", "Cancelar");
                     if (!questao)
                         return;
 
-                    var resultado = await DocentesViewModel.Apagar(docenteCurrent.IDDocenteUsuario.IDUsuario.Value);
+                    var resultado = await DocentesViewModel.Apagar(docenteCurrent);
                     DocentesViewModel.Carregar();
-                    await DisplayAlert("Info", resultado, "Ok");
+                    await MaterialDialog.Instance.SnackbarAsync(message: resultado, actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
+                   new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
+                   {
+                       BackgroundColor = Color.Orange,
+                       MessageTextColor = Color.Black
+                   });
                 }
-                catch (Exception erro)
-                {
-                    if (DocentesViewModel.Busy)
-                        DocentesViewModel.Busy = false;
-                    await DisplayAlert("Info", erro.Message, "Ok");
-                }
-                finally
-                {
-                    if (DocentesViewModel.Busy)
-                        DocentesViewModel.Busy = false;
-                }*/
-                Console.WriteLine("apagar");
+            }
+            catch (Exception erro)
+            {
+                if (DocentesViewModel.Busy)
+                    DocentesViewModel.Busy = false;
+                await MaterialDialog.Instance.SnackbarAsync(message: erro.Message, actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
+                   new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
+                   {
+                       BackgroundColor = Color.Orange,
+                       MessageTextColor = Color.Black
+                   });
+            }
+            finally
+            {
+                if (DocentesViewModel.Busy)
+                    DocentesViewModel.Busy = false;
             }
         }
         protected override void OnAppearing()

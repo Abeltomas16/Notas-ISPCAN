@@ -26,8 +26,8 @@ namespace IspcaNotas.Features.Service.usuario
         }
         public async Task<string> Alterar(UsuarioDTO entidade, List<CadeiraDTO> cadeiras)
         {
-            string retorno = await dbLogin.Alterar(entidade, entidade.Key);
-            string apagarCadeiras = await dbCadeira.apagarCadeiraProf(entidade.Token);
+            await dbLogin.Alterar(entidade, entidade.Key);
+            await dbCadeira.apagarCadeiraProf(entidade.Token);
             List<Task> tarefas = new List<Task>();
 
             foreach (CadeiraDTO item in cadeiras)

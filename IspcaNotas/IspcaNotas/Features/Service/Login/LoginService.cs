@@ -1,7 +1,4 @@
 ﻿using IspcaNotas.Features.Interface;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Firebase.Auth;
 using Xamarin.Essentials;
@@ -30,9 +27,9 @@ namespace IspcaNotas.Features.Service.Login
         }
         public async Task DeleteAccount(string email, string password)
         {
-            var request = await auth.SignInWithEmailAndPasswordAsync(email, password);
-            string token = request.FirebaseToken;
-            await auth.DeleteUserAsync(token);
+            var content = await auth.SignInWithEmailAndPasswordAsync(email, password);
+            var result = content.FirebaseToken;
+            await auth.DeleteUserAsync(result);
         }
         public void SignOut(string email, string password)
         {

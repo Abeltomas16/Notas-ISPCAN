@@ -1,15 +1,11 @@
-﻿using Firebase.Auth;
-using IspcaNotas.Features.Interface;
+﻿using IspcaNotas.Features.Interface;
 using IspcaNotas.Model;
 using Splat;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using Firebase.Database;
 using Firebase.Database.Query;
 using System.Threading.Tasks;
 using System.Linq;
-using Newtonsoft.Json;
 
 namespace IspcaNotas.Features.Service.usuario
 {
@@ -17,6 +13,7 @@ namespace IspcaNotas.Features.Service.usuario
     {
         FirebaseClient dbCliente { get; } = Locator.Current.GetService<FirebaseClient>();
         ILogin dbLogin { get; } = Locator.Current.GetService<ILogin>();
+        ICadeira dbCadeira { get; } = Locator.Current.GetService<ICadeira>();
         public async Task<string> Cadastrar(UsuarioDTO entidade)
         {
             string token = await dbLogin.SignUp(entidade.Email, entidade.Senha, entidade.Name);
@@ -53,11 +50,11 @@ namespace IspcaNotas.Features.Service.usuario
         }
         public async Task<string> Apagar(UsuarioDTO usuarioDTO)
         {
-            await dbLogin.DeleteAccount(usuarioDTO.Email, usuarioDTO.Senha);
+            await dbLogin.DeleteAccount(usuarioDTO.Email,usuarioDTO.Senha);
+            await dbCadeira.apagarCadeiraProf(usuarioDTO.Token);
             await dbCliente.Child("usuario")
                            .Child(usuarioDTO.Key)
                            .DeleteAsync();
-
             return "Usúario apagado com sucesso !";
         }
 
@@ -66,8 +63,6 @@ namespace IspcaNotas.Features.Service.usuario
             var dados = (await dbCliente.Child("usuario")
                         .OnceAsync<UsuarioDTO>())
                         .Where(y => y.Object.Token == token).FirstOrDefault();
-
-
             return dados.Object;
         }
     }
