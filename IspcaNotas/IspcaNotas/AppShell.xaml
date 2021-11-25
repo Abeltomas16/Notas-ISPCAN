@@ -56,7 +56,7 @@
     </TabBar>
 
     <TabBar Route="admin">
-        <ShellContent Title="admin" ContentTemplate="{DataTemplate control:ActividadesTabbed}"/>
+        <ShellContent Title="Actividades" Icon="actividades" ContentTemplate="{DataTemplate control:Actividades}"/>
         <ShellContent Title="Cadeira" Icon="disciplinas.png" ContentTemplate="{DataTemplate control:Cadeiras}"/>
         <ShellContent Title="Estudantes" Icon="estudante.png" ContentTemplate="{DataTemplate control:Estudantes}"/>
         <ShellContent Title="Docentes" Icon="docente.png" ContentTemplate="{DataTemplate control:Docentes}"/>

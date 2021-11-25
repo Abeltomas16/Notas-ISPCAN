@@ -30,20 +30,27 @@ namespace IspcaNotas.ViewModel
         {
             Busy = false;
             this.actividades = actividades ?? Locator.Current.GetService<IActividades>();
-            Carregar();
+            Task.Run(async () => await Carregar());
         }
 
         public ObservableCollection<ActividadeDTO> Actividades { get; set; }
-        /*public async Task<string> CadastrarEditar(ActividadesDTO actividades, EnumOperacoes operacao)
+        public async Task<string> Cadastrar(ActividadeDTO actividade)
         {
             Busy = true;
-            ActividadesNegocios actividadesNegocios = new ActividadesNegocios();
-            var retorno = await actividadesNegocios.CadastrarEditar(actividades, operacao);
+            var retorno = await actividades.Cadastrar(actividade);
             Busy = false;
             return retorno;
-        }*/
+        }
 
-        public async void Carregar()
+        public async Task<string> Editar(ActividadeDTO actividade)
+        {
+            Busy = true;
+            var retorno = await actividades.Alterar(actividade, actividade.IDActividade);
+            Busy = false;
+            return retorno;
+        }
+
+        public async Task Carregar()
         {
             Busy = true;
             var _actividades = await this.actividades.listarTodos();
@@ -51,16 +58,14 @@ namespace IspcaNotas.ViewModel
             Console.WriteLine(Actividades.Count.ToString());
             OnPropertyChanged("Actividades");
             Busy = false;
-
         }
 
-        /*public async Task<string> Apagar(int id)
+        public async Task<string> Apagar(string key)
         {
             Busy = true;
-            ActividadesNegocios actividadesNegocios = new ActividadesNegocios();
-            var resultado = await actividadesNegocios.Apagar(id);
+            var resultado = await actividades.Apagar(key);
             Busy = false;
             return resultado;
-        }*/
+        }
     }
 }

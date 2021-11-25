@@ -1,16 +1,12 @@
 ﻿using IspcaNotas.Features.Enums;
-using IspcaNotas.Features.Service.Actividades;
 using IspcaNotas.Model;
 using IspcaNotas.ViewModel;
 using Splat;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XF.Material.Forms.UI.Dialogs;
 
 namespace IspcaNotas.View.Control
 {
@@ -30,7 +26,12 @@ namespace IspcaNotas.View.Control
             }
             catch (Exception erro)
             {
-                DisplayAlert("Info", erro.Message, "Ok");
+                MaterialDialog.Instance.SnackbarAsync(message: erro.Message, actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
+               new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
+               {
+                   BackgroundColor = Color.Orange,
+                   MessageTextColor = Color.Black
+               });
             }
         }
         private async void ViewActividades_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -38,38 +39,48 @@ namespace IspcaNotas.View.Control
             var result = await DisplayActionSheet("Acção", "Cancelar", null, new string[] { "Editar", "Apagar" });
             if (result == null || result == "Cancelar") return;
             actividadeCurrent = e.CurrentSelection[0] as ActividadeDTO;
-            if (result.Equals("Editar"))
+            try
             {
-                labelDescricao.Text = actividadeCurrent.Descricao;
-                labelIMG.Text = actividadeCurrent.IMGURL;
-                btCancelarEditar.IsVisible = true;
+                if (result.Equals("Editar"))
+                {
+                    labelDescricao.Text = actividadeCurrent.Descricao;
+                    labelIMG.Text = actividadeCurrent.IMGURL;
+                    btCancelarEditar.IsVisible = true;
 
-                EnumActividades = EnumAdmCRUD.Editar;
-                btSalvarEditar.Text = "Actualizar";
-            }
-            else if (result.Equals("Apagar"))
-            {
-                try
+                    EnumActividades = EnumAdmCRUD.Editar;
+                    btSalvarEditar.Text = "Actualizar";
+                }
+                else if (result.Equals("Apagar"))
                 {
                     var questao = await DisplayAlert("Notas", "Tens certeza que pretendes Apagar a actividade selecionada?", "Sim", "Cancelar");
                     if (!questao)
                         return;
 
-                 ///???????????   var resultado = await Service.Apagar(actividadeCurrent.IDActividade.Value);
-                    Service.Carregar();
-                   /// await DisplayAlert("Info", resultado, "Ok");
+                    var resultado = await Service.Apagar(actividadeCurrent.IDActividade);
+                    await Service.Carregar();
+                    await MaterialDialog.Instance.SnackbarAsync(message: resultado, actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
+                       new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
+                       {
+                           BackgroundColor = Color.Orange,
+                           MessageTextColor = Color.Black
+                       });
                 }
-                catch (Exception erro)
+            }
+            catch (Exception erro)
+            {
+                if (Service.Busy)
+                    Service.Busy = false;
+                await MaterialDialog.Instance.SnackbarAsync(message: erro.Message, actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
+                new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
                 {
-                    if (Service.Busy)
-                        Service.Busy = false;
-                    await DisplayAlert("Info", erro.Message, "Ok");
-                }
-                finally
-                {
-                    if (Service.Busy)
-                        Service.Busy = false;
-                }
+                    BackgroundColor = Color.Orange,
+                    MessageTextColor = Color.Black
+                });
+            }
+            finally
+            {
+                if (Service.Busy)
+                    Service.Busy = false;
             }
         }
         private void MaterialButtonCancelar_Clicked(object sender, EventArgs e)
@@ -88,35 +99,44 @@ namespace IspcaNotas.View.Control
         }
         private async void MaterialButton_Clicked(object sender, EventArgs e)
         {
-           ActividadeDTO actividades = new ActividadeDTO()
+            ActividadeDTO actividades = new ActividadeDTO()
             {
                 Descricao = labelDescricao.Text,
-                IMGURL = labelIMG.Text
+                IMGURL = labelIMG.Text,
+                DataCadastro = DateTime.Now
             };
             try
             {
-                EnumOperacoes operacao = EnumOperacoes.Cadastrar;
                 string resultado = string.Empty;
 
                 if (EnumActividades == EnumAdmCRUD.Cadastrar)
-                    operacao = EnumOperacoes.Cadastrar;
+                    resultado = await Service.Cadastrar(actividades);
                 else
                 {
                     if (actividadeCurrent == null)
                         return;
-                    actividades.IDActividade = actividadeCurrent.IDActividade;
-                    operacao = EnumOperacoes.Editar;
-                }
-              //??????????????????  resultado = await Service.CadastrarEditar(actividades, operacao);
 
-                Service.Carregar();
-                await DisplayAlert("Info", resultado, "Ok");
+                    actividades.IDActividade = actividadeCurrent.IDActividade;
+                    resultado = await Service.Editar(actividades);
+                }
+                await Service.Carregar();
+                await MaterialDialog.Instance.SnackbarAsync(message: resultado, actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
+                new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
+                {
+                    BackgroundColor = Color.Orange,
+                    MessageTextColor = Color.Black
+                });
             }
             catch (Exception erro)
             {
                 if (Service.Busy)
                     Service.Busy = false;
-                await DisplayAlert("Info", erro.Message, "Ok");
+                await MaterialDialog.Instance.SnackbarAsync(message: erro.Message, actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
+                 new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
+                 {
+                     BackgroundColor = Color.Orange,
+                     MessageTextColor = Color.Black
+                 });
             }
             finally
             {
