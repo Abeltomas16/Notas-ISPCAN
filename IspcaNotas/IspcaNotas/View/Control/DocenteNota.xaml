@@ -16,6 +16,10 @@
                                 VerticalOptions="Center" 
                                 HorizontalOptions="Center" Color="Blue" />
 
+            <Label x:Name="txtNome" Margin="10,0" FontSize="Small" TextColor="Green"/>
+
+            <Label x:Name="txtDisciplina" Margin="10,0" FontSize="Small" TextColor="Green"/>
+            
             <Label Text="Estudantes" Margin="10,10" FontSize="Medium" TextColor="#2189df" Style="{DynamicResource BodyStyle}"/>
 
             <Label x:Name="txtTotal" Margin="10,0" FontSize="Small" TextColor="Green"/>

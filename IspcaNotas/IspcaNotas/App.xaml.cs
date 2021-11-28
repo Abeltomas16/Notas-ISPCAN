@@ -43,7 +43,7 @@ namespace IspcaNotas
             Locator.CurrentMutable.Register(() => new ActividadesViewModel());
             Locator.CurrentMutable.Register(() => new UsuarioViewModel());
             Locator.CurrentMutable.Register(() => new DocenteViewModel());
-
+       
 
         }
 

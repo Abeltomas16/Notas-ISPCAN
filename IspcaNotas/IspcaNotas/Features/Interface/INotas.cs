@@ -6,7 +6,7 @@ namespace IspcaNotas.Features.Interface
 {
     public interface INotas
     {
-        Task<List<NotasDTO>> listarPorCadeira(string keycadeira);
+        Task<NotasDTO> listarPorCadeira(string keycadeira, string keyEstudante);
         Task<string> Cadastrar(NotasDTO actividade);
         Task<string> Alterar(NotasDTO entidade);
     }

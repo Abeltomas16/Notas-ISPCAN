@@ -24,6 +24,8 @@ namespace IspcaNotas.View.Control
             try
             {
                 BindingContext = estudantesViewModel;
+                txtNome.Text = Application.Current.Properties["NomeUsuario"].ToString();
+                txtDisciplina.Text = Application.Current.Properties["Nomecadeira"].ToString();
             }
             catch (Exception erro)
             {
@@ -42,13 +44,15 @@ namespace IspcaNotas.View.Control
             {
                 UsuarioDTO estudante = (e.CurrentSelection.FirstOrDefault() as UsuarioDTO);
 
-                /* if (estudante == null) return;
-                 activityIndicatorAlunos.IsRunning = true;
-                 NotasNegocios notasNegocios = new NotasNegocios();
-                 //Pego a nota */
+                if (estudante == null) return;
+                activityIndicatorAlunos.IsRunning = true;
+
+                Locator.CurrentMutable.Register(() => new NotasViewModel(estudante.Key));
+
                 //  Modelos.Notas notasEstudante = await notasNegocios.MostrarPorCadeiraEEStudante(_DocenteCadeira, estudante);
-                //  activityIndicatorAlunos.IsRunning = false;
-                //  await Navigation.PushAsync(new NotasDetalhes(notasEstudante));
+                await Task.Delay(2000);
+                activityIndicatorAlunos.IsRunning = false;
+                await Shell.Current.Navigation.PushAsync(new NotasDetalhes(estudante));
             }
             catch (Exception erro)
             {
