@@ -50,10 +50,10 @@ namespace IspcaNotas.ViewModel
 
 
             }
-            catch (Exception erro)
+            catch (Firebase.Auth.FirebaseAuthException erro)
             {
-                Console.WriteLine(erro.Message);
-                await XF.Material.Forms.UI.Dialogs.MaterialDialog.Instance.SnackbarAsync("Senha errada", XF.Material.Forms.UI.Dialogs.MaterialSnackbar.DurationShort);
+                Console.WriteLine(erro.ResponseData);
+                await XF.Material.Forms.UI.Dialogs.MaterialDialog.Instance.SnackbarAsync(erro.Message, XF.Material.Forms.UI.Dialogs.MaterialSnackbar.DurationShort);
             }
         }
 

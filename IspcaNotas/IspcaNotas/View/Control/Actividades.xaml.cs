@@ -150,5 +150,10 @@ namespace IspcaNotas.View.Control
         {
             await Navigation.PushAsync(new Sobre());
         }
+
+        private async void MenuPerfil_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Perfil());
+        }
     }
 }

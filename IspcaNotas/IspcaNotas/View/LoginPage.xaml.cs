@@ -1,5 +1,7 @@
 ﻿using IspcaNotas.Features.Interface;
+using IspcaNotas.View.Animation;
 using IspcaNotas.ViewModel;
+using Rg.Plugins.Popup.Services;
 using Splat;
 using System;
 using System.Collections.Generic;
@@ -25,9 +27,9 @@ namespace IspcaNotas.View
         {
             return true;
         }
-        private void AjudaFacebook(object sender, EventArgs e)
+        private async void AjudaFacebook(object sender, EventArgs e)
         {
-            Device.OpenUri(new Uri("https://www.facebook.com/abel.tomas.16"));
+            await PopupNavigation.Instance.PushAsync(new MyPopupPage( Features.Enums.EnumPerfil.Email));
         }
         private void MenuItem2_Clicked(object sender, EventArgs e)
         {

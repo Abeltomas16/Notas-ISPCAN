@@ -64,5 +64,15 @@ namespace IspcaNotas.ViewModel
             Busy = false;
             return resultado;
         }
+        public async Task<string> UpdateEmail(string newEmail)
+        {
+            string retorno = await Idata.AlterarEmail(newEmail);
+            return retorno;
+        }
+        public async Task<string> UpdateSenha(string newSenha)
+        {
+            string retorno = await Idata.AlterarSenha(newSenha);
+            return retorno;
+        }
     }
 }

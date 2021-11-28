@@ -26,13 +26,14 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
                             <StackLayout Grid.Row="0" Orientation="Horizontal">
                                 <StackLayout VerticalOptions="Center" HorizontalOptions="StartAndExpand">
                                     <Label Text="Nome" TextColor="#2196f3"/>
-                                    <Label Text="{Binding Nome}" TextColor="Gray"/>
+                                    <Label Text="{Binding Name}" TextColor="Gray"/>
                                 </StackLayout>
                                 <Label x:Name="btEditarNome" Text="Editar" VerticalOptions="End" 
                                        HorizontalOptions="End" TextColor="Orange">
@@ -56,9 +57,23 @@
                             </StackLayout>
 
 
-                            <Grid Grid.Row="2" VerticalOptions="CenterAndExpand" Margin="0,40">
+
+                            <StackLayout Grid.Row="2" Orientation="Horizontal">
+                                <StackLayout VerticalOptions="Center" HorizontalOptions="StartAndExpand">
+                                    <Label Text="Telefone" TextColor="#2196f3"/>
+                                    <Label Text="{Binding Email}" TextColor="Gray"/>
+                                </StackLayout>
+                                <Label x:Name="btEditarEmail" Text="Editar" VerticalOptions="End"
+                                       HorizontalOptions="End" TextColor="Orange">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </StackLayout>
+
+                            
+                            <Grid Grid.Row="3" VerticalOptions="CenterAndExpand" Margin="0,40">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
 
@@ -66,15 +81,11 @@
                                     <Image Source="trocaSenha" VerticalOptions="Center"/>
                                     <Label Text="Alterar Senha" VerticalOptions="Center">
                                         <Label.GestureRecognizers>
-                                            <TapGestureRecognizer NumberOfTapsRequired="1"/>
+                                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped_1"/>
                                         </Label.GestureRecognizers>
                                     </Label>
                                 </StackLayout>
 
-                                <StackLayout Orientation="Horizontal" Grid.Row="1">
-                                    <Image Source="apaga" VerticalOptions="Center" Margin="5,0"/>
-                                    <Label Text="Apagar Conta" VerticalOptions="Center"/>
-                                </StackLayout>
 
                             </Grid>
                         </Grid>

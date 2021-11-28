@@ -13,5 +13,7 @@ namespace IspcaNotas.Features.Interface
         Task<string> Apagar(UsuarioDTO usuarioDTO);
         Task<List<UsuarioDTO>> ListarTodos();
         Task<UsuarioDTO> Pesquisar(string token);
+        Task<string> AlterarEmail(string newEmail);
+        Task<string> AlterarSenha(string newSenha);
     }
 }

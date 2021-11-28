@@ -8,7 +8,7 @@
              x:Class="IspcaNotas.View.Control.Actividades">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Name="MenuPerfil" Order="Secondary" Text="Perfil" Priority="0" />
+        <ToolbarItem Name="MenuPerfil" Order="Secondary" Text="Perfil" Clicked="MenuPerfil_Clicked" Priority="0" />
         <ToolbarItem Name="MenuSobre" Order="Secondary" Clicked="MenuSobre_Clicked" Text="Sobre" Priority="1"/>
     </ContentPage.ToolbarItems>
 

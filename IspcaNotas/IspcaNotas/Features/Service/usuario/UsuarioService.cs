@@ -50,7 +50,7 @@ namespace IspcaNotas.Features.Service.usuario
         }
         public async Task<string> Apagar(UsuarioDTO usuarioDTO)
         {
-            await dbLogin.DeleteAccount(usuarioDTO.Email,usuarioDTO.Senha);
+            await dbLogin.DeleteAccount(usuarioDTO.Email, usuarioDTO.Senha);
             await dbCadeira.apagarCadeiraProf(usuarioDTO.Token);
             await dbCliente.Child("usuario")
                            .Child(usuarioDTO.Key)
@@ -63,6 +63,16 @@ namespace IspcaNotas.Features.Service.usuario
                         .OnceAsync<UsuarioDTO>())
                         .Where(y => y.Object.Token == token).FirstOrDefault();
             return dados.Object;
+        }
+        public async Task<string> AlterarEmail(string newEmail)
+        {
+            string retorno = await dbLogin.UpdateEmail(newEmail);
+            return retorno;
+        }
+        public async Task<string> AlterarSenha(string newSenha)
+        {
+            string retorno = await dbLogin.UpdateSenha(newSenha);
+            return retorno;
         }
     }
 }
