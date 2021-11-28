@@ -46,6 +46,8 @@ namespace IspcaNotas.ViewModel
                         await routing.NavigateTo("///main");
                     else if (categoria.Categoria == "Administrador")
                         await routing.NavigateTo("///admin");
+                    else if (categoria.Categoria == "Professor")
+                        await routing.NavigateTo("///professor");
                 }
 
 

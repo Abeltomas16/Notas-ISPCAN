@@ -8,9 +8,16 @@ namespace IspcaNotas.Features.Service.Routing
         public bool IsLogged()
         {
 
+            Preferences.Remove("MyFirebaseToken");
+            Preferences.Remove("MyEmail");
+            Preferences.Remove("MySenha");
+
+
             string usuario = Preferences.Get("MyFirebaseToken", "doesnot");
-            string email = Preferences.Get("MyEmail", "doesnot");
-            string senha = Preferences.Get("MySenha", "doesnot");
+             string email = Preferences.Get("MyEmail", "doesnot");
+             string senha = Preferences.Get("MySenha", "doesnot");
+
+
             return usuario != "doesnot" || email != "doesnot" || senha != "doesnot";
         }
     }

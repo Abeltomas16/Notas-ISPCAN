@@ -61,5 +61,10 @@
         <ShellContent Title="Estudantes" Icon="estudante.png" ContentTemplate="{DataTemplate control:Estudantes}"/>
         <ShellContent Title="Docentes" Icon="docente.png" ContentTemplate="{DataTemplate control:Docentes}"/>
     </TabBar>
+
+    <TabBar Route="professor">
+        <ShellContent Title="Actividades" Icon="actividades" ContentTemplate="{DataTemplate control:Actividades}"/>
+        <ShellContent Title="Estudantes" Icon="estudante.png" ContentTemplate="{DataTemplate control:DocenteNota}"/>
+    </TabBar>
     
 </Shell>

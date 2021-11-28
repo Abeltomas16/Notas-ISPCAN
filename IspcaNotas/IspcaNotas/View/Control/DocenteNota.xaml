@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+              Title="Notas"   
+             x:Class="IspcaNotas.View.Control.DocenteNota">
+    <ContentPage.Content>
+
+
+        <StackLayout x:Name="AlunosTabbed">
+            <ActivityIndicator x:Name="activityIndicatorAlunos"
+                                IsRunning="{Binding Busy}" 
+                                IsVisible="{Binding Busy}"           
+                                VerticalOptions="Center" 
+                                HorizontalOptions="Center" Color="Blue" />
+
+            <Label Text="Estudantes" Margin="10,10" FontSize="Medium" TextColor="#2189df" Style="{DynamicResource BodyStyle}"/>
+
+            <Label x:Name="txtTotal" Margin="10,0" FontSize="Small" TextColor="Green"/>
+
+            <CollectionView x:Name="ViewEstudante" BackgroundColor="#f3f3f3" EmptyView="Nenhum estudante registrado" 
+                            SelectionMode="Single" 
+                            ItemsSource="{Binding Estudantes}"
+                            SelectionChanged="ViewEstudante_SelectionChanged">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="5" Span="1"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame
+                                    Margin="10,5"
+                                    Padding="10"
+                                    BackgroundColor="White"
+                                    HasShadow="True"
+                                      >
+                            <Grid Padding="0" ColumnSpacing="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Label Text="{Binding Name}" FontSize="Medium" VerticalOptions="Start" Grid.Row="0" Margin="0,5" TextColor="#2189dc"  Style="{DynamicResource CaptionStyle}" />
+                                <Label Text="{Binding Telefone}" FontSize="Medium" VerticalOptions="End" Grid.Row="1" TextColor="Black"  Style="{DynamicResource CaptionStyle}"/>
+
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+   
+     
+    
+</ContentPage.Content>
+</ContentPage>
