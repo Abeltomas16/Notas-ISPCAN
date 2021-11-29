@@ -10,11 +10,6 @@
 
 
         <StackLayout x:Name="AlunosTabbed">
-            <ActivityIndicator x:Name="activityIndicatorAlunos"
-                                IsRunning="{Binding Busy}" 
-                                IsVisible="{Binding Busy}"           
-                                VerticalOptions="Center" 
-                                HorizontalOptions="Center" Color="Blue" />
 
             <Label x:Name="txtNome" Margin="10,0" FontSize="Small" TextColor="Green"/>
 

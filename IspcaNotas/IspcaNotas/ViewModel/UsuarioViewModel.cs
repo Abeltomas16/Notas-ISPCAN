@@ -4,6 +4,7 @@ using Splat;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -37,7 +38,7 @@ namespace IspcaNotas.ViewModel
         {
             Busy = true;
             var estudantes = await Idata.ListarTodos();
-            Estudantes = new ObservableCollection<UsuarioDTO>(estudantes);
+            Estudantes = new ObservableCollection<UsuarioDTO>(estudantes.Where(y => y.Categoria == "Estudante"));
             OnPropertyChanged("Estudantes");
             Total = Estudantes.Count;
             OnPropertyChanged("Total");

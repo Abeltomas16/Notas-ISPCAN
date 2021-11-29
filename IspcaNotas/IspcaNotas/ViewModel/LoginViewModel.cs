@@ -56,7 +56,10 @@ namespace IspcaNotas.ViewModel
                         //carregar todas cadeiras que ele leciona
                         var cadeiras = await cadeiraService.MostrarPorID(categoria.Token);
                         if (cadeiras.Count <= 0)
-                            throw new Exception("O Srº Professor Ainda não leciona uma disciplina, por essa razão não vai poder efectuar o login, Obrigado pela comprensão!");
+                        {
+                            await XF.Material.Forms.UI.Dialogs.MaterialDialog.Instance.SnackbarAsync("O Srº Professor Ainda não leciona uma disciplina, por essa razão, não vai poder efectuar o login, Obrigado pela comprensão!", 10000);
+                            return;
+                        }
                         else if (cadeiras.Count == 1)
                         {
                             Application.Current.Properties["IDCadeira"] = cadeiras.FirstOrDefault().IDCadeira;
@@ -64,16 +67,16 @@ namespace IspcaNotas.ViewModel
                         }
                         else
                         {
-                            //var cadeira= cadeiras.RemoveAll(x => x.Name != resultadoAction);
-                            var resultadoAction= await XF.Material.Forms.UI.Dialogs.MaterialDialog.Instance.SelectActionAsync(title: "Seleciona uma Cadeira para continuares",
+                            var resultadoAction = await XF.Material.Forms.UI.Dialogs.MaterialDialog.Instance.SelectActionAsync(title: "Seleciona uma Cadeira para continuares",
                                                                                                           actions: cadeiras.Select(x => x.Name).ToArray());
+                            if (resultadoAction == -1) return;
+                            var _cadeira = cadeiras[resultadoAction];
+                            Application.Current.Properties["IDCadeira"] = _cadeira.IDCadeira;
+                            Application.Current.Properties["Nomecadeira"] = _cadeira.Name;
                         }
                         await routing.NavigateTo("///professor");
                     }
-                    // 
                 }
-
-
             }
             catch (Firebase.Auth.FirebaseAuthException erro)
             {

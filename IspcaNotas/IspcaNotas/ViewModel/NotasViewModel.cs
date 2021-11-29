@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using XF.Material.Forms.UI.Dialogs;
 
 namespace IspcaNotas.ViewModel
 {
@@ -41,6 +42,7 @@ namespace IspcaNotas.ViewModel
 
         private async void Salvar()
         {
+            string retorno = string.Empty;
             NotasDTO notas = new NotasDTO();
             notas.Nota1 = _Nota1;
             notas.Nota2 = _Nota2;
@@ -49,10 +51,20 @@ namespace IspcaNotas.ViewModel
 
             if (string.IsNullOrEmpty(IDNota))
             {
-                string retorno = await notasService.Cadastrar(notas);
-                Console.WriteLine(retorno);
+                retorno = await notasService.Cadastrar(notas);
+            }
+            else
+            {
+                notas.Key = IDNota;
+                retorno = await notasService.Alterar(notas);
             }
 
+            await MaterialDialog.Instance.SnackbarAsync(message: retorno, actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
+                  new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
+                  {
+                      BackgroundColor = Color.Orange,
+                      MessageTextColor = Color.Black
+                  });
         }
     }
 }

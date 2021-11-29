@@ -44,7 +44,7 @@ namespace IspcaNotas.ViewModel
             clienteDocente = docente ?? Locator.Current.GetService<IDocente>();
             clienteCadeira = cadeira ?? Locator.Current.GetService<ICadeira>();
             Busy = false;
-            Carregar();
+            Task.Run(async () => await Carregar());
         }
         public ObservableCollection<UsuarioDTO> Docentes { get; set; }
         public ObservableCollection<CadeiraDTO> Cadeiras { get; set; }
@@ -62,7 +62,7 @@ namespace IspcaNotas.ViewModel
             Busy = false;
             return retorno;
         }
-        public async void Carregar()
+        public async Task Carregar()
         {
             Busy = true;
             var docentes = await clienteDocente.ListarTodos();

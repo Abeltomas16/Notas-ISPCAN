@@ -14,10 +14,14 @@ namespace IspcaNotas.Features.Service.usuario
     public class NotasService : INotas
     {
         FirebaseClient dbCliente { get; } = Locator.Current.GetService<FirebaseClient>();
-        public Task<string> Alterar(NotasDTO entidade)
+        public async Task<string> Alterar(NotasDTO notas)
         {
-            throw new NotImplementedException();
-
+            string key = notas.Key;
+            notas.Key = null;
+            await dbCliente.Child("notas")
+                            .Child(key)
+                            .PutAsync(notas);
+            return "Nota Alterada";
         }
 
         public async Task<string> Cadastrar(NotasDTO notas)
