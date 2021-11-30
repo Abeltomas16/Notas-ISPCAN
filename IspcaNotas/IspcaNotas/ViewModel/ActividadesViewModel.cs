@@ -6,6 +6,8 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using IspcaNotas.Model;
+using XF.Material.Forms.UI.Dialogs;
+
 namespace IspcaNotas.ViewModel
 {
     public class ActividadesViewModel : BaseViewModel
@@ -53,7 +55,11 @@ namespace IspcaNotas.ViewModel
         public async Task Carregar()
         {
             Busy = true;
+            var load = await MaterialDialog.Instance.LoadingDialogAsync(message: "Caregando");
             var _actividades = await this.actividades.listarTodos();
+            load.Dismiss();
+
+
             Actividades = new ObservableCollection<ActividadeDTO>(_actividades);
             Console.WriteLine(Actividades.Count.ToString());
             OnPropertyChanged("Actividades");

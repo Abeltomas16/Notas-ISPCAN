@@ -51,8 +51,8 @@
 
     <!-- Main Page -->
     <TabBar Route="main">
-        <ShellContent Title="Home" ContentTemplate="{DataTemplate control:ActividadesTabbed}"/>
-        <ShellContent Title="Notas" ContentTemplate="{DataTemplate control:EstudantesNota}"/>
+        <ShellContent Title="Actividades" Icon="actividades" ContentTemplate="{DataTemplate control:ActividadesTabbed}"/>
+        <ShellContent Title="Notas" Icon="disciplinas.png" ContentTemplate="{DataTemplate control:EstudantesNota}"/>
     </TabBar>
 
     <TabBar Route="admin">
@@ -63,7 +63,7 @@
     </TabBar>
 
     <TabBar Route="professor">
-        <ShellContent Title="Actividades" Icon="actividades" ContentTemplate="{DataTemplate control:Actividades}"/>
+        <ShellContent Title="Actividades" Icon="actividades" ContentTemplate="{DataTemplate control:ActividadesTabbed}"/>
         <ShellContent Title="Estudantes" Icon="estudante.png" ContentTemplate="{DataTemplate control:DocenteNota}"/>
     </TabBar>
     

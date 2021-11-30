@@ -40,7 +40,6 @@ namespace IspcaNotas.View.Control
                 {
                     var load = await MaterialDialog.Instance.LoadingDialogAsync(message: "Caregando");
                     List<NotasCadeirasDocente> notas = await _ViewModel.listar(key);
-
                     load.Dismiss();
                     notass.ItemsSource = notas;
                     List<ChartEntry> entradas1 = new List<ChartEntry>();

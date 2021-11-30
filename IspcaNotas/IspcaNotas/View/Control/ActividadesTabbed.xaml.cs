@@ -22,9 +22,9 @@ namespace IspcaNotas.View.Control
             InitializeComponent();
             BindingContext = Service;
         }
-        private void MenuPerfil_Clicked(object sender, EventArgs e)
+        private async void MenuPerfil_Clicked(object sender, EventArgs e)
         {
-            // await Navigation.PushAsync(new Perfil(_UsuarioCorrente));
+            await Navigation.PushAsync(new Perfil());
         }
 
         private async void MenuSobre_Clicked(object sender, EventArgs e)
