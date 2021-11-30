@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:local="clr-namespace:IspcaNotas.View"
+             xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             x:Class="IspcaNotas.View.Control.EstudantesNota"
+             BackgroundColor="#F5F8FD"
+             Title="Notas">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:TypeColorConverter x:Key="IndexToColorConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+
+        <ScrollView>
+            <StackLayout>
+                <pancake:PancakeView WidthRequest="450" HeightRequest="110" 
+                                     VerticalOptions="Center" HorizontalOptions="Center" 
+                                     Margin="10" CornerRadius="10" BackgroundColor="#fff"
+                                     Padding="10">
+                    <pancake:PancakeView.Shadow>
+                        <pancake:DropShadow Color="Black" Offset="10,10"/>
+                    </pancake:PancakeView.Shadow>
+                    <StackLayout>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                        <Label x:Name="lblCurso" Grid.Row="0" Grid.Column="0" Style="{DynamicResource LbCursoEDisciplina}" Text="Eng. informática"/>
+                        <Label x:Name="lblNomeAluno" Grid.Row="1" Grid.Column="0" VerticalOptions="EndAndExpand" VerticalTextAlignment="End" Style="{DynamicResource LbCursoEDisciplina}" Text="Abel Tomás"/>
+                        <Image Source="NomeUsuario.png" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" WidthRequest="60" HeightRequest="50" VerticalOptions="Center" HorizontalOptions="EndAndExpand"/>
+                    </StackLayout>
+                </pancake:PancakeView>
+
+                <CollectionView x:Name="notass" EmptyView="Sem notas"  Margin="10" HeightRequest="110">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Horizontal" Span="1" HorizontalItemSpacing="5"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <pancake:PancakeView BorderColor="Transparent" CornerRadius="10"
+                                             Elevation="2" Padding="5" BackgroundColor="{Binding .,Converter={StaticResource IndexToColorConverter},ConverterParameter={Binding .}}" WidthRequest="100">
+                                <StackLayout Orientation="Vertical" Grid.Row="2" Grid.ColumnSpan="3" Margin="0" Padding="0">
+                                    <Label Text="{Binding KeyCadeira}" FontAttributes="Bold" FontSize="Small"/>
+                                    <Label Text="{Binding KeyCadeira}"/>
+
+                                    <Label Text="{Binding Nota1, StringFormat='1ª Prova: {0}'}" HorizontalOptions="StartAndExpand" TextColor="White"/>
+                                    <Label Text="{Binding Nota2, StringFormat='2ª Prova: {0}'}" HorizontalOptions="StartAndExpand" TextColor="White"/>
+                                </StackLayout>
+
+                            </pancake:PancakeView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <StackLayout Margin="10" BackgroundColor="#F5F8FD">
+                    <forms:ChartView  x:Name="Grafico1" HeightRequest="150"/>
+                    <forms:ChartView x:Name="Grafico2" HeightRequest="150"/>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
+    
+    

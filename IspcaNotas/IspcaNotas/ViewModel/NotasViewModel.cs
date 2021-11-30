@@ -43,11 +43,13 @@ namespace IspcaNotas.ViewModel
         private async void Salvar()
         {
             string retorno = string.Empty;
-            NotasDTO notas = new NotasDTO();
-            notas.Nota1 = _Nota1;
-            notas.Nota2 = _Nota2;
-            notas.KeyCadeira = cadeiraKey;
-            notas.KeyAluno = EstudanteKey;
+            NotasDTO notas = new NotasDTO
+            {
+                Nota1 = _Nota1,
+                Nota2 = _Nota2,
+                KeyCadeira = cadeiraKey,
+                KeyAluno = EstudanteKey
+            };
 
             if (string.IsNullOrEmpty(IDNota))
             {

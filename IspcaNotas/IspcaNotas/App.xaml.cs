@@ -6,6 +6,7 @@ using IspcaNotas.Features.Service.Cadeira;
 using IspcaNotas.Features.Service.Login;
 using IspcaNotas.Features.Service.Routing;
 using IspcaNotas.Features.Service.usuario;
+using IspcaNotas.View.Control;
 using IspcaNotas.ViewModel;
 using Splat;
 using System;
@@ -35,15 +36,17 @@ namespace IspcaNotas
             Locator.CurrentMutable.RegisterLazySingleton<ICadeira>(() => new CadeiraService());
             Locator.CurrentMutable.RegisterLazySingleton<IDocente>(() => new DocenteService());
             Locator.CurrentMutable.RegisterLazySingleton<INotas>(() => new NotasService());
+            Locator.CurrentMutable.RegisterLazySingleton<IEstudante>(() => new EstudanteService());
 
-            Locator.CurrentMutable.Register(() => new CadeiraViewModel("Cadeiras"),"Cadeira");
+            Locator.CurrentMutable.Register(() => new CadeiraViewModel("Cadeiras"), "Cadeira");
             Locator.CurrentMutable.Register(() => new CadeiraViewModel("CadeirasMostrar"), "CadeirasMostrar");
             Locator.CurrentMutable.Register(() => new LoadingViewModel());
             Locator.CurrentMutable.Register(() => new LoginViewModel());
             Locator.CurrentMutable.Register(() => new ActividadesViewModel());
             Locator.CurrentMutable.Register(() => new UsuarioViewModel());
             Locator.CurrentMutable.Register(() => new DocenteViewModel());
-       
+            Locator.CurrentMutable.Register(() => new EstudantesViewModel());
+
 
         }
 

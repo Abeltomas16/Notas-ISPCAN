@@ -48,7 +48,10 @@ namespace IspcaNotas.ViewModel
                     UsuarioDTO categoria = await usuarioService.Pesquisar(resultado);
                     Application.Current.Properties["NomeUsuario"] = categoria.Name;
                     if (categoria.Categoria == "Estudante")
+                    {
+                        Application.Current.Properties["IDEstudante"] = categoria.Key;
                         await routing.NavigateTo("///main");
+                    }
                     else if (categoria.Categoria == "Administrador")
                         await routing.NavigateTo("///admin");
                     else if (categoria.Categoria == "Professor")

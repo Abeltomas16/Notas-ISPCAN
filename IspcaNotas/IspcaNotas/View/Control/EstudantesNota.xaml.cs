@@ -1,0 +1,84 @@
+﻿using IspcaNotas.Model;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+using Microcharts;
+using SkiaSharp;
+using IspcaNotas.ViewModel;
+using Splat;
+using XF.Material.Forms.UI.Dialogs;
+
+namespace IspcaNotas.View.Control
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class EstudantesNota : ContentPage
+    {
+        EstudantesViewModel _ViewModel { get; } = Locator.Current.GetService<EstudantesViewModel>();
+        string[] cores = new string[]
+       {
+             "#FF1943",
+            "#00BFFF",
+            "#00CED9",
+            "#00CED1",
+            "#F58A1F",
+            "#282C34",
+            "#000000",
+        };
+        public EstudantesNota()
+        {
+            InitializeComponent();
+
+            string key = Application.Current.Properties["IDEstudante"].ToString(); ;
+            List<NotasDTO> notas = new List<NotasDTO>();
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                var load = await MaterialDialog.Instance.LoadingDialogAsync(message: "caregando");
+                notas = await _ViewModel.listar(key);
+                load.Dismiss();
+                notass.ItemsSource = notas;
+                List<ChartEntry> entradas1 = new List<ChartEntry>();
+                List<ChartEntry> entradas2 = new List<ChartEntry>();
+
+                int indice = 0;
+                foreach (NotasDTO item in notas)
+                {
+                    if (indice == 6) indice = 0;
+                    int n1 = int.TryParse(item.Nota1, out n1) ? n1 : 0;
+                    int n2 = int.TryParse(item.Nota2, out n2) ? n2 : 0;
+                    int soma = n1 + n2;
+                    entradas1.Add(new ChartEntry(soma)
+                    {
+                        Color = SKColor.Parse(cores[indice]),
+                        Label = item.KeyCadeira,
+                        ValueLabel = soma.ToString()
+                    });
+                    indice++;
+                }
+                Grafico1.Chart = new LineChart() { Entries = entradas1, BackgroundColor = SKColors.Transparent, LabelTextSize = 25 };
+                indice = 0;
+                foreach (NotasDTO item in notas)
+                {
+                    if (indice == 6) indice = 0;
+                    int n1 = int.TryParse(item.Nota1, out n1) ? n1 : 0;
+                    int n2 = int.TryParse(item.Nota2, out n2) ? n2 : 0;
+                    float soma = (n1 + n2) / 2;
+                    entradas2.Add(new ChartEntry(soma)
+                    {
+                        Color = SKColor.Parse(cores[indice]),
+                        Label = item.KeyCadeira,
+                        ValueLabel = soma.ToString()
+                    });
+                    indice++;
+                }
+                Grafico2.Chart = new DonutChart() { Entries = entradas2, BackgroundColor = SKColors.Transparent, LabelTextSize = 25 };
+
+
+            });
+        }
+    }
+}

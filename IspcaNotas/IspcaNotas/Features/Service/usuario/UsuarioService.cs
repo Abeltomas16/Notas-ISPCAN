@@ -61,8 +61,18 @@ namespace IspcaNotas.Features.Service.usuario
         {
             var dados = (await dbCliente.Child("usuario")
                         .OnceAsync<UsuarioDTO>())
-                        .Where(y => y.Object.Token == token).FirstOrDefault();
-            return dados.Object;
+                        .Select(x => new UsuarioDTO
+                        {
+                            Key = x.Key,
+                            Name = x.Object.Name,
+                            Categoria = x.Object.Categoria,
+                            Email = x.Object.Email,
+                            Senha = x.Object.Senha,
+                            Telefone = x.Object.Telefone,
+                            Token = x.Object.Token
+                        })
+                        .Where(y => y.Token == token).FirstOrDefault();
+            return dados;
         }
         public async Task<string> AlterarEmail(string newEmail)
         {

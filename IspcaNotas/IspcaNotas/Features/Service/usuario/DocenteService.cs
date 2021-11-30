@@ -12,7 +12,6 @@ namespace IspcaNotas.Features.Service.usuario
 {
     public class DocenteService : IDocente
     {
-        FirebaseClient dbCliente { get; } = Locator.Current.GetService<FirebaseClient>();
         IUsuario dbLogin { get; } = Locator.Current.GetService<IUsuario>();
         ICadeira dbCadeira { get; } = Locator.Current.GetService<ICadeira>();
         public async Task<string> Cadastrar(UsuarioDTO entidade, List<CadeiraDTO> cadeiras)

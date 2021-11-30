@@ -52,7 +52,7 @@
     <!-- Main Page -->
     <TabBar Route="main">
         <ShellContent Title="Home" ContentTemplate="{DataTemplate control:ActividadesTabbed}"/>
-        <ShellContent Title="Notas" ContentTemplate="{DataTemplate control:ActividadesTabbed}"/>
+        <ShellContent Title="Notas" ContentTemplate="{DataTemplate control:EstudantesNota}"/>
     </TabBar>
 
     <TabBar Route="admin">
