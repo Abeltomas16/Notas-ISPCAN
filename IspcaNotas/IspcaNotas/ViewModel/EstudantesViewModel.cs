@@ -13,7 +13,7 @@ namespace IspcaNotas.ViewModel
         {
             estudanteService = estudantes ?? Locator.Current.GetService<IEstudante>();
         }
-        public async Task<List<NotasDTO>> listar(string keyEstudante)
+        public async Task<List<NotasCadeirasDocente>> listar(string keyEstudante)
         {
             var notas = await estudanteService.ListarNotas(keyEstudante);
             return notas;

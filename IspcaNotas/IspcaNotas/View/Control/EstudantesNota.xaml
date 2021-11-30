@@ -44,7 +44,7 @@
                     </StackLayout>
                 </pancake:PancakeView>
 
-                <CollectionView x:Name="notass" EmptyView="Sem notas"  Margin="10" HeightRequest="110">
+                <CollectionView x:Name="notass" EmptyView="Sem notas"  Margin="10" HeightRequest="120">
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Orientation="Horizontal" Span="1" HorizontalItemSpacing="5"/>
                     </CollectionView.ItemsLayout>
@@ -53,8 +53,8 @@
                             <pancake:PancakeView BorderColor="Transparent" CornerRadius="10"
                                              Elevation="2" Padding="5" BackgroundColor="{Binding .,Converter={StaticResource IndexToColorConverter},ConverterParameter={Binding .}}" WidthRequest="100">
                                 <StackLayout Orientation="Vertical" Grid.Row="2" Grid.ColumnSpan="3" Margin="0" Padding="0">
-                                    <Label Text="{Binding KeyCadeira}" FontAttributes="Bold" FontSize="Small"/>
-                                    <Label Text="{Binding KeyCadeira}"/>
+                                    <Label Text="{Binding NomeCadeira}" FontAttributes="Bold" FontSize="Small"/>
+                                    <Label Text="{Binding NomeDocente}"/>
 
                                     <Label Text="{Binding Nota1, StringFormat='1ª Prova: {0}'}" HorizontalOptions="StartAndExpand" TextColor="White"/>
                                     <Label Text="{Binding Nota2, StringFormat='2ª Prova: {0}'}" HorizontalOptions="StartAndExpand" TextColor="White"/>

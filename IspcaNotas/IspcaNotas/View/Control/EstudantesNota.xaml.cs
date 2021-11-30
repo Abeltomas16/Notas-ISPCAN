@@ -32,53 +32,64 @@ namespace IspcaNotas.View.Control
         public EstudantesNota()
         {
             InitializeComponent();
-
-            string key = Application.Current.Properties["IDEstudante"].ToString(); ;
-            List<NotasDTO> notas = new List<NotasDTO>();
-            Device.BeginInvokeOnMainThread(async () =>
+            try
             {
-                var load = await MaterialDialog.Instance.LoadingDialogAsync(message: "caregando");
-                notas = await _ViewModel.listar(key);
-                load.Dismiss();
-                notass.ItemsSource = notas;
-                List<ChartEntry> entradas1 = new List<ChartEntry>();
-                List<ChartEntry> entradas2 = new List<ChartEntry>();
-
-                int indice = 0;
-                foreach (NotasDTO item in notas)
+                string key = Application.Current.Properties["IDEstudante"].ToString();
+                lblNomeAluno.Text = Application.Current.Properties["NomeUsuario"].ToString();
+                Device.BeginInvokeOnMainThread(async () =>
                 {
-                    if (indice == 6) indice = 0;
-                    int n1 = int.TryParse(item.Nota1, out n1) ? n1 : 0;
-                    int n2 = int.TryParse(item.Nota2, out n2) ? n2 : 0;
-                    int soma = n1 + n2;
-                    entradas1.Add(new ChartEntry(soma)
-                    {
-                        Color = SKColor.Parse(cores[indice]),
-                        Label = item.KeyCadeira,
-                        ValueLabel = soma.ToString()
-                    });
-                    indice++;
-                }
-                Grafico1.Chart = new LineChart() { Entries = entradas1, BackgroundColor = SKColors.Transparent, LabelTextSize = 25 };
-                indice = 0;
-                foreach (NotasDTO item in notas)
-                {
-                    if (indice == 6) indice = 0;
-                    int n1 = int.TryParse(item.Nota1, out n1) ? n1 : 0;
-                    int n2 = int.TryParse(item.Nota2, out n2) ? n2 : 0;
-                    float soma = (n1 + n2) / 2;
-                    entradas2.Add(new ChartEntry(soma)
-                    {
-                        Color = SKColor.Parse(cores[indice]),
-                        Label = item.KeyCadeira,
-                        ValueLabel = soma.ToString()
-                    });
-                    indice++;
-                }
-                Grafico2.Chart = new DonutChart() { Entries = entradas2, BackgroundColor = SKColors.Transparent, LabelTextSize = 25 };
+                    var load = await MaterialDialog.Instance.LoadingDialogAsync(message: "Caregando");
+                    List<NotasCadeirasDocente> notas = await _ViewModel.listar(key);
 
+                    load.Dismiss();
+                    notass.ItemsSource = notas;
+                    List<ChartEntry> entradas1 = new List<ChartEntry>();
+                    List<ChartEntry> entradas2 = new List<ChartEntry>();
 
-            });
+                    int indice = 0;
+                    foreach (NotasCadeirasDocente item in notas)
+                    {
+                        if (indice == 6) indice = 0;
+                        int n1 = int.TryParse(item.Nota1, out n1) ? n1 : 0;
+                        int n2 = int.TryParse(item.Nota2, out n2) ? n2 : 0;
+                        int soma = n1 + n2;
+                        entradas1.Add(new ChartEntry(soma)
+                        {
+                            Color = SKColor.Parse(cores[indice]),
+                            Label = item.NomeCadeira,
+                            ValueLabel = soma.ToString()
+                        });
+                        indice++;
+                    }
+                    Grafico1.Chart = new LineChart() { Entries = entradas1, BackgroundColor = SKColors.Transparent, LabelTextSize = 25 };
+                    indice = 0;
+                    foreach (NotasCadeirasDocente item in notas)
+                    {
+                        if (indice == 6) indice = 0;
+                        int n1 = int.TryParse(item.Nota1, out n1) ? n1 : 0;
+                        int n2 = int.TryParse(item.Nota2, out n2) ? n2 : 0;
+                        float soma = (n1 + n2) / 2;
+                        entradas2.Add(new ChartEntry(soma)
+                        {
+                            Color = SKColor.Parse(cores[indice]),
+                            Label = item.NomeCadeira,
+                            ValueLabel = soma.ToString()
+                        });
+                        indice++;
+                    }
+                    Grafico2.Chart = new DonutChart() { Entries = entradas2, BackgroundColor = SKColors.Transparent, LabelTextSize = 25 };
+
+                });
+            }
+            catch (Exception erro)
+            {
+                MaterialDialog.Instance.SnackbarAsync(message: erro.Message, actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
+                   new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
+                   {
+                       BackgroundColor = Color.Orange,
+                       MessageTextColor = Color.Black
+                   });
+            }
         }
     }
 }

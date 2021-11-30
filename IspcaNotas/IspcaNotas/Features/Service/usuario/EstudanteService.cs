@@ -13,7 +13,7 @@ namespace IspcaNotas.Features.Service.usuario
         {
             notasService = notas ?? Locator.Current.GetService<INotas>();
         }
-        public async Task<List<NotasDTO>> ListarNotas(string Keyaluno)
+        public async Task<List<NotasCadeirasDocente>> ListarNotas(string Keyaluno)
         {
             var notas = await notasService.listarPorAluno(Keyaluno);
             return notas;

@@ -45,7 +45,8 @@ namespace IspcaNotas.Features.Service.Cadeira
                          ).Select(x => new CadeiraDTO
                          {
                              IDCadeira = x.Key,
-                             Name = x.Object.Name
+                             Name = x.Object.Name,
+                              Docente=x.Object.Docente
                          });
 
             return cadeiras.ToList();

@@ -12,6 +12,14 @@ namespace IspcaNotas.Features.Service.usuario
     public class NotasService : INotas
     {
         FirebaseClient dbCliente { get; } = Locator.Current.GetService<FirebaseClient>();
+        ICadeira cadeiraService;
+        IDocente docenteService;
+        public NotasService(FirebaseClient client = null, ICadeira cadeira = null, IDocente docente = null)
+        {
+            dbCliente = client ?? Locator.Current.GetService<FirebaseClient>();
+            cadeiraService = cadeira ?? Locator.Current.GetService<ICadeira>();
+            docenteService = docente ?? Locator.Current.GetService<IDocente>();
+        }
         public async Task<string> Alterar(NotasDTO notas)
         {
             string key = notas.Key;
@@ -46,9 +54,11 @@ namespace IspcaNotas.Features.Service.usuario
                             .FirstOrDefault();
             return Nota;
         }
-        public async Task<List<NotasDTO>> listarPorAluno(string keyEstudante)
+        public async Task<List<NotasCadeirasDocente>> listarPorAluno(string keyEstudante)
         {
-            var Notas = (await dbCliente.Child("notas")
+            List<CadeiraDTO> cadeiras = await cadeiraService.listarTodos();
+            List<UsuarioDTO> docent = await docenteService.ListarTodos();
+            List<NotasDTO> Notas = (await dbCliente.Child("notas")
                             .OnceAsync<NotasDTO>())
                             .Select(z => new NotasDTO
                             {
@@ -57,10 +67,49 @@ namespace IspcaNotas.Features.Service.usuario
                                 KeyCadeira = z.Object.KeyCadeira,
                                 Nota1 = z.Object.Nota1,
                                 Nota2 = z.Object.Nota2
-
                             })
-                            .Where(x => x.KeyAluno == keyEstudante);
-            return Notas.ToList();
+                            .Where(x => x.KeyAluno == keyEstudante).ToList();
+
+            var notaJoincadeira = from i in Notas
+                                  join d in cadeiras
+                                  on i.KeyCadeira equals d.IDCadeira
+                                  select new
+                                  {
+                                      i.Nota1,
+                                      Nota2 = i.Nota2 ?? "0",
+                                      NomeCadeira = d.Name,
+                                      d.Docente
+                                  };
+            var cadeiraJoinDocente = from i in notaJoincadeira
+                                     join d in docent
+                                     on i.Docente equals d.Token
+                                     select new
+                                     {
+                                         i.Nota1,
+                                         i.Nota2,
+                                         i.NomeCadeira,
+                                         NomeDocente = d.Name
+                                     };
+            List<NotasCadeirasDocente> lista = new List<NotasCadeirasDocente>();
+            foreach (var item in cadeiraJoinDocente)
+            {
+                string cadeira_ = item.NomeCadeira;
+                string prof_ = item.NomeDocente;
+                if (item.NomeCadeira.Length > 11)
+                    cadeira_ = item.NomeCadeira.Substring(0, 11);
+
+                if (item.NomeDocente.Length > 11)
+                    prof_ = item.NomeDocente.Substring(0, 10);
+
+                lista.Add(new NotasCadeirasDocente
+                {
+                    NomeCadeira = cadeira_,
+                    NomeDocente = prof_,
+                    Nota1 = item.Nota1,
+                    Nota2 = item.Nota2
+                });
+            }
+            return lista;
         }
     }
 }

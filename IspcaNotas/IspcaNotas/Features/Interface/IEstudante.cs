@@ -6,6 +6,6 @@ namespace IspcaNotas.Features.Interface
 {
     public  interface IEstudante
     {
-        Task<List<NotasDTO>> ListarNotas(string Keyaluno);
+        Task<List<NotasCadeirasDocente>> ListarNotas(string Keyaluno);
     }
 }

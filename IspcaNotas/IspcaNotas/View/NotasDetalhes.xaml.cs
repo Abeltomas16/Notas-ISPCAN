@@ -24,7 +24,6 @@ namespace IspcaNotas.View
             NomeEstudante.Text = estudante.Name;
             NomeCadeira.Text = Application.Current.Properties["Nomecadeira"].ToString();
             NomeProf.Text = Application.Current.Properties["NomeUsuario"].ToString();
-
         }
 
     }
