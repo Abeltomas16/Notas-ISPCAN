@@ -7,6 +7,7 @@ using IspcaNotas.Features.Service.Login;
 using IspcaNotas.Features.Service.Routing;
 using IspcaNotas.Features.Service.usuario;
 using IspcaNotas.View.Control;
+using IspcaNotas.View.Grafico;
 using IspcaNotas.ViewModel;
 using Splat;
 using System;
@@ -46,7 +47,6 @@ namespace IspcaNotas
             Locator.CurrentMutable.Register(() => new UsuarioViewModel());
             Locator.CurrentMutable.Register(() => new DocenteViewModel());
             Locator.CurrentMutable.Register(() => new EstudantesViewModel());
-
 
         }
 
