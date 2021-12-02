@@ -1,13 +1,8 @@
 ﻿using IspcaNotas.Features.Enums;
-using IspcaNotas.Features.Interface;
 using IspcaNotas.Model;
 using IspcaNotas.ViewModel;
 using Splat;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -78,20 +73,12 @@ namespace IspcaNotas.View.Control
             }
             catch (Exception erro)
             {
-                if (estudantesViewModel.Busy)
-                    estudantesViewModel.Busy = false;
-
                 await MaterialDialog.Instance.SnackbarAsync(message: erro.Message, actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
                     new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
                     {
                         BackgroundColor = Color.Orange,
                         MessageTextColor = Color.Black
                     });
-            }
-            finally
-            {
-                if (estudantesViewModel.Busy)
-                    estudantesViewModel.Busy = false;
             }
         }
         private void LimparCampo()
@@ -157,9 +144,6 @@ namespace IspcaNotas.View.Control
             }
             catch (Exception erro)
             {
-                if (estudantesViewModel.Busy)
-                    estudantesViewModel.Busy = false;
-
                 await MaterialDialog.Instance.SnackbarAsync(message: erro.Message, actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
                     new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
                     {
@@ -170,9 +154,6 @@ namespace IspcaNotas.View.Control
             finally
             {
                 btCancelar_Clicked(null, EventArgs.Empty);
-
-                if (estudantesViewModel.Busy)
-                    estudantesViewModel.Busy = false;
             }
         }
     }

@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using XF.Material.Forms.UI.Dialogs;
 
 namespace IspcaNotas.ViewModel
 {
@@ -16,53 +17,40 @@ namespace IspcaNotas.ViewModel
         public UsuarioViewModel(IUsuario usuario = null)
         {
             Idata = usuario ?? Locator.Current.GetService<IUsuario>();
-            Busy = false;
             Carregar();
         }
-        private bool IsBusyEstudante;
         public int Total { get; private set; }
-        public bool Busy
-        {
-            get { return IsBusyEstudante; }
-            set
-            {
-                if (IsBusyEstudante != value)
-                {
-                    IsBusyEstudante = value;
-                    OnPropertyChanged("Busy");
-                }
-            }
-        }
+
         public ObservableCollection<UsuarioDTO> Estudantes { get; set; }
         public async void Carregar()
         {
-            Busy = true;
+            var load = await MaterialDialog.Instance.LoadingDialogAsync(message: "Carregando");
             var estudantes = await Idata.ListarTodos();
             Estudantes = new ObservableCollection<UsuarioDTO>(estudantes.Where(y => y.Categoria == "Estudante"));
             OnPropertyChanged("Estudantes");
             Total = Estudantes.Count;
             OnPropertyChanged("Total");
-            Busy = false;
+            load.Dismiss();
         }
         public async Task<string> Cadastrar(UsuarioDTO usuario)
         {
-            Busy = true;
+            var load = await MaterialDialog.Instance.LoadingDialogAsync(message: "Salvando");
             var retorno = await Idata.Cadastrar(usuario);
-            Busy = false;
+            load.Dismiss();
             return retorno;
         }
         public async Task<string> Alterar(UsuarioDTO usuario)
         {
-            Busy = true;
+            var load = await MaterialDialog.Instance.LoadingDialogAsync(message: "Actualizando");
             var retorno = await Idata.Alterar(usuario, usuario.Key);
-            Busy = false;
+            load.Dismiss();
             return retorno;
         }
         public async Task<string> Apagar(UsuarioDTO usuarioDTO)
         {
-            Busy = true;
+            var load = await MaterialDialog.Instance.LoadingDialogAsync(message: "Apagando");
             var resultado = await Idata.Apagar(usuarioDTO);
-            Busy = false;
+            load.Dismiss();
             return resultado;
         }
         public async Task<string> UpdateEmail(string newEmail)

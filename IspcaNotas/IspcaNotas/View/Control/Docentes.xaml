@@ -42,7 +42,8 @@
                                     ErrorColor="Red"
                                     IconTintColor="#4A6963"
                                     TintColor="#1976D3"
-                                    BackgroundColor="Transparent" 
+                                     BackgroundColor="WhiteSmoke" 
+                                     Padding="10"
                                     MaxLength="30"
                                 />
                                 <Material:MaterialTextField 
