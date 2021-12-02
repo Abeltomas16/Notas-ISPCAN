@@ -68,19 +68,12 @@ namespace IspcaNotas.View.Control
             }
             catch (Exception erro)
             {
-                if (Service.Busy)
-                    Service.Busy = false;
                 await MaterialDialog.Instance.SnackbarAsync(message: erro.Message, actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
                 new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
                 {
                     BackgroundColor = Color.Orange,
                     MessageTextColor = Color.Black
                 });
-            }
-            finally
-            {
-                if (Service.Busy)
-                    Service.Busy = false;
             }
         }
         private void MaterialButtonCancelar_Clicked(object sender, EventArgs e)
@@ -129,8 +122,6 @@ namespace IspcaNotas.View.Control
             }
             catch (Exception erro)
             {
-                if (Service.Busy)
-                    Service.Busy = false;
                 await MaterialDialog.Instance.SnackbarAsync(message: erro.Message, actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
                  new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
                  {
@@ -141,8 +132,6 @@ namespace IspcaNotas.View.Control
             finally
             {
                 MaterialButtonCancelar_Clicked(null, EventArgs.Empty);
-                if (Service.Busy)
-                    Service.Busy = false;
             }
         }
 

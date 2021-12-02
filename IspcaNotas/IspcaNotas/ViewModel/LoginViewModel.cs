@@ -47,6 +47,7 @@ namespace IspcaNotas.ViewModel
                 {
                     UsuarioDTO categoria = await usuarioService.Pesquisar(resultado);
                     Application.Current.Properties["NomeUsuario"] = categoria.Name;
+                    Application.Current.Properties["TelefoneUsuario"] = categoria.Telefone;
                     if (categoria.Categoria == "Estudante")
                     {
                         Application.Current.Properties["IDEstudante"] = categoria.Key;

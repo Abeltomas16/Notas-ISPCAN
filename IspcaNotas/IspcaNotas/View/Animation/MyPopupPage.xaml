@@ -46,9 +46,7 @@
                         <Image.Source>
                             <OnPlatform
                                 x:TypeArguments="ImageSource"
-                                Android="github_octocat.png"
-                                WinPhone="Assets/github_octocat.png"
-                                iOS="github_octocat.png" />
+                                Android="compose.png"/>
                         </Image.Source>
                     </Image>
                     <Entry

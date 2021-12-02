@@ -24,8 +24,8 @@ namespace IspcaNotas.View.Control
             base.OnAppearing();
             List<UsuarioDTO> usuarios = new List<UsuarioDTO>();
             var email = Preferences.Get("MyEmail", null);
-            var name = Preferences.Get("MyName", null);
-            var Telefone = Preferences.Get("MyTelefone", null);
+            var name = Application.Current.Properties["NomeUsuario"].ToString() ?? "";
+            var Telefone = Application.Current.Properties["TelefoneUsuario"].ToString() ?? "";
             usuarios.Add(new UsuarioDTO
             {
                 Email = email,

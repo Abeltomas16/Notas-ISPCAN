@@ -51,7 +51,7 @@
                         IconTintColor="#4A6963"
                         TintColor="#1976D3"
                         BackgroundColor="WhiteSmoke" 
-                            Padding="10"
+                         Padding="10"
                         Grid.Row="2" 
                         MaxLength="30"
                     />

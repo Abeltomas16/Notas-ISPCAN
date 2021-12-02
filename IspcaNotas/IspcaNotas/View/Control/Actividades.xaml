@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:Material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material.Forms"
              mc:Ignorable="d"
+             Title="Actividades"
              x:Class="IspcaNotas.View.Control.Actividades">
 
     <ContentPage.ToolbarItems>
@@ -25,33 +26,35 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <ActivityIndicator x:Name="activityIndicator1" 
-                                IsRunning="{Binding Busy}" 
-                                IsVisible="{Binding Busy}"
-                                VerticalOptions="Center"
-                                HorizontalOptions="Center" 
-                                Color="Blue" Grid.Row="0" />
-
-                        <StackLayout  Grid.Row="1">
-
+                        <StackLayout Grid.Row="0">
                             <Label Text="Dados da Actividade" Margin="10,10" 
                                FontSize="Medium" 
                                TextColor="#2189df"/>
 
-                            <Editor Placeholder="Descrição" MaxLength="200" AutoSize="TextChanges"
-                                x:Name="labelDescricao" HorizontalOptions="FillAndExpand"
-                                />
-                            <Editor Placeholder="URL da imagem" MaxLength="600" AutoSize="TextChanges"
+
+                            <Material:MaterialTextField 
+                                x:Name="labelDescricao"
+                                Placeholder="Descrição"
+                                HorizontalOptions="FillAndExpand"
+                                InputType="Text"
+                                TextColor="#4A6963"
+                                PlaceholderColor="#4A6963"
+                                ErrorColor="Red"
+                                IconTintColor="#4A6963"
+                                TintColor="#1976D3"
+                                BackgroundColor="WhiteSmoke" 
+                                Padding="10"/>
+
+                            <Editor Margin="10,0" Placeholder="URL da imagem" MaxLength="600" AutoSize="TextChanges"
                                 x:Name="labelIMG" HorizontalOptions="FillAndExpand"
                               />
                         </StackLayout>
 
-                        <StackLayout Orientation="Horizontal" Grid.Row="2" Padding="10,10" >
-                            <Material:MaterialButton x:Name="btSalvarEditar" Text="Salvar"                                              
-                             BackgroundColor="#2196f3" Clicked="MaterialButton_Clicked" VerticalOptions="Fill"/>
+                        <StackLayout Orientation="Horizontal" Grid.Row="1" Padding="10,10" >
+                            <Material:MaterialButton x:Name="btSalvarEditar" BackgroundColor="#46D57B" Text="Salvar"                                              
+                             Clicked="MaterialButton_Clicked" VerticalOptions="Fill"/>
 
                             <Material:MaterialButton x:Name="btCancelarEditar" Text="Cancelar"
                              BackgroundColor="#D53343" Clicked="MaterialButtonCancelar_Clicked" VerticalOptions="End" IsVisible="False"/>

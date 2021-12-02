@@ -35,12 +35,6 @@
                                     <Label Text="Nome" TextColor="#2196f3"/>
                                     <Label Text="{Binding Name}" TextColor="Gray"/>
                                 </StackLayout>
-                                <Label x:Name="btEditarNome" Text="Editar" VerticalOptions="End" 
-                                       HorizontalOptions="End" TextColor="Orange">
-                                    <Label.GestureRecognizers>
-                                        <TapGestureRecognizer NumberOfTapsRequired="1"/>
-                                    </Label.GestureRecognizers>
-                                </Label>
                             </StackLayout>
 
                             <StackLayout Grid.Row="1" Orientation="Horizontal">
@@ -48,19 +42,12 @@
                                     <Label Text="Telefone" TextColor="#2196f3"/>
                                     <Label Text="{Binding Telefone}" TextColor="Gray"/>
                                 </StackLayout>
-                                <Label x:Name="btEditarPhone" Text="Editar" VerticalOptions="End"
-                                       HorizontalOptions="End" TextColor="Orange">
-                                    <Label.GestureRecognizers>
-                                        <TapGestureRecognizer NumberOfTapsRequired="1"/>
-                                    </Label.GestureRecognizers>
-                                </Label>
                             </StackLayout>
-
 
 
                             <StackLayout Grid.Row="2" Orientation="Horizontal">
                                 <StackLayout VerticalOptions="Center" HorizontalOptions="StartAndExpand">
-                                    <Label Text="Telefone" TextColor="#2196f3"/>
+                                    <Label Text="Email" TextColor="#2196f3"/>
                                     <Label Text="{Binding Email}" TextColor="Gray"/>
                                 </StackLayout>
                                 <Label x:Name="btEditarEmail" Text="Editar" VerticalOptions="End"
