@@ -27,13 +27,6 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <ActivityIndicator x:Name="activityIndicator1" 
-                                IsRunning="{Binding Busy}" 
-                                IsVisible="{Binding Busy}"
-                                VerticalOptions="Center"
-                                HorizontalOptions="Center" 
-                                Color="Blue" Grid.Row="1" />
-
                         <Material:MaterialTextField 
                         x:Name="txtNome"
                         Placeholder="Nome"

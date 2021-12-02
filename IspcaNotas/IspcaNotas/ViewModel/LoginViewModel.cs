@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using XF.Material.Forms.UI.Dialogs;
 
 namespace IspcaNotas.ViewModel
 {
@@ -39,13 +40,14 @@ namespace IspcaNotas.ViewModel
 
         internal async void ValidarEntrada(string email, string senha)
         {
-
+            var load = await MaterialDialog.Instance.LoadingDialogAsync(message: "Verificando");
             try
-            {
+            {              
                 var resultado = await LoginNegocios.SignIn(email, Senha);
                 if (resultado != null)
                 {
                     UsuarioDTO categoria = await usuarioService.Pesquisar(resultado);
+                    load.Dismiss();
                     Application.Current.Properties["NomeUsuario"] = categoria.Name;
                     Application.Current.Properties["TelefoneUsuario"] = categoria.Telefone;
                     if (categoria.Categoria == "Estudante")
@@ -82,9 +84,9 @@ namespace IspcaNotas.ViewModel
                     }
                 }
             }
-            catch (Firebase.Auth.FirebaseAuthException erro)
+            catch (Exception erro)
             {
-                Console.WriteLine(erro.ResponseData);
+                load.Dismiss();
                 await XF.Material.Forms.UI.Dialogs.MaterialDialog.Instance.SnackbarAsync(erro.Message, XF.Material.Forms.UI.Dialogs.MaterialSnackbar.DurationShort);
             }
         }

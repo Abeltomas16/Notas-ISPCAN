@@ -1,13 +1,8 @@
-﻿using IspcaNotas.Features.Interface;
-using IspcaNotas.View.Animation;
+﻿using IspcaNotas.View.Animation;
 using IspcaNotas.ViewModel;
 using Rg.Plugins.Popup.Services;
 using Splat;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;

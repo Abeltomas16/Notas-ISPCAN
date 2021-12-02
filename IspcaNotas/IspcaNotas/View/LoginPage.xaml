@@ -12,9 +12,7 @@
         <Image Source="back" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Aspect="AspectFill"/>
         <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
             <StackLayout>
-                <ActivityIndicator x:Name="activityIndicator1" IsRunning="{Binding AlteraRefresh}" 
-                    VerticalOptions="Center" HorizontalOptions="Center" Color="Blue" />
-
+                
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
