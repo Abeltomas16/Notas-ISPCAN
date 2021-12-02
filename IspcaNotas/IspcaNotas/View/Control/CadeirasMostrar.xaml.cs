@@ -26,16 +26,7 @@ namespace IspcaNotas.View.Control
         public CadeirasMostrar(List<CadeiraDTO> cadeirasDoDocente)
         {
             InitializeComponent();
-
-            //Locator.CurrentMutable.Register(() => new CadeiraViewModel("CadeirasMostrar", cadeirasDoDocente), "CadeirasListarProf");
-           // ViewModel = Locator.Current.GetService<CadeiraViewModel>("CadeirasListarProf");
-
             BindingContext = new CadeiraViewModel("CadeirasMostrar", cadeirasDoDocente);
-        }
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-
         }
         private void ViewCadeiras_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -43,7 +34,6 @@ namespace IspcaNotas.View.Control
             foreach (CadeiraDTO item in e.CurrentSelection)
                 CadeirasDocente.Cadeiras.Add(item);
         }
-
         private async void okk_Clicked(object sender, EventArgs e)
         {
             await Shell.Current.Navigation.PopAsync();

@@ -6,26 +6,14 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
+using XF.Material.Forms.UI.Dialogs;
 
 namespace IspcaNotas.ViewModel
 {
     public class DocenteViewModel : BaseViewModel
     {
         private CadeiraDTO CadeiraSelecionada = null;
-        private bool IsBusyEstudante;
         public int Total { get; private set; }
-        public bool Busy
-        {
-            get { return IsBusyEstudante; }
-            set
-            {
-                if (IsBusyEstudante != value)
-                {
-                    IsBusyEstudante = value;
-                    OnPropertyChanged("Busy");
-                }
-            }
-        }
         public CadeiraDTO RetornaCadeiraSelecionada
         {
             get { return CadeiraSelecionada; }
@@ -45,28 +33,27 @@ namespace IspcaNotas.ViewModel
             clienteDocente = docente ?? Locator.Current.GetService<IDocente>();
             clienteCadeira = cadeira ?? Locator.Current.GetService<ICadeira>();
             clienteUsuario = usuario ?? Locator.Current.GetService<IUsuario>();
-            Busy = false;
             Task.Run(async () => await Carregar());
         }
         public ObservableCollection<UsuarioDTO> Docentes { get; set; }
         public ObservableCollection<CadeiraDTO> Cadeiras { get; set; }
         public async Task<string> Cadastrar(UsuarioDTO docente, List<CadeiraDTO> cadeiras)
         {
-            Busy = true;
+            var load = await MaterialDialog.Instance.LoadingDialogAsync(message: "Salvando");
             var retorno = await clienteDocente.Cadastrar(docente, cadeiras);
-            Busy = false;
+            load.Dismiss();
             return retorno;
         }
         public async Task<string> Alterar(UsuarioDTO docente, List<CadeiraDTO> cadeiras)
         {
-            Busy = true;
+            var load = await MaterialDialog.Instance.LoadingDialogAsync(message: "Actualizando");
             var retorno = await clienteDocente.Alterar(docente, cadeiras);
-            Busy = false;
+            load.Dismiss();
             return retorno;
         }
         public async Task Carregar()
         {
-            Busy = true;
+            var load = await MaterialDialog.Instance.LoadingDialogAsync(message: "Carregando");
             var docentes = await clienteDocente.ListarTodos();
             Docentes = new ObservableCollection<UsuarioDTO>(docentes);
             OnPropertyChanged("Docentes");
@@ -77,7 +64,7 @@ namespace IspcaNotas.ViewModel
             Cadeiras = new ObservableCollection<CadeiraDTO>(cadeira);
             OnPropertyChanged("Cadeiras");
 
-            Busy = false;
+            load.Dismiss();
         }
 
         public async Task<UsuarioDTO> MelhorAluno(string keyMelhorAluno)
@@ -88,16 +75,16 @@ namespace IspcaNotas.ViewModel
 
         public async Task<List<CadeiraDTO>> MostrarCadeira(string key)
         {
-            Busy = true;
+            var load = await MaterialDialog.Instance.LoadingDialogAsync(message: "Carregando");
             var cadeiras = await clienteCadeira.MostrarPorID(key);
-            Busy = false;
+            load.Dismiss();
             return cadeiras;
         }
         public async Task<string> Apagar(UsuarioDTO key)
         {
-            Busy = true;
+            var load = await MaterialDialog.Instance.LoadingDialogAsync(message: "Apagando");
             var resultado = await clienteDocente.Apagar(key);
-            Busy = false;
+            load.Dismiss();
             return resultado;
         }
         public async Task<List<NotasDTO>> mostrarNotas(string keycadeira)

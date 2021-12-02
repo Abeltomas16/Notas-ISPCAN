@@ -12,13 +12,6 @@
             <Label Text="Cadeiras disponíveis" Margin="10,10" FontSize="Medium" TextColor="#2189df" Style="{DynamicResource BodyStyle}"/>
             <Label Text="{Binding Total, StringFormat='Total {0}'}" Margin="10,0" FontSize="Small" TextColor="Green"/>
 
-            <ActivityIndicator x:Name="activityIndicator1" 
-                                IsRunning="{Binding Busy}" 
-                                IsVisible="{Binding Busy}"
-                                VerticalOptions="Center"
-                                HorizontalOptions="Center" 
-                                Color="Blue"/>
-
             <CollectionView x:Name="ViewCadeiras" BackgroundColor="#f3f3f3" 
                               ItemsSource="{Binding Cadeiras}"
                             EmptyView="Nenhuma cadeira registrada" 
@@ -43,7 +36,10 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <Button x:Name="okk" Text="Guardar" Clicked="okk_Clicked"/>
+            <Button x:Name="okk" HorizontalOptions="FillAndExpand" 
+                    BackgroundColor="#46D57B" VerticalOptions="Center"
+                    TextColor="White" Margin="10,20"
+                    Text="Guardar" Clicked="okk_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

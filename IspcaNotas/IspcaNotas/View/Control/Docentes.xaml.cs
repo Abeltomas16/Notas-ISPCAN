@@ -72,7 +72,7 @@ namespace IspcaNotas.View.Control
                 else if (operacao == EnumOperacoes.Editar)
                     resultado = await DocentesViewModel.Alterar(docente, cadeiras);
 
-                DocentesViewModel.Carregar();
+                await DocentesViewModel.Carregar();
                 await MaterialDialog.Instance.SnackbarAsync(message: resultado, actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
                   new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
                   {
@@ -82,8 +82,6 @@ namespace IspcaNotas.View.Control
             }
             catch (Exception erro)
             {
-                if (DocentesViewModel.Busy)
-                    DocentesViewModel.Busy = false;
                 await MaterialDialog.Instance.SnackbarAsync(message: erro.Message, actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
                    new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
                    {
@@ -94,8 +92,6 @@ namespace IspcaNotas.View.Control
             finally
             {
                 btCancelarEditar_Clicked(null, EventArgs.Empty);
-                if (DocentesViewModel.Busy)
-                    DocentesViewModel.Busy = false;
             }
         }
 
@@ -146,7 +142,7 @@ namespace IspcaNotas.View.Control
                         return;
 
                     var resultado = await DocentesViewModel.Apagar(docenteCurrent);
-                    DocentesViewModel.Carregar();
+                    await DocentesViewModel.Carregar();
                     await MaterialDialog.Instance.SnackbarAsync(message: resultado, actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
                    new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
                    {
@@ -157,19 +153,12 @@ namespace IspcaNotas.View.Control
             }
             catch (Exception erro)
             {
-                if (DocentesViewModel.Busy)
-                    DocentesViewModel.Busy = false;
                 await MaterialDialog.Instance.SnackbarAsync(message: erro.Message, actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
                    new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
                    {
                        BackgroundColor = Color.Orange,
                        MessageTextColor = Color.Black
                    });
-            }
-            finally
-            {
-                if (DocentesViewModel.Busy)
-                    DocentesViewModel.Busy = false;
             }
         }
         protected override void OnAppearing()
