@@ -5,6 +5,7 @@
        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
        xmlns:local="clr-namespace:IspcaNotas.View"
        xmlns:control="clr-namespace:IspcaNotas.View.Control"
+       xmlns:resumo="clr-namespace:IspcaNotas.View.Grafico"
              mc:Ignorable="d"
              x:Class="IspcaNotas.AppShell"
     Title="ShellLogin">
@@ -65,6 +66,7 @@
     <TabBar Route="professor">
         <ShellContent Title="Actividades" Icon="actividades" ContentTemplate="{DataTemplate control:ActividadesTabbed}"/>
         <ShellContent Title="Estudantes" Icon="estudante.png" ContentTemplate="{DataTemplate control:DocenteNota}"/>
+        <ShellContent Title="Resumo" Icon="estudante.png" ContentTemplate="{DataTemplate resumo:ProfessorGrafico}"/>
     </TabBar>
     
 </Shell>

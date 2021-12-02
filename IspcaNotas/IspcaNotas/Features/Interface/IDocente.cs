@@ -1,7 +1,5 @@
 ﻿using IspcaNotas.Model;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace IspcaNotas.Features.Interface
@@ -12,6 +10,7 @@ namespace IspcaNotas.Features.Interface
         Task<string> Alterar(UsuarioDTO entidade, List<CadeiraDTO> cadeiras);
         Task<string> Apagar(UsuarioDTO usuarioDTO);
         Task<List<UsuarioDTO>> ListarTodos();
+        Task<List<NotasDTO>> MostrarNotas(string keyCadeira);
         Task<UsuarioDTO> Pesquisar(string token);
     }
 }

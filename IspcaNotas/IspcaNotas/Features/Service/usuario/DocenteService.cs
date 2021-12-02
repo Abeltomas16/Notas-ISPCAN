@@ -14,6 +14,7 @@ namespace IspcaNotas.Features.Service.usuario
     {
         IUsuario dbLogin { get; } = Locator.Current.GetService<IUsuario>();
         ICadeira dbCadeira { get; } = Locator.Current.GetService<ICadeira>();
+        INotas dbNotas { get; } = Locator.Current.GetService<INotas>();
         public async Task<string> Cadastrar(UsuarioDTO entidade, List<CadeiraDTO> cadeiras)
         {
             List<Task> tarefas = new List<Task>();
@@ -48,6 +49,12 @@ namespace IspcaNotas.Features.Service.usuario
         public async Task<UsuarioDTO> Pesquisar(string token)
         {
             var dados = await dbLogin.Pesquisar(token);
+            return dados;
+        }
+
+        public async Task<List<NotasDTO>> MostrarNotas(string keyCadeira)
+        {
+            var dados = await dbNotas.listarPorCadeira(keyCadeira);
             return dados;
         }
     }

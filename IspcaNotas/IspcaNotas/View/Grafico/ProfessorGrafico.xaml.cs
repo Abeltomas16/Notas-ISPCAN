@@ -3,62 +3,170 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using IspcaNotas.Model;
+using IspcaNotas.ViewModel;
 using Microcharts;
 using SkiaSharp;
+using Splat;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XF.Material.Forms.UI.Dialogs;
 
 namespace IspcaNotas.View.Grafico
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProfessorGrafico : ContentPage
     {
+        DocenteViewModel DocentesViewModel { get; } = Locator.Current.GetService<DocenteViewModel>();
         public ProfessorGrafico()
         {
             InitializeComponent();
-            List<ChartEntry> entries = new List<ChartEntry>();
-            entries.Add(new ChartEntry(20)
-            {
-                ValueLabel = "20",
-                Label = "Aprovados",
-                Color = SKColor.Parse("#00FEFE"),
-                TextColor = SKColors.Black
-            });
-            entries.Add(new ChartEntry(10)
-            {
-                ValueLabel = "10",
-                Label = "Reprovados",
-                Color = SKColors.Red,
-                TextColor = SKColors.Black
-            });
-            grafico1.Chart = new DonutChart()
-            {
-                Entries = entries,
-                BackgroundColor = SKColors.Transparent,
-                LabelTextSize = 25,
-                AnimationDuration = TimeSpan.FromMilliseconds(200),
-                IsAnimated = true
-            };
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
 
-
-            grafico2.Chart = new DonutChart()
+            List<ChartEntry> entries1 = new List<ChartEntry>();
+            List<ChartEntry> entries2 = new List<ChartEntry>();
+            List<ChartEntry> entries3 = new List<ChartEntry>();
+            try
             {
-                Entries = entries,
-                BackgroundColor = SKColors.Transparent,
-                LabelTextSize = 25,
-                AnimationDuration = TimeSpan.FromMilliseconds(200),
-                IsAnimated = true
-            };
+                string keycadeira = Application.Current.Properties["IDCadeira"].ToString();
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    var load = await MaterialDialog.Instance.LoadingDialogAsync(message: "Caregando");
+                    List<NotasDTO> notas = await DocentesViewModel.mostrarNotas(keycadeira);
+                    load.Dismiss();
 
-            grafico3.Chart = new BarChart()
+                    //PRIMEIRA PARCELAR
+                    int positivas = 0;
+                    int negativas = 0;
+
+                    foreach (NotasDTO item in notas)
+                    {
+                        int _nota1 = int.TryParse(item.Nota1, out _nota1) ? _nota1 : 0;
+                        if (_nota1 >= 10)
+                            positivas++;
+                        else
+                            negativas++;
+                    }
+                    TotPositivas1.Text = positivas.ToString();
+                    TotNegativas1.Text = negativas.ToString();
+
+                    //if(positivas)
+                    entries1.Add(new ChartEntry(positivas)
+                    {
+                        ValueLabel = positivas.ToString(),
+                        Label = "Aprovados",
+                        Color = SKColor.Parse("#00FEFE"),
+                        TextColor = SKColors.Black
+                    });
+
+                    entries1.Add(new ChartEntry(negativas)
+                    {
+                        ValueLabel = negativas.ToString(),
+                        Label = "Reprovados",
+                        Color = SKColors.Red,
+                        TextColor = SKColors.Black
+                    });
+
+                    grafico1.Chart = new DonutChart()
+                    {
+                        Entries = entries1,
+                        BackgroundColor = SKColors.Transparent,
+                        LabelTextSize = 25,
+                        AnimationDuration = TimeSpan.FromMilliseconds(2000),
+                        IsAnimated = true
+                    };
+
+                    //SEGUNDA PARCELAR
+                    positivas = 0;
+                    negativas = 0;
+                    foreach (NotasDTO item in notas)
+                    {
+                        int _nota2 = int.TryParse(item.Nota2, out _nota2) ? _nota2 : 0;
+                        if (_nota2 >= 10)
+                            positivas++;
+                        else
+                            negativas++;
+                    }
+                    TotPositivas2.Text = positivas.ToString();
+                    TotNegativas2.Text = negativas.ToString();
+
+                    entries2.Add(new ChartEntry(positivas)
+                    {
+                        ValueLabel = positivas.ToString(),
+                        Label = "Aprovados",
+                        Color = SKColor.Parse("#00FEFE"),
+                        TextColor = SKColors.Black
+                    });
+
+                    entries2.Add(new ChartEntry(negativas)
+                    {
+                        ValueLabel = negativas.ToString(),
+                        Label = "Reprovados",
+                        Color = SKColors.Red,
+                        TextColor = SKColors.Black
+                    });
+
+                    grafico2.Chart = new DonutChart()
+                    {
+                        Entries = entries2,
+                        BackgroundColor = SKColors.Transparent,
+                        LabelTextSize = 25,
+                        AnimationDuration = TimeSpan.FromMilliseconds(2000),
+                        IsAnimated = true
+                    };
+
+                    //SIMESTRE
+                    positivas = 0;
+                    negativas = 0;
+                    foreach (NotasDTO item in notas)
+                    {
+                        int _nota1 = int.TryParse(item.Nota1, out _nota1) ? _nota1 : 0;
+                        int _nota2 = int.TryParse(item.Nota2, out _nota2) ? _nota2 : 0;
+                        double soma = _nota1 + _nota2;
+                        if ((soma / 2) >= 10)
+                            positivas++;
+                        else
+                            negativas++;
+                    }
+
+                    entries3.Add(new ChartEntry(positivas)
+                    {
+                        ValueLabel = positivas.ToString(),
+                        Label = "Aprovados",
+                        Color = SKColor.Parse("#00FEFE"),
+                        TextColor = SKColors.Black
+                    });
+
+                    entries3.Add(new ChartEntry(negativas)
+                    {
+                        ValueLabel = negativas.ToString(),
+                        Label = "Reprovados",
+                        Color = SKColors.Red,
+                        TextColor = SKColors.Black
+                    });
+                    grafico3.Chart = new BarChart()
+                    {
+                        Entries = entries3,
+                        BackgroundColor = SKColors.Transparent,
+                        LabelTextSize = 25,
+                        AnimationDuration = TimeSpan.FromMilliseconds(2000),
+                        IsAnimated = true
+                    };
+
+                });
+            }
+            catch (Exception erro)
             {
-                Entries = entries,
-                BackgroundColor = SKColors.Transparent,
-                LabelTextSize = 25,
-                AnimationDuration = TimeSpan.FromMilliseconds(200),
-                IsAnimated = true
-            };
+                MaterialDialog.Instance.SnackbarAsync(message: erro.Message, actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
+                  new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
+                  {
+                      BackgroundColor = Color.Orange,
+                      MessageTextColor = Color.Black
+                  });
+            }
         }
     }
 }

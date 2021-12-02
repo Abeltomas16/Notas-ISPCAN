@@ -13,12 +13,12 @@ namespace IspcaNotas.Features.Service.usuario
     {
         FirebaseClient dbCliente { get; } = Locator.Current.GetService<FirebaseClient>();
         ICadeira cadeiraService;
-        IDocente docenteService;
-        public NotasService(FirebaseClient client = null, ICadeira cadeira = null, IDocente docente = null)
+        IUsuario dbLogin { get; } = Locator.Current.GetService<IUsuario>();
+        public NotasService(FirebaseClient client = null, ICadeira cadeira = null, IUsuario docente = null)
         {
             dbCliente = client ?? Locator.Current.GetService<FirebaseClient>();
             cadeiraService = cadeira ?? Locator.Current.GetService<ICadeira>();
-            docenteService = docente ?? Locator.Current.GetService<IDocente>();
+            dbLogin = docente ?? Locator.Current.GetService<IUsuario>();
         }
         public async Task<string> Alterar(NotasDTO notas)
         {
@@ -57,7 +57,8 @@ namespace IspcaNotas.Features.Service.usuario
         public async Task<List<NotasCadeirasDocente>> listarPorAluno(string keyEstudante)
         {
             List<CadeiraDTO> cadeiras = await cadeiraService.listarTodos();
-            List<UsuarioDTO> docent = await docenteService.ListarTodos();
+            var docent = (await dbLogin.ListarTodos()).Where(y => y.Categoria == "Professor");
+
             List<NotasDTO> Notas = (await dbCliente.Child("notas")
                             .OnceAsync<NotasDTO>())
                             .Select(z => new NotasDTO
@@ -110,6 +111,19 @@ namespace IspcaNotas.Features.Service.usuario
                 });
             }
             return lista;
+        }
+
+        public async Task<List<NotasDTO>> listarPorCadeira(string keycadeira)
+        {
+            var notas = (await dbCliente.Child("notas")
+                        .OnceAsync<NotasDTO>()
+                        ).Select(n => new NotasDTO
+                        {
+                            KeyCadeira = n.Object.KeyCadeira,
+                            Nota1 = n.Object.Nota1,
+                            Nota2 = n.Object.Nota2 ?? "0"
+                        }).Where(x => x.KeyCadeira == keycadeira);
+            return notas.ToList();
         }
     }
 }

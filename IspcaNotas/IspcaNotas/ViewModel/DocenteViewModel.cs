@@ -91,5 +91,10 @@ namespace IspcaNotas.ViewModel
             Busy = false;
             return resultado;
         }
+        public async Task<List<NotasDTO>> mostrarNotas(string keycadeira)
+        {
+             var resultado = await clienteDocente.MostrarNotas(keycadeira);
+             return resultado;
+        }
     }
 }
