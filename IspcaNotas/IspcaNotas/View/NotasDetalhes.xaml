@@ -71,10 +71,9 @@
                     </Grid>
                 </Frame>
                 <Button Text="Salvar" HorizontalOptions="FillAndExpand" 
-                    BackgroundColor="#2189dc" VerticalOptions="Center"
-                    Grid.Row="3" TextColor="White" Margin="10,0"
-                       Command="{Binding Cadastrar}"
-                    />
+                    BackgroundColor="#46D57B" VerticalOptions="Center"
+                    Grid.Row="3" TextColor="White" Margin="10,20"
+                       Command="{Binding Cadastrar}"/>
             </Grid>
         </ScrollView>
     </ContentPage.Content>
