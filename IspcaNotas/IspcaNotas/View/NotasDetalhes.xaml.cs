@@ -2,10 +2,6 @@
 using IspcaNotas.ViewModel;
 using Splat;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -19,12 +15,22 @@ namespace IspcaNotas.View
         public NotasDetalhes(UsuarioDTO estudante)
         {
             InitializeComponent();
-
-            BindingContext = _notasViewModel;
-            NomeEstudante.Text = estudante.Name;
-            NomeCadeira.Text = Application.Current.Properties["Nomecadeira"].ToString();
-            NomeProf.Text = Application.Current.Properties["NomeUsuario"].ToString();
+            try
+            {
+                BindingContext = _notasViewModel;
+                NomeEstudante.Text = estudante.Name;
+                NomeCadeira.Text = Application.Current.Properties["Nomecadeira"].ToString();
+                NomeProf.Text = Application.Current.Properties["NomeUsuario"].ToString();
+            }
+            catch (Exception erro)
+            {
+                XF.Material.Forms.UI.Dialogs.MaterialDialog.Instance.SnackbarAsync(message: erro.Message, actionButtonText: "Ok", msDuration: XF.Material.Forms.UI.Dialogs.MaterialSnackbar.DurationLong,
+                  new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
+                  {
+                      BackgroundColor = Color.Orange,
+                      MessageTextColor = Color.Black
+                  });
+            }
         }
-
     }
 }

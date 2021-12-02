@@ -21,39 +21,31 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
                         <Label Text="Dados da cadeira" Margin="10,10" 
                                FontSize="Medium" 
                                TextColor="#2189df"
                                Grid.Row="0"/>
-                        <ActivityIndicator x:Name="activityIndicator1" 
-                                IsRunning="{Binding Busy}" 
-                                IsVisible="{Binding Busy}"
-                                VerticalOptions="Center"
-                                HorizontalOptions="Center" 
-                                Color="Blue" Grid.Row="1" />
-
+                        
                         <Material:MaterialTextField 
                         x:Name="txtNome"
-                        Placeholder="Nome"
+                        Placeholder="Descrição"
                         VerticalOptions="Center"
                         InputType="Text"
                         TextColor="#4A6963"
-                        Icon="NomeUsuario"
                         PlaceholderColor="#4A6963"
                         ErrorColor="Red"
                         IconTintColor="#4A6963"
                         TintColor="#1976D3"
                         BackgroundColor="WhiteSmoke" 
                         Padding="10"
-                        Grid.Row="2" 
+                        Grid.Row="1" 
                         MaxLength="50"/>
 
-                        <StackLayout Orientation="Horizontal" Grid.Row="3" Padding="10,10" >
+                        <StackLayout Orientation="Horizontal" Grid.Row="2" Padding="10,10" >
                             <Material:MaterialButton x:Name="btSalvarEditar" Text="Salvar"                                              
-                             BackgroundColor="#2196f3" Clicked="btSalvarEditar_Clicked" VerticalOptions="Fill"/>
+                             BackgroundColor="#46D57B" Clicked="btSalvarEditar_Clicked" VerticalOptions="Fill"/>
 
                             <Material:MaterialButton x:Name="btCancelarEditar" Text="Cancelar"
                              BackgroundColor="#D53343" Clicked="btCancelarEditar_Clicked" VerticalOptions="End" IsVisible="False"/>

@@ -3,10 +3,6 @@ using IspcaNotas.Model;
 using IspcaNotas.ViewModel;
 using Splat;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using XF.Material.Forms.UI.Dialogs;
 
 using Xamarin.Forms;
@@ -23,7 +19,6 @@ namespace IspcaNotas.View.Control
         public Cadeiras()
         {
             InitializeComponent();
-
             try
             {
                 EnumCadeiras = EnumAdmCRUD.Cadastrar;
@@ -40,9 +35,7 @@ namespace IspcaNotas.View.Control
                       MessageTextColor = Color.Black
                   });
             }
-
         }
-
         private async void ViewCadeiras_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var result = await DisplayActionSheet("Acção", "Cancelar", null, new string[] { "Editar", "Apagar" });
@@ -75,8 +68,6 @@ namespace IspcaNotas.View.Control
                 }
                 catch (Exception erro)
                 {
-                    if (CadeiraViewModel.Busy)
-                        CadeiraViewModel.Busy = false;
                     await MaterialDialog.Instance.SnackbarAsync(message: erro.Message, actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
                       new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
                       {
@@ -84,14 +75,8 @@ namespace IspcaNotas.View.Control
                           MessageTextColor = Color.Black
                       });
                 }
-                finally
-                {
-                    if (CadeiraViewModel.Busy)
-                        CadeiraViewModel.Busy = false;
-                }
             }
         }
-
         private void btCancelarEditar_Clicked(object sender, EventArgs e)
         {
             btCancelarEditar.IsVisible = false;
@@ -103,7 +88,6 @@ namespace IspcaNotas.View.Control
         {
             txtNome.Text = string.Empty;
         }
-
         private async void btSalvarEditar_Clicked(object sender, EventArgs e)
         {
             CadeiraDTO cadeira = new CadeiraDTO()
@@ -136,20 +120,12 @@ namespace IspcaNotas.View.Control
             }
             catch (Exception erro)
             {
-                if (CadeiraViewModel.Busy)
-                    CadeiraViewModel.Busy = false;
                 await MaterialDialog.Instance.SnackbarAsync(message: erro.Message, actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
                     new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
                     {
                         BackgroundColor = Color.Orange,
                         MessageTextColor = Color.Black
                     });
-            }
-            finally
-            {
-                btCancelarEditar_Clicked(null, EventArgs.Empty);
-                if (CadeiraViewModel.Busy)
-                    CadeiraViewModel.Busy = false;
             }
         }
     }

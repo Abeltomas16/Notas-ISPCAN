@@ -7,31 +7,17 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
+using XF.Material.Forms.UI.Dialogs;
 
 namespace IspcaNotas.ViewModel
 {
     public class CadeiraViewModel : BaseViewModel
     {
-        private bool IsBusyCadeira;
         //Total de cadeiras existentes
         public int Total { get; private set; }
-        public bool Busy
-        {
-            get { return IsBusyCadeira; }
-            set
-            {
-                if (IsBusyCadeira != value)
-                {
-                    IsBusyCadeira = value;
-                    OnPropertyChanged("Busy");
-                }
-            }
-        }
         ICadeira cadeiraService = Locator.Current.GetService<ICadeira>();
         public CadeiraViewModel(string Tela)
         {
-
-            Busy = false;
             if (Tela == "CadeirasMostrar")
                 Task.Run(async () => await CarregarCadeiraLivres());
             else  //QUANDO A TELA NÃO FOR CADEIRA MOSTRAR, LOGO É A TELA DE INSERÇÃO DAS CADEIRAS
@@ -41,7 +27,6 @@ namespace IspcaNotas.ViewModel
         {
             //Depois de pegar todas cadeiras, seleciono todas em que um pof leciona
             selectedCadeira = new ObservableCollection<object>();
-            Busy = false;
             Task.Run(async () => await Carregar())
                 .ContinueWith(
                 tarefaAnterior =>
@@ -76,40 +61,37 @@ namespace IspcaNotas.ViewModel
         public ObservableCollection<CadeiraDTO> Cadeiras { get; set; }
         public async Task<string> CadastrarEditar(CadeiraDTO cadeira, EnumOperacoes operacao)
         {
-            Busy = true;
+            var load = await MaterialDialog.Instance.LoadingDialogAsync(message: "Salvando");
             var retorno = await cadeiraService.inserirOuAlterar(cadeira, operacao);
-            Busy = false;
+            load.Dismiss();
             return retorno;
         }
         public async Task Carregar()
         {
-
-                Busy = true;
-                var cadeiras = await cadeiraService.listarTodos();
-                this.Cadeiras = new ObservableCollection<CadeiraDTO>(cadeiras);
-                OnPropertyChanged("Cadeiras");
-                Total = this.Cadeiras.Count;
-                OnPropertyChanged("Total");
-                Busy = false;
-
-
+            var load = await MaterialDialog.Instance.LoadingDialogAsync(message: "Carregando");
+            var cadeiras = await cadeiraService.listarTodos();
+            this.Cadeiras = new ObservableCollection<CadeiraDTO>(cadeiras);
+            OnPropertyChanged("Cadeiras");
+            Total = this.Cadeiras.Count;
+            OnPropertyChanged("Total");
+            load.Dismiss();
         }
         public async Task<string> Apagar(string id)
         {
-            Busy = true;
+            var load = await MaterialDialog.Instance.LoadingDialogAsync(message: "Apagando");
             var resultado = await cadeiraService.apagar(id);
-            Busy = false;
+            load.Dismiss();
             return resultado;
         }
         public async Task CarregarCadeiraLivres()
         {
-            Busy = true;
+            var load = await MaterialDialog.Instance.LoadingDialogAsync(message: "Carregando");
             var cadeiras = await cadeiraService.CadeiraLivre();
             this.Cadeiras = new ObservableCollection<CadeiraDTO>(cadeiras);
             OnPropertyChanged("Cadeiras");
             Total = this.Cadeiras.Count;
             OnPropertyChanged("Total");
-            Busy = false;
+            load.Dismiss();
         }
     }
 
