@@ -29,7 +29,6 @@ namespace IspcaNotas.View.Grafico
             List<ChartEntry> EntrySemestre = new List<ChartEntry>();
             try
             {
-                string keycadeira = Application.Current.Properties["IDCadeira"].ToString();
                 Device.BeginInvokeOnMainThread(async () =>
                 {
                     var load = await MaterialDialog.Instance.LoadingDialogAsync(message: "Caregando");
