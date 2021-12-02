@@ -39,10 +39,12 @@ namespace IspcaNotas.ViewModel
         }
         ICadeira clienteCadeira;
         IDocente clienteDocente;
-        public DocenteViewModel(IDocente docente = null, ICadeira cadeira = null)
+        IUsuario clienteUsuario;
+        public DocenteViewModel(IDocente docente = null, IUsuario usuario = null, ICadeira cadeira = null)
         {
             clienteDocente = docente ?? Locator.Current.GetService<IDocente>();
             clienteCadeira = cadeira ?? Locator.Current.GetService<ICadeira>();
+            clienteUsuario = usuario ?? Locator.Current.GetService<IUsuario>();
             Busy = false;
             Task.Run(async () => await Carregar());
         }
@@ -77,6 +79,13 @@ namespace IspcaNotas.ViewModel
 
             Busy = false;
         }
+
+        public async Task<UsuarioDTO> MelhorAluno(string keyMelhorAluno)
+        {
+            var usuario = await clienteUsuario.PesquisarPorKey(keyMelhorAluno);
+            return usuario;
+        }
+
         public async Task<List<CadeiraDTO>> MostrarCadeira(string key)
         {
             Busy = true;
@@ -93,8 +102,13 @@ namespace IspcaNotas.ViewModel
         }
         public async Task<List<NotasDTO>> mostrarNotas(string keycadeira)
         {
-             var resultado = await clienteDocente.MostrarNotas(keycadeira);
-             return resultado;
+            var resultado = await clienteDocente.MostrarNotas(keycadeira);
+            return resultado;
+        }
+        public async Task<List<NotasDTO>> mostrarNotas()
+        {
+            var resultado = await clienteDocente.MostrarNotas();
+            return resultado;
         }
     }
 }

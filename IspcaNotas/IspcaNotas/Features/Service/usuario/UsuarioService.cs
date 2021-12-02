@@ -74,6 +74,21 @@ namespace IspcaNotas.Features.Service.usuario
                         .Where(y => y.Token == token).FirstOrDefault();
             return dados;
         }
+        public async Task<UsuarioDTO> PesquisarPorKey(string key)
+        {
+            var dados = (await dbCliente.Child("usuario")
+                        .OnceAsync<UsuarioDTO>())
+                        .Select(x => new UsuarioDTO
+                        {
+                            Key = x.Key,
+                            Categoria = x.Object.Categoria,
+                            Email = x.Object.Email,
+                            Telefone = x.Object.Telefone,
+                            Name = x.Object.Name
+                        }).Where(z => z.Key == key);
+
+            return dados.FirstOrDefault();
+        }
         public async Task<string> AlterarEmail(string newEmail)
         {
             string retorno = await dbLogin.UpdateEmail(newEmail);

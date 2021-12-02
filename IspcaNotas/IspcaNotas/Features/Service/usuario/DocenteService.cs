@@ -57,6 +57,11 @@ namespace IspcaNotas.Features.Service.usuario
             var dados = await dbNotas.listarPorCadeira(keyCadeira);
             return dados;
         }
+        public async Task<List<NotasDTO>> MostrarNotas()
+        {
+            var dados = await dbNotas.listarPorCadeira();
+            return dados;
+        }
     }
 }
 

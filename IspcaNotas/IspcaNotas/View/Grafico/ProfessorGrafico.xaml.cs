@@ -37,11 +37,9 @@ namespace IspcaNotas.View.Grafico
                     var load = await MaterialDialog.Instance.LoadingDialogAsync(message: "Caregando");
                     List<NotasDTO> notas = await DocentesViewModel.mostrarNotas(keycadeira);
                     load.Dismiss();
-
-                    //PRIMEIRA PARCELAR
+                    #region PRIMEIRA PARCELAR
                     int positivas = 0;
                     int negativas = 0;
-
                     foreach (NotasDTO item in notas)
                     {
                         int _nota1 = int.TryParse(item.Nota1, out _nota1) ? _nota1 : 0;
@@ -52,8 +50,6 @@ namespace IspcaNotas.View.Grafico
                     }
                     TotPositivas1.Text = positivas.ToString();
                     TotNegativas1.Text = negativas.ToString();
-
-                    //if(positivas)
                     entries1.Add(new ChartEntry(positivas)
                     {
                         ValueLabel = positivas.ToString(),
@@ -61,7 +57,6 @@ namespace IspcaNotas.View.Grafico
                         Color = SKColor.Parse("#00FEFE"),
                         TextColor = SKColors.Black
                     });
-
                     entries1.Add(new ChartEntry(negativas)
                     {
                         ValueLabel = negativas.ToString(),
@@ -69,7 +64,6 @@ namespace IspcaNotas.View.Grafico
                         Color = SKColors.Red,
                         TextColor = SKColors.Black
                     });
-
                     grafico1.Chart = new DonutChart()
                     {
                         Entries = entries1,
@@ -78,8 +72,8 @@ namespace IspcaNotas.View.Grafico
                         AnimationDuration = TimeSpan.FromMilliseconds(2000),
                         IsAnimated = true
                     };
-
-                    //SEGUNDA PARCELAR
+                    #endregion
+                    #region SEGUNDA PARCELAR
                     positivas = 0;
                     negativas = 0;
                     foreach (NotasDTO item in notas)
@@ -92,7 +86,6 @@ namespace IspcaNotas.View.Grafico
                     }
                     TotPositivas2.Text = positivas.ToString();
                     TotNegativas2.Text = negativas.ToString();
-
                     entries2.Add(new ChartEntry(positivas)
                     {
                         ValueLabel = positivas.ToString(),
@@ -100,7 +93,6 @@ namespace IspcaNotas.View.Grafico
                         Color = SKColor.Parse("#00FEFE"),
                         TextColor = SKColors.Black
                     });
-
                     entries2.Add(new ChartEntry(negativas)
                     {
                         ValueLabel = negativas.ToString(),
@@ -108,7 +100,6 @@ namespace IspcaNotas.View.Grafico
                         Color = SKColors.Red,
                         TextColor = SKColors.Black
                     });
-
                     grafico2.Chart = new DonutChart()
                     {
                         Entries = entries2,
@@ -117,8 +108,8 @@ namespace IspcaNotas.View.Grafico
                         AnimationDuration = TimeSpan.FromMilliseconds(2000),
                         IsAnimated = true
                     };
-
-                    //SIMESTRE
+                    #endregion
+                    #region SEMESTRE
                     positivas = 0;
                     negativas = 0;
                     foreach (NotasDTO item in notas)
@@ -131,7 +122,6 @@ namespace IspcaNotas.View.Grafico
                         else
                             negativas++;
                     }
-
                     entries3.Add(new ChartEntry(positivas)
                     {
                         ValueLabel = positivas.ToString(),
@@ -139,7 +129,6 @@ namespace IspcaNotas.View.Grafico
                         Color = SKColor.Parse("#00FEFE"),
                         TextColor = SKColors.Black
                     });
-
                     entries3.Add(new ChartEntry(negativas)
                     {
                         ValueLabel = negativas.ToString(),
@@ -155,7 +144,7 @@ namespace IspcaNotas.View.Grafico
                         AnimationDuration = TimeSpan.FromMilliseconds(2000),
                         IsAnimated = true
                     };
-
+                    #endregion
                 });
             }
             catch (Exception erro)

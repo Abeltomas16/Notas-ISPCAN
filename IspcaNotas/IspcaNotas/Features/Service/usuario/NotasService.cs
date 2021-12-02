@@ -46,8 +46,8 @@ namespace IspcaNotas.Features.Service.usuario
                                 Key = z.Key,
                                 KeyAluno = z.Object.KeyAluno,
                                 KeyCadeira = z.Object.KeyCadeira,
-                                Nota1 = z.Object.Nota1,
-                                Nota2 = z.Object.Nota2
+                                Nota1 = z.Object.Nota1 ?? "0",
+                                Nota2 = z.Object.Nota2 ?? "0"
 
                             })
                             .Where(x => x.KeyAluno == keyEstudante && x.KeyCadeira == keycadeira)
@@ -120,9 +120,22 @@ namespace IspcaNotas.Features.Service.usuario
                         ).Select(n => new NotasDTO
                         {
                             KeyCadeira = n.Object.KeyCadeira,
-                            Nota1 = n.Object.Nota1,
+                            Nota1 = n.Object.Nota1 ?? "0",
                             Nota2 = n.Object.Nota2 ?? "0"
                         }).Where(x => x.KeyCadeira == keycadeira);
+            return notas.ToList();
+        }
+        public async Task<List<NotasDTO>> listarPorCadeira()
+        {
+            var notas = (await dbCliente.Child("notas")
+                        .OnceAsync<NotasDTO>()
+                        ).Select(n => new NotasDTO
+                        {
+                            KeyCadeira = n.Object.KeyCadeira,
+                            KeyAluno=n.Object.KeyAluno,
+                            Nota1 = n.Object.Nota1 ?? "0",
+                            Nota2 = n.Object.Nota2 ?? "0"
+                        });
             return notas.ToList();
         }
     }
