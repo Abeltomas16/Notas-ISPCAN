@@ -8,9 +8,7 @@
              x:Class="IspcaNotas.View.LoadingPage" BackgroundColor="Red">
     <ContentPage.Content>
         <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
-            <ActivityIndicator Color="Accent"
-                               IsRunning="True"
-                               IsVisible="True" />
+
             <Label Text="Loading ..." />
         </StackLayout>
     </ContentPage.Content>

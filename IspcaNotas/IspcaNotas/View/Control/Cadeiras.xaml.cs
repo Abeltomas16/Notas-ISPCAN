@@ -106,6 +106,7 @@ namespace IspcaNotas.View.Control
                     if (cadeiraCurrent == null)
                         return;
                     cadeira.IDCadeira = cadeiraCurrent.IDCadeira;
+                    cadeira.Docente = cadeiraCurrent.Docente;
                     operacao = EnumOperacoes.Editar;
                 }
                 resultado = await CadeiraViewModel.CadastrarEditar(cadeira, operacao);
