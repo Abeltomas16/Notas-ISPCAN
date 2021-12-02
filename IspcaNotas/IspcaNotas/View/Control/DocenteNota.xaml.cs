@@ -23,8 +23,6 @@ namespace IspcaNotas.View.Control
             try
             {
                 BindingContext = estudantesViewModel;
-                txtNome.Text = Application.Current.Properties["NomeUsuario"].ToString();
-                txtDisciplina.Text = Application.Current.Properties["Nomecadeira"].ToString();
             }
             catch (Exception erro)
             {
