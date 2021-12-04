@@ -35,6 +35,17 @@ namespace IspcaNotas.View.Grafico
                     List<NotasDTO> notas = await DocentesViewModel.mostrarNotas();
                     load.Dismiss();
 
+                    if (notas.Count <= 0)
+                    {
+                        await MaterialDialog.Instance.SnackbarAsync(message: "Sem notas", actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
+                            new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
+                            {
+                                BackgroundColor = Color.Orange,
+                                MessageTextColor = Color.Black
+                            });
+                        return;
+                    }
+
                     string keyMelhorAluno = string.Empty;
                     int _melhorAluno = 0;
                     notas.ForEach((n) =>
@@ -49,6 +60,16 @@ namespace IspcaNotas.View.Grafico
                         }
                     });
                     UsuarioDTO usuarioMelhorAluno = await DocentesViewModel.MelhorAluno(keyMelhorAluno);
+                    if (usuarioMelhorAluno.Name == null)
+                    {
+                        await MaterialDialog.Instance.SnackbarAsync(message: "Aluno não encontrado", actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
+                             new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
+                             {
+                                 BackgroundColor = Color.Orange,
+                                 MessageTextColor = Color.Black
+                             });
+                        return;
+                    }
                     melhorAluno.Text = usuarioMelhorAluno.Name;
                     #region PRIMEIRA PARCELAR
                     int positiva1 = notas.Count(x => int.Parse(x.Nota1) >= 10);

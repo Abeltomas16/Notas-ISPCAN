@@ -51,7 +51,11 @@ namespace IspcaNotas.Features.Service.usuario
         public async Task<string> Apagar(UsuarioDTO usuarioDTO)
         {
             await dbLogin.DeleteAccount(usuarioDTO.Email, usuarioDTO.Senha);
-            await dbCadeira.apagarCadeiraProf(usuarioDTO.Token);
+            if (usuarioDTO.Categoria.ToUpper() == "ESTUDANTE")
+                await dbCadeira.apagarCadeiraAluno(usuarioDTO.Key);
+            else
+                await dbCadeira.apagarCadeiraProf(usuarioDTO.Token);
+
             await dbCliente.Child("usuario")
                            .Child(usuarioDTO.Key)
                            .DeleteAsync();

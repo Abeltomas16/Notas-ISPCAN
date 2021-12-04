@@ -46,7 +46,7 @@ namespace IspcaNotas.Features.Service.Cadeira
                          {
                              IDCadeira = x.Key,
                              Name = x.Object.Name,
-                              Docente=x.Object.Docente
+                             Docente = x.Object.Docente
                          });
 
             return cadeiras.ToList();
@@ -102,6 +102,22 @@ namespace IspcaNotas.Features.Service.Cadeira
             await db.Child("cadeira")
                      .Child(key.IDCadeira)
                      .PutAsync(key);
+        }
+
+        public async Task<string> apagarCadeiraAluno(string keyAluno)
+        {
+            List<Task> tarefas = new List<Task>();
+            var chaves = (await db.Child("notas")
+                        .OnceAsync<NotasDTO>()
+                        ).Select(x => new NotasDTO
+                        {
+                            Key = x.Key,
+                            KeyAluno = x.Object.KeyAluno
+                        }).Where(n => n.KeyAluno == keyAluno);
+            foreach (var item in chaves)
+                tarefas.Add(Task.Run(() => db.Child("notas").Child(item.Key).DeleteAsync()));
+            await Task.WhenAny(tarefas);
+            return "Sucesso";
         }
     }
 }

@@ -14,6 +14,7 @@ namespace IspcaNotas.Features.Interface
         Task<string> apagar(string key);
         Task removerDocente(CadeiraDTO key);
         Task<string> apagarCadeiraProf(string token);
+        Task<string> apagarCadeiraAluno(string token);
         Task<List<CadeiraDTO>> listarTodos();
         Task<List<CadeiraDTO>> CadeiraLivre();
         Task<List<CadeiraDTO>> MostrarPorID(string key);
