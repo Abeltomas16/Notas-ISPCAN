@@ -66,6 +66,9 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="FluentValidation">
+      <Version>10.3.5</Version>
+    </PackageReference>
     <PackageReference Include="Microcharts.Forms">
       <Version>0.8.5-pre</Version>
     </PackageReference>
