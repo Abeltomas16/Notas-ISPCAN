@@ -44,7 +44,7 @@ namespace IspcaNotas.Commom.Validation
             RuleFor(c => c.Categoria)
                 .Must((cat) =>
                 {
-                    bool retorno = (cat.ToUpper() == "PROFESOR" || cat.ToUpper() == "ESTUDANTE") ? true : false;
+                    bool retorno = (cat.ToUpper() == "PROFESSOR" || cat.ToUpper() == "ESTUDANTE") ? true : false;
                     return retorno;
                 }).WithErrorCode(statusCode.CategoriaInvalido);
 

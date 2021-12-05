@@ -42,7 +42,15 @@ namespace IspcaNotas.View.Control
         {
             string resultado = string.Empty;
             if (CadeirasDocente.Cadeiras.Count <= 0)
+            {
+                await MaterialDialog.Instance.SnackbarAsync(message: "Nenhuma cadeira selecionada", actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
+                  new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
+                  {
+                      BackgroundColor = Color.Orange,
+                      MessageTextColor = Color.Black
+                  });
                 return;
+            }
 
             UsuarioDTO docente = new UsuarioDTO()
             {
