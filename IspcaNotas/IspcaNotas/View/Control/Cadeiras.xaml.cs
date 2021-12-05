@@ -90,10 +90,7 @@ namespace IspcaNotas.View.Control
         }
         private async void btSalvarEditar_Clicked(object sender, EventArgs e)
         {
-            CadeiraDTO cadeira = new CadeiraDTO()
-            {
-                Name = txtNome.Text
-            };
+            CadeiraDTO cadeira = new CadeiraDTO() { Name = txtNome.Text.Trim() };
             try
             {
                 EnumOperacoes operacao = EnumOperacoes.Cadastrar;

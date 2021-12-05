@@ -106,6 +106,15 @@ namespace IspcaNotas.Commom.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 14.
+        /// </summary>
+        internal static string NaoPodeSerApenasNumero {
+            get {
+                return ResourceManager.GetString("NaoPodeSerApenasNumero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 11.
         /// </summary>
         internal static string NomeIsNullOrEmpty {

@@ -132,6 +132,9 @@
   <data name="IdDeveSerInformado" xml:space="preserve">
     <value>13</value>
   </data>
+  <data name="NaoPodeSerApenasNumero" xml:space="preserve">
+    <value>14</value>
+  </data>
   <data name="NomeIsNullOrEmpty" xml:space="preserve">
     <value>11</value>
   </data>
