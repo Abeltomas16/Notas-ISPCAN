@@ -34,7 +34,6 @@ namespace IspcaNotas.View.Control
                    });
             }
         }
-
         private async void ViewEstudante_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var result = await DisplayActionSheet("Acção", "Cancelar", null, new string[] { "Editar", "Apagar" });
@@ -88,8 +87,6 @@ namespace IspcaNotas.View.Control
             txtSenha.Text = string.Empty;
             txtEmail.Text = string.Empty;
         }
-
-
         private void btCancelar_Clicked(object sender, EventArgs e)
         {
             btCancelar.IsVisible = false;
@@ -99,18 +96,16 @@ namespace IspcaNotas.View.Control
             txtSenha.IsEnabled = true;
             LimparCampo();
         }
-
         private async void btSalvar_Clicked(object sender, EventArgs e)
         {
             UsuarioDTO usuario = new UsuarioDTO()
             {
-                Name = txtNome.Text,
+                Name = txtNome.Text.Trim(),
                 Telefone = txtPhone.Text,
-                Senha = txtSenha.Text,
-                Email = txtEmail.Text,
+                Senha = txtSenha.Text.Trim(),
+                Email = txtEmail.Text.Trim(),
                 Categoria = "Estudante"
             };
-
             try
             {
                 EnumOperacoes operacao = EnumOperacoes.Cadastrar;
@@ -132,9 +127,7 @@ namespace IspcaNotas.View.Control
                 else
                     resultado = await estudantesViewModel.Alterar(usuario);
 
-
                 estudantesViewModel.Carregar();
-
                 await MaterialDialog.Instance.SnackbarAsync(message: resultado, actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
                     new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
                     {

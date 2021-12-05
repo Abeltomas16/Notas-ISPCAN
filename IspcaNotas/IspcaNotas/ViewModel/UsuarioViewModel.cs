@@ -1,4 +1,6 @@
-﻿using IspcaNotas.Features.Interface;
+﻿using IspcaNotas.Commom.Resources;
+using IspcaNotas.Commom.Validation;
+using IspcaNotas.Features.Interface;
 using IspcaNotas.Model;
 using Splat;
 using System.Collections.ObjectModel;
@@ -11,13 +13,14 @@ namespace IspcaNotas.ViewModel
     public class UsuarioViewModel : BaseViewModel
     {
         IUsuario Idata;
+        Usuariovalidator Validations;
         public UsuarioViewModel(IUsuario usuario = null)
         {
             Idata = usuario ?? Locator.Current.GetService<IUsuario>();
+            Validations = Locator.Current.GetService<Usuariovalidator>();
             Carregar();
         }
         public int Total { get; private set; }
-
         public ObservableCollection<UsuarioDTO> Estudantes { get; set; }
         public async void Carregar()
         {
@@ -31,6 +34,28 @@ namespace IspcaNotas.ViewModel
         }
         public async Task<string> Cadastrar(UsuarioDTO usuario)
         {
+            var results = Validations.Validate(usuario);
+            if (!results.IsValid)
+            {
+                foreach (var item in results.Errors)
+                {
+                    if (item.ErrorCode == statusCode.NomeIsNullOrEmpty ||
+                        item.ErrorCode == statusCode.NomeNotCaractereEspecial)
+                        return "Nome inválido";
+                    if (item.ErrorCode == statusCode.TelefoneIsNotNullOrEmpty)
+                        return "Telefone inválido";
+                    if (item.ErrorCode == statusCode.TelefoneCaractereMinimo)
+                        return "Telefone requer 9 digítos";
+                    if (item.ErrorCode == statusCode.EmailInvalid)
+                        return "Email inválido";
+                    if (item.ErrorCode == statusCode.CategoriaInvalido)
+                        return "categoria inválida";
+                    if (item.ErrorCode == statusCode.SenhaIsNullOrEmpty)
+                        return "Informe a senha";
+                    if (item.ErrorCode == statusCode.SenhaCaractereMinimo)
+                        return "A senha tem que 4 caracteres no minímo";
+                }
+            }
             var load = await MaterialDialog.Instance.LoadingDialogAsync(message: "Salvando");
             var retorno = await Idata.Cadastrar(usuario);
             load.Dismiss();
@@ -38,6 +63,32 @@ namespace IspcaNotas.ViewModel
         }
         public async Task<string> Alterar(UsuarioDTO usuario)
         {
+            var results = Validations.Validate(usuario);
+            if (!results.IsValid)
+            {
+                foreach (var item in results.Errors)
+                {
+                    if (item.ErrorCode == statusCode.NomeIsNullOrEmpty ||
+                        item.ErrorCode == statusCode.NomeNotCaractereEspecial)
+                        return "Nome inválido";
+                    if (item.ErrorCode == statusCode.TelefoneIsNotNullOrEmpty)
+                        return "Telefone inválido";
+                    if (item.ErrorCode == statusCode.TelefoneCaractereMinimo)
+                        return "Telefone requer 9 digítos";
+                    if (item.ErrorCode == statusCode.EmailInvalid)
+                        return "Email inválido";
+                    if (item.ErrorCode == statusCode.CategoriaInvalido)
+                        return "categoria inválida";
+                    if (item.ErrorCode == statusCode.SenhaIsNullOrEmpty)
+                        return "Informe a senha";
+                    if (item.ErrorCode == statusCode.SenhaCaractereMinimo)
+                        return "A senha tem que 4 caracteres no minímo";
+                    if (item.ErrorCode == statusCode.IdDeveSerInformado)
+                        return "Informe o id";
+                    if (item.ErrorCode == statusCode.IdDeveSerInformado)
+                        return "Informe o token";
+                }
+            }
             var load = await MaterialDialog.Instance.LoadingDialogAsync(message: "Actualizando");
             var retorno = await Idata.Alterar(usuario, usuario.Key);
             load.Dismiss();
@@ -45,6 +96,25 @@ namespace IspcaNotas.ViewModel
         }
         public async Task<string> Apagar(UsuarioDTO usuarioDTO)
         {
+            var results = Validations.Validate(usuarioDTO);
+            if (!results.IsValid)
+            {
+                foreach (var item in results.Errors)
+                {
+                    if (item.ErrorCode == statusCode.EmailInvalid)
+                        return "Email inválido";
+                    if (item.ErrorCode == statusCode.CategoriaInvalido)
+                        return "categoria inválida";
+                    if (item.ErrorCode == statusCode.SenhaIsNullOrEmpty)
+                        return "Informe a senha";
+                    if (item.ErrorCode == statusCode.SenhaCaractereMinimo)
+                        return "A senha tem que 4 caracteres no minímo";
+                    if (item.ErrorCode == statusCode.IdDeveSerInformado)
+                        return "Informe o id";
+                    if (item.ErrorCode == statusCode.IdDeveSerInformado)
+                        return "Informe o token";
+                }
+            }
             var load = await MaterialDialog.Instance.LoadingDialogAsync(message: "Apagando");
             var resultado = await Idata.Apagar(usuarioDTO);
             load.Dismiss();

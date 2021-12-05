@@ -40,7 +40,6 @@ namespace IspcaNotas.ViewModel
             load.Dismiss();
             return retorno;
         }
-
         public async Task<string> Editar(ActividadeDTO actividade)
         {
             var results = Validations.Validate(actividade);
@@ -61,7 +60,6 @@ namespace IspcaNotas.ViewModel
             load.Dismiss();
             return retorno;
         }
-
         public async Task Carregar()
         {
             var load = await MaterialDialog.Instance.LoadingDialogAsync(message: "Caregando");
@@ -72,12 +70,10 @@ namespace IspcaNotas.ViewModel
             Console.WriteLine(Actividades.Count.ToString());
             OnPropertyChanged("Actividades");
         }
-
         public async Task<string> Apagar(string key)
         {
             if (string.IsNullOrEmpty(key))
                 return "Id deve ser informado";
-
             var load = await MaterialDialog.Instance.LoadingDialogAsync(message: "Apagando");
             var resultado = await actividades.Apagar(key);
             load.Dismiss();

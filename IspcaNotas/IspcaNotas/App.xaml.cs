@@ -47,6 +47,7 @@ namespace IspcaNotas
             Locator.CurrentMutable.Register(() => new EstudantesViewModel());
             Locator.CurrentMutable.Register(() => new LoginValidator());
             Locator.CurrentMutable.Register(() => new ActividadesValidator());
+            Locator.CurrentMutable.Register(() => new Usuariovalidator());
         }
 
         protected override void OnStart()

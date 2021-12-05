@@ -61,6 +61,15 @@ namespace IspcaNotas.Commom.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 17.
+        /// </summary>
+        internal static string CategoriaInvalido {
+            get {
+                return ResourceManager.GetString("CategoriaInvalido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 12.
         /// </summary>
         internal static string DescricaoCaractereMinimo11 {
@@ -133,6 +142,15 @@ namespace IspcaNotas.Commom.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 18.
+        /// </summary>
+        internal static string NomeNotCaractereEspecial {
+            get {
+                return ResourceManager.GetString("NomeNotCaractereEspecial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 4.
         /// </summary>
         internal static string Nota1MenorQue20 {
@@ -178,11 +196,29 @@ namespace IspcaNotas.Commom.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 16.
+        /// </summary>
+        internal static string TelefoneCaractereMinimo {
+            get {
+                return ResourceManager.GetString("TelefoneCaractereMinimo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 6.
         /// </summary>
         internal static string TelefoneIsNotNullOrEmpty {
             get {
                 return ResourceManager.GetString("TelefoneIsNotNullOrEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 15.
+        /// </summary>
+        internal static string TokenDeveSerInformado {
+            get {
+                return ResourceManager.GetString("TokenDeveSerInformado", resourceCulture);
             }
         }
     }

@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CategoriaInvalido" xml:space="preserve">
+    <value>17</value>
+  </data>
   <data name="DescricaoCaractereMinimo11" xml:space="preserve">
     <value>12</value>
   </data>
@@ -141,6 +144,9 @@
   <data name="NomeNaoPodeTerLetra" xml:space="preserve">
     <value>10</value>
   </data>
+  <data name="NomeNotCaractereEspecial" xml:space="preserve">
+    <value>18</value>
+  </data>
   <data name="Nota1MenorQue20" xml:space="preserve">
     <value>4</value>
   </data>
@@ -156,7 +162,13 @@
   <data name="SenhaIsNullOrEmpty" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="TelefoneCaractereMinimo" xml:space="preserve">
+    <value>16</value>
+  </data>
   <data name="TelefoneIsNotNullOrEmpty" xml:space="preserve">
     <value>6</value>
+  </data>
+  <data name="TokenDeveSerInformado" xml:space="preserve">
+    <value>15</value>
   </data>
 </root>
