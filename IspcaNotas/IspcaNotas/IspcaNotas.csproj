@@ -26,6 +26,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Commom\Resources\statusCode.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>statusCode.resx</DependentUpon>
+    </Compile>
     <Compile Update="View\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
@@ -34,6 +39,10 @@
   <ItemGroup>
     <EmbeddedResource Update="AppShell.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Commom\Resources\statusCode.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>statusCode.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="View\Administrador.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>

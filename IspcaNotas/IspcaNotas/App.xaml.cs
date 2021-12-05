@@ -1,5 +1,6 @@
 ﻿using Firebase.Auth;
 using Firebase.Database;
+using IspcaNotas.Commom.Validation;
 using IspcaNotas.Features.Interface;
 using IspcaNotas.Features.Service.Actividades;
 using IspcaNotas.Features.Service.Cadeira;
@@ -43,6 +44,7 @@ namespace IspcaNotas
             Locator.CurrentMutable.Register(() => new UsuarioViewModel());
             Locator.CurrentMutable.Register(() => new DocenteViewModel());
             Locator.CurrentMutable.Register(() => new EstudantesViewModel());
+            Locator.CurrentMutable.Register(() => new LoginValidator());
         }
 
         protected override void OnStart()

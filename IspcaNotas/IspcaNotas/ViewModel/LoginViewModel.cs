@@ -1,11 +1,10 @@
-﻿using IspcaNotas.Features.Interface;
+﻿using IspcaNotas.Commom.Resources;
+using IspcaNotas.Commom.Validation;
+using IspcaNotas.Features.Interface;
 using IspcaNotas.Model;
 using Splat;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using XF.Material.Forms.UI.Dialogs;
@@ -24,6 +23,7 @@ namespace IspcaNotas.ViewModel
         {
             set { Senha = value; }
         }
+        LoginValidator Validations;
         IRouting routing;
         ILogin LoginNegocios;
         IUsuario usuarioService;
@@ -35,14 +35,38 @@ namespace IspcaNotas.ViewModel
             this.routing = Locator.Current.GetService<IRouting>();
             this.usuarioService = Locator.Current.GetService<IUsuario>();
             this.cadeiraService = Locator.Current.GetService<ICadeira>();
+            Validations = Locator.Current.GetService<LoginValidator>();
             ExecuteSignIn = new Command(() => ValidarEntrada(this.Email, this.Senha));
         }
-
         internal async void ValidarEntrada(string email, string senha)
         {
-            var load = await MaterialDialog.Instance.LoadingDialogAsync(message: "Verificando");
+            IMaterialModalPage load = null;
             try
-            {              
+            {
+                Login _login = new Login { email = email, Senha = senha };
+                var results = Validations.Validate(_login);
+                if (!results.IsValid)
+                {
+                    foreach (var item in results.Errors)
+                    {
+                        if (item.ErrorCode == statusCode.EmailInvalid)
+                        {
+                            await MaterialDialog.Instance.SnackbarAsync("Email inválido", MaterialSnackbar.DurationShort, new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
+                            {
+                                BackgroundColor = Color.Red
+                            });
+                        }
+                        else if (item.ErrorCode == statusCode.SenhaIsNullOrEmpty)
+                        {
+                            await MaterialDialog.Instance.SnackbarAsync("Informe a senha", MaterialSnackbar.DurationShort, new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
+                            {
+                                BackgroundColor = Color.Red
+                            });
+                        }
+                        return;
+                    }
+                }
+                load = await MaterialDialog.Instance.LoadingDialogAsync(message: "Verificando");
                 var resultado = await LoginNegocios.SignIn(email, Senha);
                 if (resultado != null)
                 {
@@ -63,7 +87,7 @@ namespace IspcaNotas.ViewModel
                         var cadeiras = await cadeiraService.MostrarPorID(categoria.Token);
                         if (cadeiras.Count <= 0)
                         {
-                            await XF.Material.Forms.UI.Dialogs.MaterialDialog.Instance.SnackbarAsync("O Srº Professor Ainda não leciona uma disciplina, por essa razão, não vai poder efectuar o login, Obrigado pela comprensão!", 10000);
+                            await MaterialDialog.Instance.SnackbarAsync("O Srº Professor Ainda não leciona uma disciplina, por essa razão, não vai poder efectuar o login, Obrigado pela comprensão!", 10000);
                             return;
                         }
                         else if (cadeiras.Count == 1)
@@ -73,7 +97,7 @@ namespace IspcaNotas.ViewModel
                         }
                         else
                         {
-                            var resultadoAction = await XF.Material.Forms.UI.Dialogs.MaterialDialog.Instance.SelectActionAsync(title: "Seleciona uma Cadeira para continuares",
+                            var resultadoAction = await MaterialDialog.Instance.SelectActionAsync(title: "Seleciona uma Cadeira para continuares",
                                                                                                           actions: cadeiras.Select(x => x.Name).ToArray());
                             if (resultadoAction == -1) return;
                             var _cadeira = cadeiras[resultadoAction];
@@ -86,10 +110,10 @@ namespace IspcaNotas.ViewModel
             }
             catch (Exception erro)
             {
-                load.Dismiss();
-                await XF.Material.Forms.UI.Dialogs.MaterialDialog.Instance.SnackbarAsync(erro.Message, XF.Material.Forms.UI.Dialogs.MaterialSnackbar.DurationShort);
+                if (!(load is null))
+                    load.Dismiss();
+                await MaterialDialog.Instance.SnackbarAsync(erro.Message, MaterialSnackbar.DurationShort);
             }
         }
-
     }
 }
