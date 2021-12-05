@@ -2,10 +2,7 @@
 using IspcaNotas.ViewModel;
 using Splat;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -34,7 +31,6 @@ namespace IspcaNotas.View.Control
                    });
             }
         }
-
         private async void ViewEstudante_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try

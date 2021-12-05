@@ -26,22 +26,23 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Label Text="Dados do Estudante" HorizontalOptions="CenterAndExpand" FontSize="Body" Margin="15" TextColor="#2189dc"/>
+                        <Label Text="Dados do Estudante" HorizontalOptions="CenterAndExpand" 
+                               FontSize="Body" Margin="15" TextColor="#2189dc"/>
                         <Label x:Name="NomeEstudante" Grid.Row="1"/>
                         <Label Text="Curso: Eng. Infomática" Grid.Row="2"/>
                     </Grid>
                 </Frame>
-                <Frame Grid.Row="1"  
-                   Padding="10"
-                   BackgroundColor="White"
-                  HasShadow="True">
+                <Frame Grid.Row="1" Padding="10"
+                       BackgroundColor="White"
+                       HasShadow="True">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Label Text="Dados da cadeira" HorizontalOptions="CenterAndExpand" FontSize="Body" Margin="15" TextColor="#2189dc"/>
+                        <Label Text="Dados da cadeira" HorizontalOptions="CenterAndExpand" 
+                               FontSize="Body" Margin="15" TextColor="#2189dc"/>
                         <Label x:Name="NomeCadeira" Grid.Row="1"/>
                         <Label x:Name="NomeProf" Grid.Row="2"/>
                     </Grid>
@@ -56,14 +57,12 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-
-                        <Label Text="Notas" HorizontalOptions="CenterAndExpand" FontSize="Body" Margin="15" TextColor="#2189dc"/>
-
+                        <Label Text="Notas" HorizontalOptions="CenterAndExpand" FontSize="Body" 
+                               Margin="15" TextColor="#2189dc"/>
                         <StackLayout Grid.Row="1">
                             <Label Text="Nota 1:"/>
                             <Entry Keyboard="Numeric" x:Name="txtNota1" Text="{Binding _Nota1}"/>
                         </StackLayout>
-
                         <StackLayout Grid.Row="2">
                             <Label Text="Nota 2:"/>
                             <Entry Keyboard="Numeric" x:Name="txtNota2" Text="{Binding _Nota2}"/>

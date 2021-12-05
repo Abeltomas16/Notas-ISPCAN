@@ -37,7 +37,6 @@ namespace IspcaNotas.View.Control
                   });
             }
         }
-
         private async void btSalvarEditar_Clicked(object sender, EventArgs e)
         {
             string resultado = string.Empty;
@@ -51,7 +50,6 @@ namespace IspcaNotas.View.Control
                   });
                 return;
             }
-
             UsuarioDTO docente = new UsuarioDTO()
             {
                 Name = txtNome.Text,
@@ -102,7 +100,6 @@ namespace IspcaNotas.View.Control
                 btCancelarEditar_Clicked(null, EventArgs.Empty);
             }
         }
-
         private void btCancelarEditar_Clicked(object sender, EventArgs e)
         {
             btCancelarEditar.IsVisible = false;
@@ -121,7 +118,6 @@ namespace IspcaNotas.View.Control
             viewcadeirasResumo.IsVisible = false;
             CadeirasDocente.Cadeiras = new List<CadeiraDTO>();
         }
-
         private async void ViewDocentes_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var result = await DisplayActionSheet("Acção", "Cancelar", null, new string[] { "Editar", "Apagar" });

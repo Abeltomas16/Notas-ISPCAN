@@ -106,6 +106,24 @@ namespace IspcaNotas.Commom.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 19.
+        /// </summary>
+        internal static string IdAlunoNotNull {
+            get {
+                return ResourceManager.GetString("IdAlunoNotNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 20.
+        /// </summary>
+        internal static string IdCadeiraNotNull {
+            get {
+                return ResourceManager.GetString("IdCadeiraNotNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 13.
         /// </summary>
         internal static string IdDeveSerInformado {
@@ -153,18 +171,72 @@ namespace IspcaNotas.Commom.Resources {
         /// <summary>
         ///   Looks up a localized string similar to 4.
         /// </summary>
-        internal static string Nota1MenorQue20 {
+        internal static string Nota1MaiorQue20 {
             get {
-                return ResourceManager.GetString("Nota1MenorQue20", resourceCulture);
+                return ResourceManager.GetString("Nota1MaiorQue20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 21.
+        /// </summary>
+        internal static string Nota1NotNull {
+            get {
+                return ResourceManager.GetString("Nota1NotNull", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to 5.
         /// </summary>
-        internal static string Nota2MenorQue20 {
+        internal static string Nota2MaiorQue20 {
             get {
-                return ResourceManager.GetString("Nota2MenorQue20", resourceCulture);
+                return ResourceManager.GetString("Nota2MaiorQue20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 22.
+        /// </summary>
+        internal static string Nota2NotNull {
+            get {
+                return ResourceManager.GetString("Nota2NotNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 25.
+        /// </summary>
+        internal static string NotaInvalid {
+            get {
+                return ResourceManager.GetString("NotaInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 24.
+        /// </summary>
+        internal static string Notamaximo20 {
+            get {
+                return ResourceManager.GetString("Notamaximo20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 26.
+        /// </summary>
+        internal static string NotaMenorZero {
+            get {
+                return ResourceManager.GetString("NotaMenorZero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 23.
+        /// </summary>
+        internal static string NotaMinimo {
+            get {
+                return ResourceManager.GetString("NotaMinimo", resourceCulture);
             }
         }
         

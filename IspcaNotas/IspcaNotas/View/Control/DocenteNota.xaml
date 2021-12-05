@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              mc:Ignorable="d"
-              Title="Notas"   
+             Title="Notas"   
              x:Class="IspcaNotas.View.Control.DocenteNota">
     <ContentPage.Content>
         <Grid>
@@ -29,22 +29,22 @@
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame
-                                    Margin="10,5"
-                                    Padding="10"
-                                    BackgroundColor="White"
-                                    HasShadow="True"
-                                      >
+                    <Frame Margin="10,5"
+                           Padding="10"
+                           BackgroundColor="White"
+                           HasShadow="True">
                         <Grid Padding="0" ColumnSpacing="10">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-
-                            <Label Text="{Binding Name}" FontSize="Medium" VerticalOptions="Start" Grid.Row="0" Margin="0,5" TextColor="#2189dc"  Style="{DynamicResource CaptionStyle}" />
-                            <Label Text="{Binding Telefone}" FontSize="Medium" VerticalOptions="End" Grid.Row="1" TextColor="Black"  Style="{DynamicResource CaptionStyle}"/>
-
-                        </Grid>
+                            <Label Text="{Binding Name}" FontSize="Medium" VerticalOptions="Start" 
+                                   Grid.Row="0" Margin="0,5" TextColor="#2189dc"  
+                                   Style="{DynamicResource CaptionStyle}" />
+                                <Label Text="{Binding Telefone}" FontSize="Medium" 
+                                       VerticalOptions="End" Grid.Row="1" 
+                                       TextColor="Black"  Style="{DynamicResource CaptionStyle}"/>
+                            </Grid>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

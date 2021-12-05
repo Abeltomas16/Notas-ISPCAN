@@ -132,6 +132,12 @@
   <data name="EmailInvalid" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="IdAlunoNotNull" xml:space="preserve">
+    <value>19</value>
+  </data>
+  <data name="IdCadeiraNotNull" xml:space="preserve">
+    <value>20</value>
+  </data>
   <data name="IdDeveSerInformado" xml:space="preserve">
     <value>13</value>
   </data>
@@ -147,11 +153,29 @@
   <data name="NomeNotCaractereEspecial" xml:space="preserve">
     <value>18</value>
   </data>
-  <data name="Nota1MenorQue20" xml:space="preserve">
+  <data name="Nota1MaiorQue20" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="Nota2MenorQue20" xml:space="preserve">
+  <data name="Nota1NotNull" xml:space="preserve">
+    <value>21</value>
+  </data>
+  <data name="Nota2MaiorQue20" xml:space="preserve">
     <value>5</value>
+  </data>
+  <data name="Nota2NotNull" xml:space="preserve">
+    <value>22</value>
+  </data>
+  <data name="NotaInvalid" xml:space="preserve">
+    <value>25</value>
+  </data>
+  <data name="Notamaximo20" xml:space="preserve">
+    <value>24</value>
+  </data>
+  <data name="NotaMenorZero" xml:space="preserve">
+    <value>26</value>
+  </data>
+  <data name="NotaMinimo" xml:space="preserve">
+    <value>23</value>
   </data>
   <data name="SenhaCaractereMaximo" xml:space="preserve">
     <value>9</value>
