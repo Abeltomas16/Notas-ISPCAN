@@ -61,7 +61,7 @@ namespace IspcaNotas.Commom.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to 12.
         /// </summary>
         internal static string DescricaoCaractereMinimo11 {
             get {
@@ -79,6 +79,15 @@ namespace IspcaNotas.Commom.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 7.
+        /// </summary>
+        internal static string DescricaoNotCaracteresEspecial {
+            get {
+                return ResourceManager.GetString("DescricaoNotCaracteresEspecial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 1.
         /// </summary>
         internal static string EmailInvalid {
@@ -88,7 +97,16 @@ namespace IspcaNotas.Commom.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 10.
+        ///   Looks up a localized string similar to 13.
+        /// </summary>
+        internal static string IdDeveSerInformado {
+            get {
+                return ResourceManager.GetString("IdDeveSerInformado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 11.
         /// </summary>
         internal static string NomeIsNullOrEmpty {
             get {
@@ -97,7 +115,7 @@ namespace IspcaNotas.Commom.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 9.
+        ///   Looks up a localized string similar to 10.
         /// </summary>
         internal static string NomeNaoPodeTerLetra {
             get {
@@ -124,7 +142,7 @@ namespace IspcaNotas.Commom.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 8.
+        ///   Looks up a localized string similar to 9.
         /// </summary>
         internal static string SenhaCaractereMaximo {
             get {
@@ -133,7 +151,7 @@ namespace IspcaNotas.Commom.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 7.
+        ///   Looks up a localized string similar to 8.
         /// </summary>
         internal static string SenhaCaractereMinimo {
             get {

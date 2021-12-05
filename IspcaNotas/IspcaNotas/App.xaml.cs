@@ -36,6 +36,7 @@ namespace IspcaNotas
             Locator.CurrentMutable.RegisterLazySingleton<INotas>(() => new NotasService());
             Locator.CurrentMutable.RegisterLazySingleton<IEstudante>(() => new EstudanteService());
 
+            Locator.CurrentMutable.Register(() => new CadeiraValidator());
             Locator.CurrentMutable.Register(() => new CadeiraViewModel("Cadeiras"), "Cadeira");
             Locator.CurrentMutable.Register(() => new CadeiraViewModel("CadeirasMostrar"), "CadeirasMostrar");
             Locator.CurrentMutable.Register(() => new LoadingViewModel());

@@ -41,7 +41,7 @@
                         BackgroundColor="WhiteSmoke" 
                         Padding="10"
                         Grid.Row="1" 
-                        MaxLength="50"/>
+                        MaxLength="30"/>
 
                         <StackLayout Orientation="Horizontal" Grid.Row="2" Padding="10,10" >
                             <Material:MaterialButton x:Name="btSalvarEditar" Text="Salvar"                                              

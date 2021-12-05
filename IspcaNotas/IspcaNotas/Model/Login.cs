@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace IspcaNotas.Model
+﻿namespace IspcaNotas.Model
 {
     public class Login
     {
