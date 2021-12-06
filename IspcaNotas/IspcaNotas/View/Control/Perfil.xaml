@@ -5,12 +5,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="IspcaNotas.View.Control.Perfil"
-             Title="Perfil">
+             Title="Perfil" >
     <ContentPage.Content>
 
         <Grid Grid.Row="0" Margin="20,0,20,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
@@ -58,12 +59,8 @@
                                 </Label>
                             </StackLayout>
 
-                            
-                            <Grid Grid.Row="3" VerticalOptions="CenterAndExpand" Margin="0,40">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
 
+                            <Grid Grid.Row="3" VerticalOptions="CenterAndExpand" Margin="0,40">
                                 <StackLayout Orientation="Horizontal" Grid.Row="0">
                                     <Image Source="trocaSenha" VerticalOptions="Center"/>
                                     <Label Text="Alterar Senha" VerticalOptions="Center">
@@ -73,12 +70,23 @@
                                     </Label>
                                 </StackLayout>
 
-
                             </Grid>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+
+
+            <StackLayout Orientation="Horizontal" Grid.Row="2" VerticalOptions="EndAndExpand">
+                <Label  x:Name="percent" Text="" VerticalOptions="Center" FontSize="Medium"/>
+                <Label x:Name="btnVerificar" Text="Verificar Actualização" VerticalOptions="Center"
+                       TextColor="#FFC000" FontSize="Medium">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped_2"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+            
         </Grid>
     </ContentPage.Content>
 </ContentPage>
