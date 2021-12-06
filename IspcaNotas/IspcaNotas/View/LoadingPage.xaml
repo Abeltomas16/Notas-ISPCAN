@@ -5,12 +5,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              Shell.NavBarIsVisible="False"
-             x:Class="IspcaNotas.View.LoadingPage" BackgroundColor="Red">
+             x:Class="IspcaNotas.View.LoadingPage">
     <ContentPage.Content>
-        <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
-
-            <Label Text="Loading ..." />
-        </StackLayout>
+        <Grid VerticalOptions="Center" HorizontalOptions="Center">
+            <ActivityIndicator x:Name="activy" IsRunning="True" IsVisible="True" HorizontalOptions="Center" Color="Orange"/>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
     

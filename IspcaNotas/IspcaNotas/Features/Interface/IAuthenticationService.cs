@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Threading.Tasks;
 
 namespace IspcaNotas.Features.Interface
 {
     public interface IAuthenticationService
     {
-        bool IsLogged();
+       Task<bool> IsLogged();
     }
 }

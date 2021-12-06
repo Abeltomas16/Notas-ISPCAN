@@ -1,9 +1,5 @@
 ﻿using IspcaNotas.Features.Interface;
-using IspcaNotas.Features.Service.Routing;
 using Splat;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace IspcaNotas.ViewModel
 {
@@ -18,7 +14,7 @@ namespace IspcaNotas.ViewModel
         }
         public async void Init()
         {
-            var isAuthenticated = AuthenticationService.IsLogged();
+            var isAuthenticated = await AuthenticationService.IsLogged();
             if (isAuthenticated)
             {
                 await routingService.NavigateTo("///admin");
