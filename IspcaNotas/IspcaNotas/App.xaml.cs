@@ -1,4 +1,6 @@
-﻿using IspcaNotas.Commom.Validation;
+﻿using Firebase.Auth;
+using Firebase.Database;
+using IspcaNotas.Commom.Validation;
 using IspcaNotas.Features.Interface;
 using IspcaNotas.Features.Service.Actividades;
 using IspcaNotas.Features.Service.Cadeira;

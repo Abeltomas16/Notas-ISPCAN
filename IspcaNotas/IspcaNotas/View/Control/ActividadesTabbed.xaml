@@ -19,7 +19,7 @@
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Margin="10">
+                    <StackLayout Margin="10" CompressedLayout.IsHeadless="True">
                         <Frame BorderColor="Transparent" HasShadow="True" CornerRadius="4" BackgroundColor="White" Padding="5">
                             <Grid RowSpacing="0">
                                 <Grid.RowDefinitions>

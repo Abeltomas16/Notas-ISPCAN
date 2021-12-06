@@ -8,37 +8,32 @@
              x:Class="IspcaNotas.View.Sobre" Title="Sobre">
     <ContentPage.Content>
         <StackLayout Padding="20">
-
-            <Frame
-                   CornerRadius="100" 
+            <Frame CornerRadius="100" 
                    Padding="0" Margin="0"
                    VerticalOptions="Center"
                    HorizontalOptions="Center"
                    IsClippedToBounds="True">
                 <Image Source="loginLogo"/>
             </Frame>
-
             <Label Text="Notas ISPCAN" 
                    VerticalOptions="Center"
                    HorizontalOptions="Center"
                    FontSize="Large"/>
-
             <Material:MaterialCard 
                    CornerRadius="5" Elevation="2"
-                   HorizontalOptions="FillAndExpand"
-                   >
+                   HorizontalOptions="FillAndExpand" >
                 <Label x:Name="lblSobre"
                        Style="{DynamicResource CaptionStyle}"
                        HorizontalOptions="FillAndExpand" 
                        TextColor="Black"/>
             </Material:MaterialCard>
-
             <Label Text="Engenheiros" Margin="0,20,0,10"/>
             <Material:MaterialCard 
                    CornerRadius="5" Elevation="2"
-                   HorizontalOptions="FillAndExpand"
-                   >
-                <CollectionView x:Name="EstudantesCollectionView" SelectionMode="Single" HeightRequest="200">
+                   HorizontalOptions="FillAndExpand">
+                <CollectionView x:Name="EstudantesCollectionView" 
+                                SelectionMode="Single"                           
+                                HeightRequest="200">
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Orientation="Vertical" Span="1"/>
                     </CollectionView.ItemsLayout>
@@ -54,7 +49,6 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </Material:MaterialCard>
-
             <Label Text="Versão: 1 Autor: Abel Tomás" HorizontalOptions="StartAndExpand" VerticalOptions="EndAndExpand" VerticalTextAlignment="End"/>
         </StackLayout>
     </ContentPage.Content>

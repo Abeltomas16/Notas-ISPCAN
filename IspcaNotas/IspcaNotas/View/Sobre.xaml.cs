@@ -1,10 +1,5 @@
 ﻿using IspcaNotas.Model;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -33,57 +28,67 @@ namespace IspcaNotas.View
                 }, new UsuarioDTO()
                 {
                     Name="ADRIANO JOSÉ"
-                }, new UsuarioDTO()
+                },  new UsuarioDTO
                 {
-                    Name="JULIÃO FERNANDES"
-                }, new UsuarioDTO()
+                    Name="DANIEL GONÇALVES"
+                },new UsuarioDTO
                 {
-                    Name="MANUEL DE DEUS"
-                }, new UsuarioDTO()
+                    Name="DOMINGOS ABREU"
+                },new UsuarioDTO
+                {
+                    Name="EDGAR MARCOS"
+                }, new UsuarioDTO
+                {
+                    Name="EDSON GOLOME"
+                },new UsuarioDTO()
                 {
                     Name="FERNANDA ANTÓNIO"
                 }, new UsuarioDTO()
                 {
-                    Name="FERNANDES MANUEL"
+                    Name="FERNANDO MANUEL"
+                },new UsuarioDTO
+                {
+                    Name="GELSON DOS PRAZERES"
                 }, new UsuarioDTO()
                 {
                     Name="GRACIETH PASCOAL"
-                },
-                new UsuarioDTO
+                }, new UsuarioDTO
                 {
                     Name="ILÍDIO NHANGA"
-                },
-                new UsuarioDTO
+                }, new UsuarioDTO
                 {
-                    Name="EDSON GOLOME"
-                },
-                new UsuarioDTO
+                    Name="INOQUE SEJA"
+                },  new UsuarioDTO()
+                {
+                    Name="JOÃO FERNANDES"
+                },     new UsuarioDTO
+                {
+                    Name="JOÃO FILIPE"
+                },new UsuarioDTO()
+                {
+                    Name="JULIÃO FERREIRA"
+                },     new UsuarioDTO
+                {
+                    Name="LUÍS MARCOS"
+                }, new UsuarioDTO()
+                {
+                    Name="MANUEL DE DEUS"
+                },     new UsuarioDTO
+                {
+                    Name="MARIANO CUXIXIMA"
+                }, new UsuarioDTO
                 {
                     Name="MARTINS VUNG"
-                },
-                new UsuarioDTO
+                },     new UsuarioDTO
                 {
-                    Name="DANIEL GONÇALVES"
-                },
-                new UsuarioDTO
-                {
-                    Name="EDGAR MARCOS"
-                },
-                new UsuarioDTO
-                {
-                    Name="SALVADOR BRAVO"
-                },
-                new UsuarioDTO
+                    Name="MIGUEL MATAMBA"
+                },  new UsuarioDTO
                 {
                     Name="NOÉ CAMPOS"
                 },
                 new UsuarioDTO
                 {
-                    Name="JOÃO FILIPE"
-                },
-                new UsuarioDTO
-                {
-                    Name="GELSON GASPAR"
+                    Name="SALVADOR BRAVO"
                 }
             };
             usuarios.Sort(delegate (UsuarioDTO u1, UsuarioDTO p2)
