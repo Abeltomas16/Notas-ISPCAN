@@ -1,13 +1,10 @@
-﻿using Firebase.Auth;
-using Firebase.Database;
-using IspcaNotas.Commom.Validation;
+﻿using IspcaNotas.Commom.Validation;
 using IspcaNotas.Features.Interface;
 using IspcaNotas.Features.Service.Actividades;
 using IspcaNotas.Features.Service.Cadeira;
 using IspcaNotas.Features.Service.Login;
 using IspcaNotas.Features.Service.Routing;
 using IspcaNotas.Features.Service.usuario;
-using IspcaNotas.View.Control;
 using IspcaNotas.ViewModel;
 using Splat;
 using Xamarin.Forms;
@@ -18,12 +15,10 @@ namespace IspcaNotas
     {
         public App()
         {
-            //Dependences();
+            Dependences();
             InitializeComponent();
-
             XF.Material.Forms.Material.Init(this);
-           // MainPage = new AppShell();
-            MainPage = new Perfil();
+            MainPage = new AppShell();
         }
 
         private void Dependences()
