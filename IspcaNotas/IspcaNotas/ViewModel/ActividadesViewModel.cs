@@ -7,6 +7,8 @@ using IspcaNotas.Model;
 using XF.Material.Forms.UI.Dialogs;
 using IspcaNotas.Commom.Validation;
 using IspcaNotas.Commom.Resources;
+using System.Drawing;
+using System.Diagnostics;
 
 namespace IspcaNotas.ViewModel
 {
@@ -62,13 +64,32 @@ namespace IspcaNotas.ViewModel
         }
         public async Task Carregar()
         {
-            var load = await MaterialDialog.Instance.LoadingDialogAsync(message: "Caregando");
-            var _actividades = await this.actividades.listarTodos();
-            load.Dismiss();
+            IMaterialModalPage load = null;
+            try
+            {
+                load = await MaterialDialog.Instance.LoadingDialogAsync(message: "Caregando");
+                var _actividades = await this.actividades.listarTodos();
+                load.Dismiss();
 
-            Actividades = new ObservableCollection<ActividadeDTO>(_actividades);
-            Console.WriteLine(Actividades.Count.ToString());
-            OnPropertyChanged("Actividades");
+                Actividades = new ObservableCollection<ActividadeDTO>(_actividades);
+                OnPropertyChanged("Actividades");
+            }
+            catch (Exception)
+            {
+                await MaterialDialog.Instance.SnackbarAsync(message: "Erro, contacte o administrador", actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
+                 new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
+                 {
+                     BackgroundColor = Color.Orange,
+                     MessageTextColor = Color.Black
+                 });
+
+                Process.GetCurrentProcess().Kill();
+            }
+            finally
+            {
+                if (!(load is null))
+                    load.Dismiss();
+            }
         }
         public async Task<string> Apagar(string key)
         {

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using IspcaNotas.Model;
 using IspcaNotas.ViewModel;
 using Microcharts;
@@ -29,12 +26,13 @@ namespace IspcaNotas.View.Grafico
             List<ChartEntry> entries1 = new List<ChartEntry>();
             List<ChartEntry> entries2 = new List<ChartEntry>();
             List<ChartEntry> entries3 = new List<ChartEntry>();
+            IMaterialModalPage load = null;
             try
             {
                 string keycadeira = Application.Current.Properties["IDCadeira"].ToString();
                 Device.BeginInvokeOnMainThread(async () =>
                 {
-                    var load = await MaterialDialog.Instance.LoadingDialogAsync(message: "Caregando");
+                    load = await MaterialDialog.Instance.LoadingDialogAsync(message: "Caregando");
                     List<NotasDTO> notas = await DocentesViewModel.mostrarNotas(keycadeira);
                     load.Dismiss();
                     #region PRIMEIRA PARCELAR
@@ -147,9 +145,12 @@ namespace IspcaNotas.View.Grafico
                     #endregion
                 });
             }
-            catch (Exception erro)
+            catch (Exception)
             {
-                MaterialDialog.Instance.SnackbarAsync(message: erro.Message, actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
+                if (!(load is null))
+                    load.Dismiss();
+
+                MaterialDialog.Instance.SnackbarAsync(message: "Erro contacte o administrador", actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
                   new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
                   {
                       BackgroundColor = Color.Orange,

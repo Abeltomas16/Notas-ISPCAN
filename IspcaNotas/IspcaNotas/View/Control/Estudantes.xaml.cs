@@ -24,9 +24,9 @@ namespace IspcaNotas.View.Control
             {
                 BindingContext = estudantesViewModel;
             }
-            catch (Exception erro)
+            catch (Exception)
             {
-                MaterialDialog.Instance.SnackbarAsync(message: erro.Message, actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
+                MaterialDialog.Instance.SnackbarAsync(message: "Erro, contacte o administrador", actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
                    new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
                    {
                        BackgroundColor = Color.Orange,
@@ -70,9 +70,9 @@ namespace IspcaNotas.View.Control
                             });
                 }
             }
-            catch (Exception erro)
+            catch (Exception)
             {
-                await MaterialDialog.Instance.SnackbarAsync(message: erro.Message, actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
+                await MaterialDialog.Instance.SnackbarAsync(message: "Erro, contacte o administrador", actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
                     new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
                     {
                         BackgroundColor = Color.Orange,
@@ -135,9 +135,9 @@ namespace IspcaNotas.View.Control
                         MessageTextColor = Color.Black
                     });
             }
-            catch (Exception erro)
+            catch (Exception)
             {
-                await MaterialDialog.Instance.SnackbarAsync(message: erro.Message, actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
+                await MaterialDialog.Instance.SnackbarAsync(message: "Erro, contacte o administrador", actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
                     new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
                     {
                         BackgroundColor = Color.Orange,

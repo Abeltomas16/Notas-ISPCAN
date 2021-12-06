@@ -22,9 +22,9 @@ namespace IspcaNotas.View
                 NomeCadeira.Text = Application.Current.Properties["Nomecadeira"].ToString();
                 NomeProf.Text = Application.Current.Properties["NomeUsuario"].ToString();
             }
-            catch (Exception erro)
+            catch (Exception)
             {
-                XF.Material.Forms.UI.Dialogs.MaterialDialog.Instance.SnackbarAsync(message: erro.Message, actionButtonText: "Ok", msDuration: XF.Material.Forms.UI.Dialogs.MaterialSnackbar.DurationLong,
+                XF.Material.Forms.UI.Dialogs.MaterialDialog.Instance.SnackbarAsync(message: "Erro, contacte o administrador", actionButtonText: "Ok", msDuration: XF.Material.Forms.UI.Dialogs.MaterialSnackbar.DurationLong,
                   new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
                   {
                       BackgroundColor = Color.Orange,

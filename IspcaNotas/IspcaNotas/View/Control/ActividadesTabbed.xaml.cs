@@ -5,6 +5,7 @@ using System.Diagnostics;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XF.Material.Forms.UI.Dialogs;
 
 namespace IspcaNotas.View.Control
 {
@@ -15,7 +16,20 @@ namespace IspcaNotas.View.Control
         public ActividadesTabbed()
         {
             InitializeComponent();
-            BindingContext = Service;
+            try
+            {
+                BindingContext = Service;
+            }
+            catch (Exception)
+            {
+                MaterialDialog.Instance.SnackbarAsync(message: "Erro, contacte o administrador", actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
+                    new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
+                    {
+                        BackgroundColor = Color.Orange,
+                        MessageTextColor = Color.Black
+                    });
+            }
+
         }
         private async void MenuPerfil_Clicked(object sender, EventArgs e)
         {

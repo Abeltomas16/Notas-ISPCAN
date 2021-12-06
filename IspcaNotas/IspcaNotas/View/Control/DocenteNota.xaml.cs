@@ -13,17 +13,18 @@ namespace IspcaNotas.View.Control
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DocenteNota : ContentPage
     {
-        UsuarioViewModel estudantesViewModel = Locator.Current.GetService<UsuarioViewModel>();
+
         public DocenteNota()
         {
             InitializeComponent();
             try
             {
+                UsuarioViewModel estudantesViewModel = Locator.Current.GetService<UsuarioViewModel>();
                 BindingContext = estudantesViewModel;
             }
-            catch (Exception erro)
+            catch (Exception)
             {
-                MaterialDialog.Instance.SnackbarAsync(message: erro.Message, actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
+                MaterialDialog.Instance.SnackbarAsync(message: "Erro, contacte o administrador", actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
                    new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
                    {
                        BackgroundColor = Color.Orange,
@@ -43,9 +44,14 @@ namespace IspcaNotas.View.Control
 
                 await Shell.Current.Navigation.PushAsync(new NotasDetalhes(estudante));
             }
-            catch (Exception erro)
+            catch (Exception)
             {
-                await DisplayAlert("Info", erro.Message, "Ok");
+                await MaterialDialog.Instance.SnackbarAsync(message: "Erro, contacte o administrador", actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
+                    new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
+                    {
+                        BackgroundColor = Color.Orange,
+                        MessageTextColor = Color.Black
+                    });
             }
         }
     }

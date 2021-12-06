@@ -3,7 +3,9 @@ using IspcaNotas.Commom.Validation;
 using IspcaNotas.Features.Interface;
 using IspcaNotas.Model;
 using Splat;
+using System;
 using System.Collections.ObjectModel;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using XF.Material.Forms.UI.Dialogs;
@@ -24,13 +26,31 @@ namespace IspcaNotas.ViewModel
         public ObservableCollection<UsuarioDTO> Estudantes { get; set; }
         public async void Carregar()
         {
-            var load = await MaterialDialog.Instance.LoadingDialogAsync(message: "Carregando");
-            var estudantes = await Idata.ListarTodos();
-            Estudantes = new ObservableCollection<UsuarioDTO>(estudantes.Where(y => y.Categoria == "Estudante"));
-            OnPropertyChanged("Estudantes");
-            Total = Estudantes.Count;
-            OnPropertyChanged("Total");
-            load.Dismiss();
+            IMaterialModalPage load = null;
+            try
+            {
+                load = await MaterialDialog.Instance.LoadingDialogAsync(message: "Carregando");
+                var estudantes = await Idata.ListarTodos();
+                Estudantes = new ObservableCollection<UsuarioDTO>(estudantes.Where(y => y.Categoria == "Estudante"));
+                OnPropertyChanged("Estudantes");
+                Total = Estudantes.Count;
+                OnPropertyChanged("Total");
+                load.Dismiss();
+            }
+            catch (Exception)
+            {
+                await MaterialDialog.Instance.SnackbarAsync(message: "Erro, contacte o administrador", actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
+                 new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
+                 {
+                     BackgroundColor = Color.Orange,
+                     MessageTextColor = Color.Black
+                 });
+            }
+            finally
+            {
+                if (!(load is null))
+                    load.Dismiss();
+            }
         }
         public async Task<string> Cadastrar(UsuarioDTO usuario)
         {

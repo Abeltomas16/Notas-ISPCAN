@@ -1,7 +1,10 @@
-﻿using IspcaNotas.Commom.Resources;
+﻿using Firebase.Auth;
+using IspcaNotas.Commom.Resources;
 using IspcaNotas.Commom.Validation;
 using IspcaNotas.Features.Interface;
 using IspcaNotas.Model;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Splat;
 using System;
 using System.Linq;
@@ -14,6 +17,10 @@ namespace IspcaNotas.ViewModel
 {
     public class LoginViewModel
     {
+        public class er
+        {
+            public string message { get; set; }
+        }
         private string Senha = string.Empty;
         private string Email = string.Empty;
         public string _email
@@ -110,11 +117,12 @@ namespace IspcaNotas.ViewModel
                     }
                 }
             }
-            catch (Exception erro)
+            catch (Exception)
             {
                 if (!(load is null))
                     load.Dismiss();
-                await MaterialDialog.Instance.SnackbarAsync(erro.Message, MaterialSnackbar.DurationShort);
+
+                await MaterialDialog.Instance.SnackbarAsync("E-mail ou senha incorreta", MaterialSnackbar.DurationShort);
             }
         }
     }

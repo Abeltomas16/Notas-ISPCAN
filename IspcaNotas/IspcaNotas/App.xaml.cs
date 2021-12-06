@@ -25,6 +25,7 @@ namespace IspcaNotas
 
         private void Dependences()
         {
+
             Locator.CurrentMutable.RegisterLazySingleton<IRouting>(() => new IRoutingService());
             Locator.CurrentMutable.RegisterLazySingleton<IAuthenticationService>(() => new LoadingPageService());
             Locator.CurrentMutable.RegisterLazySingleton<ILogin>(() => new LoginService());

@@ -6,6 +6,7 @@ using Splat;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Drawing;
 using System.Text;
 using System.Threading.Tasks;
 using XF.Material.Forms.UI.Dialogs;
@@ -63,18 +64,27 @@ namespace IspcaNotas.ViewModel
         }
         public async Task Carregar()
         {
-            var load = await MaterialDialog.Instance.LoadingDialogAsync(message: "Carregando");
-            var docentes = await clienteDocente.ListarTodos();
-            Docentes = new ObservableCollection<UsuarioDTO>(docentes);
-            OnPropertyChanged("Docentes");
-            Total = Docentes.Count;
-            OnPropertyChanged("Total");
+            IMaterialModalPage load = null;
+            try
+            {
+                load = await MaterialDialog.Instance.LoadingDialogAsync(message: "Carregando");
+                var docentes = await clienteDocente.ListarTodos();
+                Docentes = new ObservableCollection<UsuarioDTO>(docentes);
+                OnPropertyChanged("Docentes");
+                Total = Docentes.Count;
+                OnPropertyChanged("Total");
 
-            var cadeira = await clienteCadeira.listarTodos();
-            Cadeiras = new ObservableCollection<CadeiraDTO>(cadeira);
-            OnPropertyChanged("Cadeiras");
+                var cadeira = await clienteCadeira.listarTodos();
+                Cadeiras = new ObservableCollection<CadeiraDTO>(cadeira);
+                OnPropertyChanged("Cadeiras");
 
-            load.Dismiss();
+                load.Dismiss();
+            }
+            catch (Exception)
+            {
+                if (!(load is null))
+                    load.Dismiss();
+            }
         }
 
         public async Task<UsuarioDTO> MelhorAluno(string keyMelhorAluno)

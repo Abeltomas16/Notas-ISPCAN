@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using IspcaNotas.Features.Enums;
 using IspcaNotas.ViewModel;
-using Rg.Plugins.Popup.Extensions;
 using Rg.Plugins.Popup.Pages;
 using Rg.Plugins.Popup.Services;
 using Splat;
@@ -146,10 +145,10 @@ namespace IspcaNotas.View.Animation
                     MessageTextColor = Color.Black
                 });
             }
-            catch (Firebase.Database.FirebaseException erro)
+            catch (Exception)
             {
                 CloseAllPopup();
-                await MaterialDialog.Instance.SnackbarAsync(message: erro.Message, actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
+                await MaterialDialog.Instance.SnackbarAsync(message: "Erro, contacte o administrador", actionButtonText: "Ok", msDuration: MaterialSnackbar.DurationLong,
                    new XF.Material.Forms.UI.Dialogs.Configurations.MaterialSnackbarConfiguration
                    {
                        BackgroundColor = Color.Orange,
