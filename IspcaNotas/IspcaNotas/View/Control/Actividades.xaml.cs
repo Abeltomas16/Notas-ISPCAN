@@ -3,7 +3,8 @@ using IspcaNotas.Model;
 using IspcaNotas.ViewModel;
 using Splat;
 using System;
-
+using System.Diagnostics;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using XF.Material.Forms.UI.Dialogs;
@@ -143,6 +144,17 @@ namespace IspcaNotas.View.Control
         private async void MenuPerfil_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new Perfil());
+        }
+
+        private void MenuLogout_Clicked(object sender, EventArgs e)
+        {
+            Preferences.Remove("MyEmail");
+            Preferences.Remove("MySenha");
+            Preferences.Remove("MyFirebaseToken");
+            Preferences.Remove("Categoria");
+            Application.Current.Properties.Clear();
+
+            Process.GetCurrentProcess().Kill();
         }
     }
 }

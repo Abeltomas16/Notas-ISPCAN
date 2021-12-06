@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using Splat;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace IspcaNotas.Features.Service.Login
 {
@@ -45,6 +46,10 @@ namespace IspcaNotas.Features.Service.Login
             Preferences.Remove("MyEmail");
             Preferences.Remove("MySenha");
             Preferences.Remove("MyFirebaseToken");
+
+            Application.Current.Properties["NomeUsuario"] = null;
+            Application.Current.Properties["TelefoneUsuario"] = null;
+            Preferences.Remove("Categoria");
         }
 
         public async Task<string> UpdateEmail(string newEmail)

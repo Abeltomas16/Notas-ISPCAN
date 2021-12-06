@@ -8,16 +8,12 @@ namespace IspcaNotas.Features.Service.Routing
     {
         public async Task<bool> IsLogged()
         {
-            Preferences.Remove("MyFirebaseToken");
-            Preferences.Remove("MyEmail");
-            Preferences.Remove("MySenha");
-
+            string categoria = Preferences.Get("Categoria", "doesnot");
             string usuario = Preferences.Get("MyFirebaseToken", "doesnot");
             string email = Preferences.Get("MyEmail", "doesnot");
             string senha = Preferences.Get("MySenha", "doesnot");
-
             await Task.Delay(500);
-            return usuario != "doesnot" || email != "doesnot" || senha != "doesnot";
+            return usuario != "doesnot" || email != "doesnot" || senha != "doesnot" || categoria != "doesnot";
         }
     }
 }

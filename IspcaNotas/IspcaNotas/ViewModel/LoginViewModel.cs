@@ -6,6 +6,7 @@ using Splat;
 using System;
 using System.Linq;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using XF.Material.Forms.UI.Dialogs;
 
@@ -74,6 +75,7 @@ namespace IspcaNotas.ViewModel
                     load.Dismiss();
                     Application.Current.Properties["NomeUsuario"] = categoria.Name;
                     Application.Current.Properties["TelefoneUsuario"] = categoria.Telefone;
+                    Preferences.Set("Categoria", categoria.Categoria);
                     if (categoria.Categoria == "Estudante")
                     {
                         Application.Current.Properties["IDEstudante"] = categoria.Key;

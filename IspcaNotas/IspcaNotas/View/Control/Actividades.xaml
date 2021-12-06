@@ -10,6 +10,7 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Name="MenuPerfil" Order="Secondary" Text="Perfil" Clicked="MenuPerfil_Clicked" Priority="0" />
         <ToolbarItem Name="MenuSobre" Order="Secondary" Clicked="MenuSobre_Clicked" Text="Sobre" Priority="1"/>
+        <ToolbarItem Name="MenuLogout" Order="Secondary" Text="Sair" Priority="2" Clicked="MenuLogout_Clicked"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <ScrollView>

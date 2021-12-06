@@ -1,5 +1,6 @@
 ﻿using IspcaNotas.Features.Interface;
 using Splat;
+using Xamarin.Essentials;
 
 namespace IspcaNotas.ViewModel
 {
@@ -17,7 +18,15 @@ namespace IspcaNotas.ViewModel
             var isAuthenticated = await AuthenticationService.IsLogged();
             if (isAuthenticated)
             {
-                await routingService.NavigateTo("///admin");
+                string categoria = Preferences.Get("Categoria", "doesnot");
+                if (categoria.ToUpper() == "ADMINISTRADOR")
+                    await routingService.NavigateTo("///admin");
+                else if (categoria.ToUpper() == "PROFESSOR")
+                    await routingService.NavigateTo("///professor");
+                else if (categoria.ToUpper() == "ESTUDANTE")
+                    await routingService.NavigateTo("///main");
+                else
+                    return;
             }
             else
             {
