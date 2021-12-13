@@ -29,4 +29,4 @@ Install-Package NUnit -Version 3.13.2
 
 [The MIT License](http://opensource.org/licenses/MIT)
 
-Copyright (c) 2011-2013 Jared Hanson <[http://jaredhanson.net/](http://jaredhanson.net/)>
+Copyright (c) 2020-2021 [Abel Tomás](https://www.facebook.com/abel.tomas.16/)
